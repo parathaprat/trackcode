@@ -10,7 +10,7 @@ class Solution {
 
         while(space < spaces.length && str < s.length()){
 
-            //index where spces have to be inserted
+            //index where spaces have to be inserted
             int insertionIndex = spaces[space];
 
             //insert chars before we hit a insertion index
