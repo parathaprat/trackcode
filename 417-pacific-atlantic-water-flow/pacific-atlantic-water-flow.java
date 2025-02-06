@@ -46,13 +46,16 @@ class Solution {
 
     public void dfs(int r, int c, boolean[][] visited, int[][] heights){
 
+        //mark visited
         visited[r][c] = true;
 
+        //call dfs if valid in each direction
         for(int[] dir : direction){
 
             int nr = r + dir[0];
             int nc = c + dir[1];
 
+            //check if new coord are out of bounds; if new height is >= old height and if new height has already been visited
             if(nr >= 0 && nr < heights.length && nc >= 0 && nc < heights[0].length && heights[nr][nc] >= heights[r][c] && !visited[nr][nc]){
                 dfs(nr, nc, visited, heights);
             }
