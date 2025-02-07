@@ -26,6 +26,7 @@ class Solution {
 
     }
 
+    //recursive calls made so that count is ++ at every step
     public void getAns(TreeNode node, int k){
 
         //go to the leftmost/smallest value in the tree if it exists -> get kth smallest element from left subtree while count is global
