@@ -15,30 +15,38 @@
  */
 class Solution {
 
-    //declare maxPathSum globally 
+    //globally declare sum variable
     int maxPathSum;
 
     public int maxPathSum(TreeNode root) {
-        
+
+        //assign smallest value to sum
         maxPathSum = Integer.MIN_VALUE;
-        
-        pathSum(root);
+
+        getPathSum(root);
 
         return maxPathSum;
-
+        
     }
 
-    public int pathSum(TreeNode root){
+    public int getPathSum(TreeNode node){
 
-        if(root == null) return 0;
+        //base -> if node is null, path sum = 0
+        if(node == null) return 0;
 
-        int leftSum = Math.max(0, pathSum(root.left));
-        int rightSum = Math.max(0, pathSum(root.right));
+        //path sum of subtrees may be -ve, so max bw getPathSum and 0
+        int leftSum = Math.max(0, getPathSum(node.left));
+        int rightSum = Math.max(0, getPathSum(node.right));
 
-        //break at curr node 
-        maxPathSum = Math.max(maxPathSum, root.val + leftSum + rightSum);
+        //now we have the maxPathSum of left and right subtrees -> 
+        //cases -> breaks at node and does not break at node
+        
+        //breaks at node -> left + right + node; also update maxPathSum
+        maxPathSum = Math.max(maxPathSum, leftSum + rightSum + node.val);
 
-        //return maxSum
-        return root.val + Math.max(leftSum, rightSum);
+        //return node.val + max(left, right)
+        return node.val + Math.max(leftSum, rightSum);
     }
+
+
 }
