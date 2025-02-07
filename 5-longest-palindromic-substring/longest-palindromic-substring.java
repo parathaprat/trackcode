@@ -40,11 +40,13 @@ class Solution {
             //base 
             if(s == null || left > right) return 0;
 
+            //main logic -> expand winow as long as i bounds and chars are equal
             while(left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)){
                 left--;
                 right++;
             }
 
+            //return len of window
             return right - left - 1;
 
 
