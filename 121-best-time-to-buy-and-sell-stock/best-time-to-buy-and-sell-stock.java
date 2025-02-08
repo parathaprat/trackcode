@@ -1,18 +1,20 @@
 class Solution {
     public int maxProfit(int[] prices) {
+
+        int min = Integer.MAX_VALUE;
+        int maxProf = 0;
         
-        //2 pointer method
-
-        int min_val = Integer.MAX_VALUE;
-        int max_profit = 0;
-
         for(int i = 0; i < prices.length; i++){
 
-            if(prices[i] < min_val) min_val = prices[i];
+            if(prices[i] < min) min = prices[i];
 
-            if(max_profit < prices[i] - min_val) max_profit = prices[i] - min_val;
+            if(min != prices[i]){
+
+                maxProf = Math.max(prices[i] - min, maxProf);
+            }
+
         }
 
-        return max_profit;
+        return maxProf;
     }
 }
