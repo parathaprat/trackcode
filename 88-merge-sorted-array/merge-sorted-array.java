@@ -1,7 +1,7 @@
 class Solution {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         
-        //main logic -> fill nums1 from the back
+        //logic -> merge from the back
         int p1 = m - 1;
         int p2 = n - 1;
         int i = m + n - 1;
@@ -13,6 +13,7 @@ class Solution {
                 p1--;
                 i--;
             }
+
             else{
                 nums1[i] = nums2[p2];
                 p2--;
