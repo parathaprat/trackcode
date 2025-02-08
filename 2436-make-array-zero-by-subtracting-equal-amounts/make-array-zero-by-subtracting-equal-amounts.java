@@ -1,17 +1,18 @@
 class Solution {
     public int minimumOperations(int[] nums) {
         
-        //return every non identical element over 0
-        Set<Integer> unique = new HashSet<>();
 
-        for(int num : nums){
+        //amount = no of unique elements
 
-            if(num > 0){
-                unique.add(num);
+        Set<Integer> set = new HashSet<>();
+
+        for(int i = 0; i < nums.length; i++){
+
+            if(nums[i] != 0){
+                set.add(nums[i]);
             }
         }
 
-        return unique.size();
-
+        return set.size();
     }
 }
