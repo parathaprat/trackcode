@@ -1,14 +1,16 @@
 class Solution {
 
-    //pre req map
+    //adj map
     //visited set
-    Map<Integer, List<Integer>> map = new HashMap<>();
-    Set<Integer> set = new HashSet<>();
+    //processed set
 
-    //set to show fully processed nodes
+    Map<Integer, List<Integer>> map = new HashMap<>();
+
+    Set<Integer> visit = new HashSet<>();
+
     Set<Integer> pros = new HashSet<>();
 
-    List<Integer> finalAns = new ArrayList<>();
+    List<Integer> finalOrder = new ArrayList<>();
 
 
     public int[] findOrder(int numCourses, int[][] prerequisites) {
@@ -16,49 +18,46 @@ class Solution {
         for(int i = 0; i < numCourses; i++){
 
             map.put(i, new ArrayList<>());
+
         }
 
         for(int[] pre : prerequisites){
-            
+
             map.get(pre[0]).add(pre[1]);
-            
         }
 
         for(int i = 0; i < numCourses; i++){
 
-            if(!dfs(i)){
-                return new int[0];
-            }
+            if(!dfs(i)) return new int[0];
+
         }
 
-        int[] result = new int[finalAns.size()];
+        int[] ans = new int[finalOrder.size()];
 
-        for(int i = 0; i < result.length; i++){
+        for(int i = 0; i < ans.length; i++){
 
-            result[i] = finalAns.get(i);
+            ans[i] = finalOrder.get(i);
         }
 
-        return result;
+        return ans;
     }
 
     private boolean dfs(int course){
 
-        if(set.contains(course)) return false;
+        if(visit.contains(course)) return false;
 
-        // if(pros.contains(course)) return true;
         if(pros.contains(course)) return true;
 
-        set.add(course);
+        visit.add(course);
 
         for(int pre : map.get(course)){
 
             if(!dfs(pre)) return false;
-
         }
 
-        set.remove(course);
+        visit.remove(course);
         pros.add(course);
-        finalAns.add(course);
+        finalOrder.add(course);
         return true;
     }
 }
