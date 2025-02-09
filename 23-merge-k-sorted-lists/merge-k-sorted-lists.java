@@ -10,39 +10,37 @@
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-
-        //custom comparator minHeap to hold k listnodes at a time
+        
+        //arrange heads of lists in ascending order
+        //main logic -> poll from heap, add next from list, keep going
         PriorityQueue<ListNode> minHeap = new PriorityQueue<>((a, b) -> a.val - b.val);
 
-        //add all heads to minHeap
-        for(ListNode head : lists){
+        for(ListNode node : lists){
 
-            if(head != null){
-                minHeap.add(head);
-            }
+            if(node != null) minHeap.add(node);
 
         }
 
-        //temp head and iterator
-        ListNode temp = new ListNode(-1);
-        ListNode currentNode = temp;
+        //pre head
+        ListNode temp = new ListNode(0);
 
-        //main logic -> set next node, add its next to minHeap, maintaining k nodes in heap at a time
+        //iterator
+        ListNode curr = temp;
+
         while(!minHeap.isEmpty()){
+            //add next node from top of list to minHeap, then add it to curr.next
 
-            ListNode nextMinNode = minHeap.poll();
-            currentNode.next = nextMinNode;
-            currentNode = currentNode.next;
+            ListNode next = minHeap.poll();
 
-            //if next of nextMinNode is != null, add to minHeap (will get auto sorted)
-            if(nextMinNode.next != null){
+            if(next.next != null) minHeap.add(next.next);
 
-                minHeap.add(nextMinNode.next);
-
-            }
-
+            curr.next = next;
+            curr = curr.next;
+            
         }
 
         return temp.next;
+
+
     }
 }
