@@ -44,14 +44,10 @@ class Solution {
 
         if(!maxHeap.isEmpty()){
 
-            if(maxHeap.size() != 1){
-                return " ";
-            } 
-            else{
-                char c = maxHeap.poll();
-                if(map.get(c) > 1) return "";
-                result.append(c);
-            }
+            char c = maxHeap.poll();
+            if(map.get(c) > 1) return "";
+            result.append(c);
+
         }
 
 
