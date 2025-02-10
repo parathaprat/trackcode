@@ -8,13 +8,15 @@ class Solution {
         for(int i = 0; i < nums.length - 2; i++){
 
             if(i == 0 || nums[i] != nums[i - 1]){
-
-                int sum = 0 - nums[i];
                 int left = i + 1;
                 int right = nums.length - 1;
 
+                //target for a 2sum
+                int sum = -nums[i];
+
                 while(left < right){
 
+                    //add to ans case
                     if(nums[left] + nums[right] == sum){
                         result.add(Arrays.asList(nums[i], nums[left], nums[right]));
 
@@ -24,16 +26,17 @@ class Solution {
                         left++;
                         right--;
                     }
+
                     else if(nums[left] + nums[right] > sum){
                         right--;
                     }
-                    else if(nums[left] + nums[right] < sum){
+                    else{
                         left++;
                     }
                 }
             }
-
         }
+        
 
         return result;
     }
