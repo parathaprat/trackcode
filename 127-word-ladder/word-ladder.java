@@ -2,50 +2,56 @@ class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         
         if(!wordList.contains(endWord) || beginWord.equals(endWord)) return 0;
+        Set<String> set = new HashSet<>();
 
-        //BFS to find the shortest path
-        Set<String> set = new HashSet<>(wordList);
+        for(String word : wordList){
 
+            set.add(word);
+        }
+
+        //loop through each letter of beginWord
+        //replace with each letter of the alphabet
+        //check if this new word is in our wordList
+        //return min
+
+        int ans = 0;
+
+        //queue to do BFS -> to find shortest path
         Queue<String> q = new LinkedList<>();
-
-        //add starting word to q
         q.add(beginWord);
-
-        int res = 0;
 
         while(!q.isEmpty()){
 
-            //increment res at each iteration
-            res++;
+            ans++;
 
-            for(int i = q.size(); i > 0; i--){
+            int level = q.size();
 
-                //get top node, check if it is the end
-                String node = q.poll();
-                if(node.equals(endWord)) return res;
+            for(int j = 0; j < level; j++){
 
-                for(int j = 0; j < node.length(); j++){
-                    
+                String word = q.poll();
+
+                if(word.equals(endWord)) return ans;
+
+                for(int i = 0; i < word.length(); i++){
+
                     for(char c = 'a'; c <= 'z'; c++){
 
-                        if(c == node.charAt(j)) continue;
+                        if(c == word.charAt(i)) continue;
 
-                        //append letter from a to z at every single position and check if it is in the set
-                        String nei = node.substring(0, j) + c + node.substring(j + 1);
-
-                        //if the set has a potencial nei, add nei to queue
+                        String nei = word.substring(0, i) + c + word.substring(i + 1);
                         if(set.contains(nei)){
-                            q.offer(nei);
                             set.remove(nei);
-
+                            q.add(nei);
                         }
+
                     }
+
+
                 }
             }
         }
 
         return 0;
-
 
     }
 }
