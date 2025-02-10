@@ -1,42 +1,39 @@
 class Solution {
     public int getLargestOutlier(int[] nums) {
         
-        //freq map
-        Map<Integer, Integer> freq = new HashMap<>();
+        //hashmap of nums, loop and treat each as outlier, check if rem sum/2 exists in map, num[i] is outlier
 
-        //totalSum
+        Map<Integer, Integer> map = new HashMap<>();
         int totalSum = 0;
+        int ans = Integer.MIN_VALUE;
 
-        //calculating totalSum and populating freq map
-        for(int i = 0; i < nums.length; i++){
-            totalSum += nums[i];
-            freq.put(nums[i], freq.getOrDefault(nums[i], 0) + 1);
+        for(int num : nums){
+
+            map.put(num, map.getOrDefault(num, 0) + 1);
+            totalSum += num;
+
         }
 
-        //final ans
-        int maxAns = Integer.MIN_VALUE; 
+        for(int i = 0; i < nums.length; i++){
 
-        //every num becomes outlier
-        //reduce freq in map, reduce from totalSum
-        //if rest of the sum % 2 == 0; nums[i] is an outlier
-        //math.max with final ans
-        for(int num : nums){
-            
-            int twoSum = totalSum - num;
+            //totalSum - outlier
+            int remSum = totalSum - nums[i];
 
-            freq.put(num, freq.get(num) - 1);
+            //remove and add selected outlier from rest of the list
+            map.put(nums[i], map.get(nums[i]) - 1);
 
-            if(twoSum % 2 == 0){
-
-                int count = freq.getOrDefault(twoSum/2, 0);
-                if(count > 0) maxAns = Math.max(num, maxAns);
+            if(remSum % 2 == 0 && map.containsKey(remSum/2)){
                 
+                int count = map.get(remSum/2);
+
+                if(count > 0){
+                    ans = Math.max(nums[i], ans);
+                }
             }
 
-            freq.put(num, freq.get(num) + 1);
-            
+            map.put(nums[i], map.get(nums[i]) + 1);
         }
 
-        return maxAns;
+        return ans;
     }
 }
