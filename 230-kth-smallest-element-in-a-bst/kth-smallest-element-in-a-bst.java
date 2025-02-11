@@ -15,37 +15,34 @@
  */
 class Solution {
 
-    //declare global variables
     int count = 0;
     int ans = 0;
 
     public int kthSmallest(TreeNode root, int k) {
         
+        //maintian count
+        //traverse left
+        //increase count, when count == k, return
+        //traverse right
+
+        
         getAns(root, k);
         return ans;
-
     }
 
-    //recursive calls made so that count is ++ at every step
     public void getAns(TreeNode node, int k){
 
-        //go to the leftmost/smallest value in the tree if it exists -> get kth smallest element from left subtree while count is global
-        if(node.left != null){
-            getAns(node.left, k);
-        }
+        if(node.left != null) getAns(node.left, k);
 
-        //increase count once smallest value has been reached
         count++;
 
-        //check if count is == k, if it is return ans
         if(count == k){
             ans = node.val;
             return;
         }
 
-        //last option -> to move right -> get kth smallest element from right subtree while count is global
-        if(node.right != null){
-            getAns(node.right, k);
-        }
+        if(node.right != null) getAns(node.right, k);
     }
+
+
 }
