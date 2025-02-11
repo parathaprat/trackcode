@@ -1,27 +1,27 @@
 class Solution {
 
-    //adj map
-    //visited set
-    //processed set
+    //detect cycle in grpah using dfs -> II -> add a arraylist and processed set to store cycles
 
-    Map<Integer, List<Integer>> map = new HashMap<>();
+    //map {course, list(pre)}
+    //visited set
+    //pros set
+
+    Map<Integer, List<Integer>> map = new HashMap <>();
 
     Set<Integer> visit = new HashSet<>();
 
     Set<Integer> pros = new HashSet<>();
 
-    List<Integer> finalOrder = new ArrayList<>();
-
+    List<Integer> result = new ArrayList<>();
 
     public int[] findOrder(int numCourses, int[][] prerequisites) {
-
+        
         for(int i = 0; i < numCourses; i++){
 
             map.put(i, new ArrayList<>());
-
         }
 
-        for(int[] pre : prerequisites){
+        for(int pre[] : prerequisites){
 
             map.get(pre[0]).add(pre[1]);
         }
@@ -32,14 +32,15 @@ class Solution {
 
         }
 
-        int[] ans = new int[finalOrder.size()];
+        int[] ans = new int[result.size()];
 
         for(int i = 0; i < ans.length; i++){
 
-            ans[i] = finalOrder.get(i);
+            ans[i] = result.get(i);
         }
 
         return ans;
+
     }
 
     private boolean dfs(int course){
@@ -53,11 +54,14 @@ class Solution {
         for(int pre : map.get(course)){
 
             if(!dfs(pre)) return false;
+
         }
 
         visit.remove(course);
         pros.add(course);
-        finalOrder.add(course);
+        result.add(course);
         return true;
+
+        
     }
 }
