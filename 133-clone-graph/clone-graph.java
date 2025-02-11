@@ -21,30 +21,24 @@ class Node {
 class Solution {
     public Node cloneGraph(Node node) {
         
-        //base case
+        //{original, copy map}
         if(node == null) return null;
 
-        //map stores node.val (orginal) && node(copy)
-        Map<Integer, Node> map = new HashMap<>();
+        Map<Node, Node> map = new HashMap<>();
 
-        return cloneGraph(node, map);
+        return getAns(node, map);
     }
 
-    //returns cloned nodes
-    public Node cloneGraph(Node node, Map<Integer, Node> map){
+    public Node getAns(Node node, Map<Node, Node> map){
 
-        if(map.containsKey(node.val)) return map.get(node.val);
+        if(map.containsKey(node)) return map.get(node);
 
-        //if map does not already contain a copy for a value, create it and add to map
         Node copy = new Node(node.val);
-        map.put(node.val, copy);
+        map.put(node, copy);
 
-        //iterate through its neighbors and create cloned nodes for each
-        for(Node neighbor: node.neighbors){
+        for(Node nei : node.neighbors){
 
-            //adding cloned neighbor node to copied nodes adj list
-            copy.neighbors.add(cloneGraph(neighbor, map));
-
+            copy.neighbors.add(getAns(nei, map));
         }
 
         return copy;
