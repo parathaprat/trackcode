@@ -1,41 +1,44 @@
 class Solution {
     public int leastInterval(char[] tasks, int n) {
         
-        //store freq, maxHeap, queue, time
+        //Queue{Frequency, timeOut}, freq array, 
 
+        //freq array 
         int[] freq = new int[26];
 
-        for(char c : tasks){
+        for(int i = 0; i < tasks.length; i++){
 
-            freq[c - 'A']++;
+            freq[tasks[i] - 'A']++; 
 
         }
 
+        //maxHeap
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
 
         for(int fre : freq){
-            if(fre > 0){
-                maxHeap.add(fre);
-            }
+
+            if(fre != 0) maxHeap.add(fre);
         }
 
+        //queue{Freq, timeOut}
         Queue<int[]> q = new LinkedList<>();
 
         int time = 0;
-        
-        while(!maxHeap.isEmpty() || !q.isEmpty()){
 
+        while(!q.isEmpty() || !maxHeap.isEmpty()){
+
+            //if maxHeap is empty, skip to the time that the topmost tasks comes out of q
             if(maxHeap.isEmpty()){
-
                 time = q.peek()[1];
-
             }
 
             if(!maxHeap.isEmpty()){
                 int task = maxHeap.poll();
 
-                if(task - 1 > 0){
-                    q.add(new int[]{task - 1, time + n});
+                task = task - 1;
+
+                if(task > 0){
+                    q.add(new int[]{task, time + n});
                 }
             }
 
@@ -48,6 +51,6 @@ class Solution {
 
         return time;
 
-
+        
     }
 }
