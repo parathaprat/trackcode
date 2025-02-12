@@ -5,25 +5,50 @@ class Solution {
         //move thru, create int array, create string key
         //if key matches return index start of sliding window
 
+        //for sliding window, use pointers l, r; remove char(r) and add char(l)
+
+
+        int l = 0; 
+        int r = p.length() - 1;
+
+        int[] pfreq = new int[26];
+        int[] sfreq = new int[26];
+
         List<Integer> result = new ArrayList<>();
 
-        int slide = p.length();
+        //populate freq array for p
+        for(char c : p.toCharArray()){
 
-        for(int i = 0; i <= s.length() - p.length(); i++){
+            pfreq[c - 'a']++;
 
-            int[] winFreq = new int[26];
-            int[] pFreq = new int[26];
+        }
 
-            for(int j = i; j < i + p.length(); j++){
+        while(r < s.length()){
 
-                winFreq[s.charAt(j) - 'a']++;
-                pFreq[p.charAt(j - i) - 'a']++;
-                
+            if(l == 0){
+                for(int i = l; i <= r; i++){
+                    
+                    sfreq[s.charAt(i) - 'a']++;
+
+                }
+
+                l++;
+                r++;
+            }
+            else{
+
+                sfreq[s.charAt(l - 1) - 'a']--;
+   
+                sfreq[s.charAt(r) - 'a']++;
+
+                l++;
+                r++;
             }
 
-            if(Arrays.equals(winFreq, pFreq)) result.add(i);
+            if(Arrays.equals(sfreq, pfreq)) result.add(l-1);
         }
 
         return result;
+
     }
 }
