@@ -11,25 +11,20 @@
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-
-        //edge
-        if(head == null) return false;
-
-        //slow and fast pointers
+        
 
         ListNode slow = head;
-        ListNode fast = head.next;
+        ListNode fast = head;
 
-        while(slow != fast){
-
-            if(fast == null || fast.next == null) return false;
+        while(fast != null && fast.next != null){
 
             slow = slow.next;
             fast = fast.next.next;
 
+            if(slow == fast) return true;
+
         }
 
-        return true;
-        
+        return false;
     }
 }
