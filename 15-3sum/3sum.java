@@ -8,17 +8,17 @@ class Solution {
         for(int i = 0; i < nums.length - 2; i++){
 
             if(i == 0 || nums[i] != nums[i - 1]){
+
                 int left = i + 1;
                 int right = nums.length - 1;
 
-                //target for a 2sum
-                int sum = -nums[i];
+                int target = -nums[i];
 
                 while(left < right){
 
-                    //add to ans case
-                    if(nums[left] + nums[right] == sum){
-                        result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    if(nums[left] + nums[right] == target){
+
+                        result.add(Arrays.asList(nums[i], nums[right], nums[left]));
 
                         while(left < right && nums[left] == nums[left + 1]) left++;
                         while(left < right && nums[right] == nums[right - 1]) right--;
@@ -26,8 +26,8 @@ class Solution {
                         left++;
                         right--;
                     }
+                    else if(nums[left] + nums[right] > target){
 
-                    else if(nums[left] + nums[right] > sum){
                         right--;
                     }
                     else{
@@ -36,7 +36,6 @@ class Solution {
                 }
             }
         }
-        
 
         return result;
     }
