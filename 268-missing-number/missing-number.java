@@ -1,21 +1,32 @@
 class Solution {
     public int missingNumber(int[] nums) {
         
-        //only one number is missing [0, n]
-        //calculate theoretical sol if all no were present in range
-        //calculate actual sum, subtract from pred and return
+        //cyclic sort
+        //nums[i] should be placed at i if possible
 
-        int sumPred = 0;
-        int sum = 0;
+        for(int i = 0; i < nums.length; i++){
 
-        for(int i = 0 ; i <= nums.length; i++){
-            sumPred += i;
+            //if num is not equal to its index and is in range, swap
+            if(nums[i] != i && nums[i] < nums.length){
+
+                int temp = nums[nums[i]];
+
+                nums[nums[i]] = nums[i];
+
+                nums[i] = temp;
+
+                i--;
+                
+            }
         }
 
-        for(int i = 0 ; i < nums.length; i++){
-            sum += nums[i];
+        for(int i = 0; i < nums.length; i++){
+
+            if(nums[i] != i){
+                return i;
+            }
         }
 
-        return sumPred - sum;
+        return nums.length;
     }
 }
