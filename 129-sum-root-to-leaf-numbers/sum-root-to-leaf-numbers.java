@@ -16,24 +16,21 @@
 class Solution {
     public int sumNumbers(TreeNode root) {
         
-        int sum = 0;
+        //DFS -> functiont that can get the sum of all paths from root to leaf;
 
-        //getAns -> sum of all paths from node to leaf
-        return getAns(root, sum);
+        return getSum(root, 0);
     }
 
-    private int getAns(TreeNode node, int sum){
+    private int getSum(TreeNode node, int sumToLeaf){
 
         if(node == null) return 0;
 
-        //preorder trav, since we want top numbers to be first 
-        sum = sum * 10 + node.val;
+        sumToLeaf = sumToLeaf * 10 + node.val;
 
-        //if leaf node appears -> return sum so far
-        if(node.left == null && node.right == null) return sum;
+        //if its a leaf node, sent the ans back
+        if(node.left == null && node.right == null) return sumToLeaf;
 
-        //return sum of all paths from left and right subtree
-        return getAns(node.left, sum) + getAns(node.right, sum);
-
+        //pass this down to get sumToLeaf for left and rigth subtrees
+        return getSum(node.left, sumToLeaf) + getSum(node.right, sumToLeaf);
     }
 }
