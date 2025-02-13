@@ -1,60 +1,58 @@
 class Solution {
     public String reorganizeString(String s) {
         
-        //frequency map
+        //Freq map
+        //maxHeap -> arrange freqs
+
         Map<Character, Integer> map = new HashMap<>();
 
-        //maxHeap to sort by freq
         PriorityQueue<Character> maxHeap = new PriorityQueue<>((a, b) -> map.get(b) - map.get(a));
 
-        //stringbuilder
-        StringBuilder result = new StringBuilder();
-
-        //fill map and heap
-
+        //populating our map
         for(char c : s.toCharArray()){
 
             map.put(c, map.getOrDefault(c, 0) + 1);
+
         }
 
         maxHeap.addAll(map.keySet());
 
-        //now we have a heap with letter sorted by freq
+        StringBuilder sb = new StringBuilder();
+
         while(maxHeap.size() >= 2){
-            
+
             char c1 = maxHeap.poll();
             char c2 = maxHeap.poll();
 
-            result.append(c1);
-            result.append(c2);
+            sb.append(c1);
+            sb.append(c2);
 
-            if(map.get(c1) != 0){
-                map.put(c1, map.get(c1) - 1);
+            map.put(c1, map.get(c1) - 1);
+            map.put(c2, map.get(c2) - 1);
 
-                if(map.get(c1) != 0) maxHeap.add(c1);
-            }
-
-            if(map.get(c2) != 0){
-                map.put(c2, map.get(c2) - 1);
-
-                if(map.get(c2) != 0) maxHeap.add(c2);
-            } 
+            if(map.get(c1) > 0) maxHeap.add(c1);
+            if(map.get(c2) > 0) maxHeap.add(c2);
 
         }
 
         if(!maxHeap.isEmpty()){
 
             char c = maxHeap.poll();
-            if(map.get(c) > 1) return "";
-            result.append(c);
+
+            if(map.get(c) > 1){
+                sb.setLength(0);
+            }
+            else{
+                sb.append(c);
+            }
 
         }
 
+        return sb.toString();
 
 
-        return result.toString();
 
-
+        
 
     }
 }
