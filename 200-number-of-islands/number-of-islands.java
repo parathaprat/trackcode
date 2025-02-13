@@ -1,22 +1,26 @@
 class Solution {
     public int numIslands(char[][] grid) {
         
-        int ans = 0;
+        //output = number of islands
+        //update count for each land mass
+
+        int count = 0;
 
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[0].length; j++){
 
                 if(grid[i][j] == '1'){
-                    ans++;
-                    countLand(grid, i, j);
+
+                    count++;
+                    dfs(grid, i, j);
                 }
             }
         }
 
-        return ans;
+        return count;
     }
 
-    public void countLand(char[][] grid, int i, int j){
+    private void dfs(char[][] grid, int i, int j){
 
         if(i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] == '0'){
             return;
@@ -24,9 +28,10 @@ class Solution {
 
         grid[i][j] = '0';
 
-        countLand(grid, i + 1, j);
-        countLand(grid, i - 1, j);
-        countLand(grid, i, j + 1);
-        countLand(grid, i, j - 1);
+        dfs(grid, i - 1, j);
+        dfs(grid, i + 1, j);
+        dfs(grid, i, j + 1);
+        dfs(grid, i, j - 1);
+
     }
 }
