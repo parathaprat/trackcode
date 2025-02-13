@@ -1,34 +1,35 @@
 class Solution {
+
+    List<List<Integer>> res = new ArrayList<>();
+
+    List<Integer> subset = new ArrayList<>();
+
     public List<List<Integer>> subsetsWithDup(int[] nums) {
-        
-        List<List<Integer>> res = new ArrayList<>();
-        List<Integer> subset = new ArrayList<>();
 
+        //sort elements to get dublicates tog
         Arrays.sort(nums);
-
-        getAns(res, 0, subset, nums);
+        
+        getAns(nums, 0);
 
         return res;
     }
+    
+    private void getAns(int[] nums, int i){
 
-    private void getAns(List<List<Integer>> res, int index, List<Integer> subset, int[] nums){
-
-        //base
-        if(index >= nums.length){
+        if(i >= nums.length){
             res.add(new ArrayList<>(subset));
             return;
         }
 
         //include
-        subset.add(nums[index]);
-        getAns(res, index + 1, subset, nums);
+        subset.add(nums[i]);
+        getAns(nums, i + 1);
 
-        //notInclude
+        //not include
+        //to skip duplicates
+        while(i + 1 < nums.length && nums[i] == nums[i + 1]) i++;
+
         subset.remove(subset.size() - 1);
-        
-        while(index + 1 < nums.length && nums[index] == nums[index + 1]) index++;
-
-        getAns(res, index + 1, subset, nums);
-        
+        getAns(nums, i + 1);
     }
 }
