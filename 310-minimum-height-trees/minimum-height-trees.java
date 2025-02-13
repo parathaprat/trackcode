@@ -1,67 +1,69 @@
 class Solution {
     public List<Integer> findMinHeightTrees(int n, int[][] edges) {
         
-        //Main logic -> Nodes with minimum height can be 2 at most
+        //main logic -> MHT can be at max 2 nodes
 
-        //Work backwards -> disconnect leaf nodes, add new leaf nodes to q, disconnec those ...
-        //until n <= 2; return those roots
-
-        //step1 -> convert our edges into a adj list
+        //adj list
+        //queue
+        //edgeCount
 
         if(n == 1) return List.of(0);
-        
+
         List<List<Integer>> adj = new ArrayList<>();
 
         for(int i = 0; i < n; i++){
 
             adj.add(new ArrayList<>());
+
         }
 
-        //adj list populated
         for(int[] edge : edges){
 
             adj.get(edge[0]).add(edge[1]);
             adj.get(edge[1]).add(edge[0]);
 
-        } 
-
-        //build a number of edges map
-        //add edges == 1 to a q (leaf nodes)  
-        Map<Integer, Integer> edgeCount = new HashMap<>();
-        Queue<Integer> leaf = new LinkedList<>();
-
-        //edgeCount populated
-        for(int i = 0; i < n; i++){
-
-            edgeCount.put(i, adj.get(i).size());
-            if(edgeCount.get(i) == 1) leaf.add(i); 
         }
 
+        Queue<Integer> leaf = new LinkedList<>();
 
-        //update edge count after popping from q
-        //add edges w edgeCount == 1 to q again
+        //create a edgecount map, add edgecount == 1; add to leaf q
+        Map<Integer, Integer> map = new HashMap<>();
+
+        //for each node, size of its adj list is the size 
+        for(int i = 0; i < n; i++){
+
+            map.put(i, adj.get(i).size());
+
+            //if edge count == 1 fro any node, add it to leaf q
+            if(map.get(i) == 1) leaf.add(i);
+        }
 
         while(!leaf.isEmpty()){
 
-            //if total nodes remaining <= 2; return the nodes in our q
-            if(n  <= 2) break;
+            if(n <= 2) break;
 
             int size = leaf.size();
 
             for(int i = 0; i < size; i++){
-                //get top leaf, reduce edge count for each of its nei
-                int pop = leaf.poll();
+
+                int leafz = leaf.poll();
                 n -= 1;
 
-                for(int nei : adj.get(pop)){
+                //reduce edge count for each of its neighbors
+                for(int nei : adj.get(leafz)){
 
-                    edgeCount.put(nei, edgeCount.get(nei) - 1);
-                    if(edgeCount.get(nei) == 1) leaf.add(nei);
+                    map.put(nei, map.get(nei) - 1);
+                    if(map.get(nei) == 1) leaf.add(nei);
+
                 }
+
             }
         }
 
         return new ArrayList<>(leaf);
+
+
+
 
     }
 }
