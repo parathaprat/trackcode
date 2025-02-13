@@ -5,16 +5,14 @@ class Solution {
         
         int sum = 0;
         int maxSum = Integer.MIN_VALUE;
-        
-        for(int r = 0; r < nums.length; r++){
 
-            sum += nums[r];
+        for(int i = 0 ; i < nums.length; i++){
+
+            sum += nums[i];
 
             maxSum = Math.max(sum, maxSum);
 
-            if(sum <= 0){
-                sum = 0;
-            }
+            if(sum < 0) sum = 0;
 
         }
 
