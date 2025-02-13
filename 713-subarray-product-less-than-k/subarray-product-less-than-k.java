@@ -1,11 +1,11 @@
 class Solution {
     public int numSubarrayProductLessThanK(int[] nums, int k) {
         
-        int res = 0;
-
         int l = 0;
         int product = 1;
-        
+
+        int result = 0;
+
         for(int r = 0; r < nums.length; r++){
 
             product *= nums[r];
@@ -14,12 +14,11 @@ class Solution {
 
                 product = product / nums[l];
                 l++;
-
             }
 
-            res += r - l + 1;
+            result += r - l + 1;
         }
 
-        return res;
+        return result;
     }
 }
