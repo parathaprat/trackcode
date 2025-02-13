@@ -1,16 +1,11 @@
 class Solution {
     public int minimumOperations(int[] nums) {
         
-
-        //amount = no of unique elements
-
         Set<Integer> set = new HashSet<>();
 
-        for(int i = 0; i < nums.length; i++){
+        for(int num : nums){
 
-            if(nums[i] != 0){
-                set.add(nums[i]);
-            }
+            if(num != 0) set.add(num);
         }
 
         return set.size();
