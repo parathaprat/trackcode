@@ -22,7 +22,6 @@ class Solution {
         set.add(nums[index]);
         dfs(nums, index + 1, res, set);
 
-        //current element -> not part of the subset
         set.remove(set.size() - 1);
         dfs(nums, index + 1, res, set);
     }
