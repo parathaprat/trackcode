@@ -1,57 +1,59 @@
 class Solution {
     public int leastInterval(char[] tasks, int n) {
         
-        //freq array
-        //queue{freq, timeOut}
-        //maxHeap -> to sort
+        //HashMap {Task, Frequency} WRONG
+
+        //Int freq array -> we dont need to deal with chars
+        //maxHeap {Frequency}
+        //Queue {Task, outTime}
+
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
 
         int[] freq = new int[26];
 
-        for(int i = 0; i < tasks.length; i++){
+        for(char c : tasks){
 
-            freq[tasks[i] - 'A']++;
-
+            freq[c - 'A']++;
         }
-
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
 
         for(int fre : freq){
 
             if(fre != 0) maxHeap.add(fre);
         }
 
+        //{freq, timeOut}
         Queue<int[]> q = new LinkedList<>();
 
-        //iterator
         int time = 0;
 
         while(!q.isEmpty() || !maxHeap.isEmpty()){
 
             if(maxHeap.isEmpty()){
+
                 time = q.peek()[1];
+
             }
 
             if(!maxHeap.isEmpty()){
 
                 int task = maxHeap.poll();
-
-                task = task - 1;
+                task -= 1;
 
                 if(task > 0){
-
                     q.add(new int[]{task, time + n});
-                    
                 }
             }
 
-            if(!q.isEmpty() && q.peek()[1] == time){
 
+            if(!q.isEmpty() && time == q.peek()[1]){
                 maxHeap.add(q.poll()[0]);
             }
 
             time++;
         }
 
+
         return time;
+
     }
 }
