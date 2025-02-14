@@ -1,54 +1,52 @@
 class Solution {
     public String longestPalindrome(String s) {
-
-        //base case
-        if(s.length() == 0) return null;
         
-        //define start and end of substring
+        //go thru each character
+        //treat it as the middle of either an odd or even palindrome
+        //use 2 pointers to check if it actually is
+        //odd -> left = right; even -> left, left + 1
+
         int start = 0;
         int end = 0;
 
-        //expand from each char as a potencial palindrome
+        int maxPalLen = 0;
+
         for(int i = 0; i < s.length(); i++){
 
-            //pal may be odd or even
-            //odd -> middle is one element
-            int oddPal = longPal(s, i, i);
+            //odd middle
+            int left = palLen(s, i, i);
 
-            //even -> middle is 2 elements
-            int evenPal = longPal(s, i, i + 1);
+            //even middle
+            int right = palLen(s, i, i + 1);
 
-            //get the max of both, calculate start and end, and return substring
-            int finalLen = Math.max(oddPal, evenPal);
 
-            //if finalPal > current pal, update start and end
-            if(finalLen > end - start){
+            int isPal = Math.max(left, right);
 
-                start = i - (finalLen - 1)/2;
-                end = i + finalLen/2;
+            if(isPal > maxPalLen){
 
+                maxPalLen = isPal;
+
+                start = i - (maxPalLen - 1)/2;
+                end = i + maxPalLen/2;
             }
-
         }
 
+        //.substring is exclusive at the end index
         return s.substring(start, end + 1);
-
     }
 
-    private int longPal(String s, int left, int right){
+    private int palLen(String s, int start, int end){
 
-            //base 
-            if(s == null || left > right) return 0;
+        if(start > end) return 0;
 
-            //main logic -> expand winow as long as i bounds and chars are equal
-            while(left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)){
-                left--;
-                right++;
-            }
+        while(start >= 0  && end < s.length() && s.charAt(start) == s.charAt(end)){
 
-            //return len of window
-            return right - left - 1;
-
+            start--;
+            end++;
 
         }
+
+        //since both pointers have been moved outside window area now
+        return end - start - 1;
+    }
 }
