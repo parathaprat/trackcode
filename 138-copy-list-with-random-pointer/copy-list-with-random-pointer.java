@@ -16,36 +16,39 @@ class Node {
 class Solution {
     public Node copyRandomList(Node head) {
         
-        //map of nodes and copies
         Map<Node, Node> map = new HashMap<>();
 
-        Node cur = head;
+        //1st pass -> create nodes
+        Node track = head;
 
-        //1st pass -> make nodes
-        while(cur != null){
+        while(track != null){
 
-            Node copy = new Node(cur.val);
-            map.put(cur, copy);
-            cur = cur.next;
+            Node copy = new Node(track.val);
 
+            map.put(track, copy);
+
+            track = track.next;
+
+        
         }
 
-        //2nd pass -> make links
 
-        cur = head;
-        while(cur != null){
+        //2nd pass -> connect nodes
 
-            Node copy = map.get(cur);
+        track = head;
+
+        while(track != null){
+
+            Node copy = map.get(track);
+
+            //point to map.get(pointer) since direct assignment makes them point to original list
+            copy.next = map.get(track.next);
+            copy.random = map.get(track.random);
+
+            track = track.next;
             
-            copy.next = map.get(cur.next);
-            copy.random = map.get(cur.random);
-
-            cur = cur.next;
-
         }
 
         return map.get(head);
-    
-
     }
 }
