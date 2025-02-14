@@ -1,31 +1,36 @@
 class Solution {
     public int[] productExceptSelf(int[] nums) {
         
-        //use prefix sums for left, right and ans array
+        int[] prefixLeft = new int[nums.length];
+        int[] prefixRight = new int[nums.length];
 
-        int N = nums.length;  
-        int[] leftProduct = new int[N];
-        int[] rightProduct = new int[N];
-        int[] ans = new int[N];
+        prefixLeft[0] = 1;
 
-        //start of left and end of right = 1;
-        leftProduct[0] = 1;
-        rightProduct[N - 1] = 1;
+        prefixRight[nums.length - 1] = 1; 
 
-        //initialize left and right products
-        for(int i = 1; i < N; i++){
-            leftProduct[i] = leftProduct[i - 1] * nums[i - 1];
+        //populating prefixLeft
+        for(int i = 1; i < nums.length; i++){
+
+            prefixLeft[i] = prefixLeft[i - 1] * nums[i - 1];
+
         }
 
-        for(int i = N - 2; i >= 0; i--){
-            rightProduct[i] = rightProduct[i + 1] * nums[i + 1];
+        //populating prefixRight
+        for(int i = nums.length - 2; i >= 0; i--){
+
+            prefixRight[i] = prefixRight[i + 1] * nums[i + 1];
+
         }
 
-        //ans = left * right
-        for(int i = 0; i < N; i++){
-            ans[i] = leftProduct[i] * rightProduct[i];
+        int[] ans = new int[nums.length];
+
+        for(int i = 0; i < nums.length; i++){
+
+            ans[i] = prefixLeft[i] * prefixRight[i];
+
         }
 
         return ans;
+
     }
 }
