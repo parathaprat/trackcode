@@ -15,14 +15,12 @@
  */
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
-        
-        //Simple BFS
     
-        List<List<Integer>> res = new ArrayList<>();
-
-        if(root == null) return res;
-
         Queue<TreeNode> q = new LinkedList<>();
+
+        List<List<Integer>> result = new ArrayList<>();
+
+        if(root == null) return result;
 
         q.add(root);
 
@@ -42,9 +40,9 @@ class Solution {
 
             }
 
-            res.add(ans);
+            result.add(ans);
         }
 
-        return res;
+        return result;
     }
 }
