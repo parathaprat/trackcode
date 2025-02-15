@@ -13,7 +13,7 @@ class Solution {
 
     private double getAns(double x, long n){
 
-        if(n == 0) return 1;
+        if(n == 1) return x;
 
         double half = getAns(x, n/2);
 
