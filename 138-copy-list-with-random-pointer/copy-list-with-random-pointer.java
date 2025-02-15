@@ -18,35 +18,29 @@ class Solution {
         
         Map<Node, Node> map = new HashMap<>();
 
-        //1st pass -> create nodes
+        //2 passes
+        //1st pass -> copy nodes
+
         Node track = head;
 
         while(track != null){
 
-            Node copy = new Node(track.val);
-
-            map.put(track, copy);
-
+            Node node = new Node(track.val);
+            map.put(track, node);
             track = track.next;
 
-        
         }
 
-
-        //2nd pass -> connect nodes
-
+        //2nd pass
         track = head;
-
         while(track != null){
 
             Node copy = map.get(track);
 
-            //point to map.get(pointer) since direct assignment makes them point to original list
             copy.next = map.get(track.next);
             copy.random = map.get(track.random);
 
             track = track.next;
-            
         }
 
         return map.get(head);
