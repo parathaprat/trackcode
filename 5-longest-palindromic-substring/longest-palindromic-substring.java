@@ -1,52 +1,44 @@
 class Solution {
     public String longestPalindrome(String s) {
         
-        //go thru each character
-        //treat it as the middle of either an odd or even palindrome
-        //use 2 pointers to check if it actually is
-        //odd -> left = right; even -> left, left + 1
+        //go through each letter
+        //treat it as the center of an odd/even palindrome
+        //call lenPalindrome func, is len > maxLen, assign new left and right vals
+        //return substring
 
         int start = 0;
         int end = 0;
-
-        int maxPalLen = 0;
+        int maxLen = 0;
 
         for(int i = 0; i < s.length(); i++){
 
-            //odd middle
-            int left = palLen(s, i, i);
+            char c = s.charAt(i);
 
-            //even middle
-            int right = palLen(s, i, i + 1);
+            int oddLen = getLen(c, i, i, s);
+            int evenLen = getLen(c, i, i + 1, s);
 
+            int max = Math.max(oddLen, evenLen);
 
-            int isPal = Math.max(left, right);
+            if(max > maxLen){
+                maxLen = max;
 
-            if(isPal > maxPalLen){
-
-                maxPalLen = isPal;
-
-                start = i - (maxPalLen - 1)/2;
-                end = i + maxPalLen/2;
+                start = i - (maxLen - 1)/2;
+                end = i + maxLen/2;
             }
         }
 
-        //.substring is exclusive at the end index
         return s.substring(start, end + 1);
     }
 
-    private int palLen(String s, int start, int end){
+    private int getLen(char c, int left, int right, String s){
 
-        if(start > end) return 0;
+        if(left < 0 || right >= s.length() || s.charAt(left) != s.charAt(right)) return 0;
 
-        while(start >= 0  && end < s.length() && s.charAt(start) == s.charAt(end)){
-
-            start--;
-            end++;
-
+        while(left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)){
+            left--;
+            right++;
         }
 
-        //since both pointers have been moved outside window area now
-        return end - start - 1;
+        return right - left - 1; 
     }
 }
