@@ -1,26 +1,24 @@
 class Solution {
     public int maxWidthRamp(int[] nums) {
         
-        //monotonic decreasing stack 
+        //number(i) <= number(j) 
+        //j > i
+        //width = j - i;
 
         Stack<Integer> st = new Stack<>();
 
-        int ans = 0;
-
         for(int i = 0; i < nums.length; i++){
 
-            if(st.isEmpty() || nums[i] < nums[st.peek()]){
-
-                //push index since we are concerned with diff of indexes
-                st.push(i);
-            }
+            if(st.isEmpty() || nums[i] < nums[st.peek()]) st.add(i);
         }
 
-        for(int i = nums.length - 1; i >= 0; i--){
+        int ans = 0;
 
-            while(!st.isEmpty() && nums[i] >= nums[st.peek()]){
+        for(int j = nums.length - 1; j >= 0; j--){
 
-                ans = Math.max(ans, i - st.pop());
+            //keep popping until num[j] isnt < num[st.peek()]
+            while(!st.isEmpty() && nums[j] >= nums[st.peek()]){
+                ans = Math.max(ans, j - st.pop());
             }
         }
 
