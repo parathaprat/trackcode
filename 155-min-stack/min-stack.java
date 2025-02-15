@@ -12,37 +12,40 @@ class MinStack {
 
     }
 
-    Stack<tuple> minStack;
+    Stack<tuple> st;
 
     public MinStack() {
         
-        minStack = new Stack<>();
+        st = new Stack<>();
+
     }
     
     public void push(int val) {
         
-        //if st is emopty -> {val, val}
-        //if not -> {val, min{st.peek.min, val}}
+        //if stack is empty -> push {val, val}
+        //if its not -> push {val, Math.min(val, st.peek())};
 
-        if(minStack.isEmpty()) minStack.push(new tuple(val, val));
-        else minStack.push(new tuple(val, Math.min(val, minStack.peek().min)));
+        if(st.isEmpty()) st.push(new tuple(val, val));
+        else st.push(new tuple(val, Math.min(val, st.peek().min)));
+
     }
     
     public void pop() {
-        
-        if(!minStack.isEmpty()) minStack.pop();
 
+        if(!st.isEmpty()) st.pop();
+        
     }
     
     public int top() {
 
-        return minStack.peek().num;
+        return st.peek().num;
         
     }
     
     public int getMin() {
+
+        return st.peek().min;
         
-        return minStack.peek().min;
     }
 }
 
