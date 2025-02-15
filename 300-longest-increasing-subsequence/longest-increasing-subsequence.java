@@ -1,35 +1,32 @@
 class Solution {
     public int lengthOfLIS(int[] nums) {
-
-        //define dp array, shift prev by 1, since it starts at -1
-        int[][] dp = new int[nums.length][nums.length + 1];
-
-        for(int[] row : dp) Arrays.fill(row, -1);
         
-        //take and not take logic
-        return dfs(nums, 0, -1, dp);
+        //start from the back of the array, last elements LIS == 1;
+        //every element i before LIS = Math.max(LIS[j], 1 + LIS[j]) while nums[i] < nums[j]
 
-    }
+        int[] dp = new int[nums.length];
 
-    public int dfs(int[] nums, int cur, int prev, int[][] dp){
+        Arrays.fill(dp, 1);
 
-        //base case
-        if(cur == nums.length) return 0;
+        for(int i = nums.length - 1; i >= 0; i--){
+            for(int j = i + 1; j < nums.length; j++){
 
-        //return dp[x][x + 1] if exists
-        if(dp[cur][prev + 1] != -1) return dp[cur][prev + 1];
+                if(nums[i] < nums[j]){
+                
+                    dp[i] = Math.max(dp[i], 1 + dp[j]);
+                    
+                }
 
-        //not include
-        int LIS = dfs(nums, cur + 1, prev, dp);
+            }
+        }
+        
+        int ans = 0;
 
-        //include -> len increases
-        if(prev == -1 || nums[cur] > nums[prev]){
-            LIS = Math.max(LIS, 1 + dfs(nums, cur + 1, cur, dp));
+        for(int max : dp){
+            
+            if(max > ans) ans = max;
         }
 
-        //memoize and return final ans
-        return dp[cur][prev + 1] = LIS;
-
-
+        return ans;
     }
 }
