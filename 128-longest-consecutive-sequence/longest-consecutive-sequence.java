@@ -4,29 +4,28 @@ class Solution {
         Set<Integer> set = new HashSet<>();
 
         for(int num : nums){
-
             set.add(num);
         }
 
-        int maxLen = 0;
+        int result = 0;
 
         for(int num : set){
 
-            int cur = num;
-            int curLen = 1;
+            int ans = 1;
 
-            if(!set.contains(cur - 1)){
+            if(!set.contains(num - 1)){
+
+                int cur = num;
 
                 while(set.contains(cur + 1)){
-                    cur += 1;
-                    curLen++;
+                    ans++;
+                    cur++;
                 }
 
-                maxLen = Math.max(maxLen, curLen);
+                result = Math.max(result, ans);
             }
-
         }
 
-        return maxLen;
+        return result;
     }
 }
