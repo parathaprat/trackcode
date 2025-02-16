@@ -1,31 +1,26 @@
 class Solution {
     public boolean isValid(String s) {
         
-        Stack<Character> stack = new Stack<>();
+        Stack<Character> st = new Stack<>();
 
-        for(char ch : s.toCharArray()){
+        for(char c : s.toCharArray()){
 
-            //push opening bracket chars to stack
-            if(ch == '(' || ch == '[' | ch == '{'){
-                stack.push(ch);
-            } 
+            if(c == '[' || c == '{' || c == '(' ) st.push(c);
 
-            //if stack empty, false; pop top, check complements
-            else{
-                if(stack.isEmpty()) return false;
-
-                char top = stack.pop();
-
-                //only valid way this moves forward
-                if(ch == ')' && top == '(' || ch == ']' && top == '[' || ch == '}' && top == '{') continue;
-                
-                else return false;
-
+            if(c == ']'){
+                if(st.isEmpty() || st.peek() != '[') return false;
+                st.pop();
+            }
+            if(c == '}'){
+                if(st.isEmpty() || st.peek() != '{') return false;
+                st.pop();
+            }
+            if(c == ')'){
+                if(st.isEmpty() || st.peek() != '(') return false;
+                st.pop();
             }
         }
 
-        return stack.isEmpty();
-
-
+        return st.isEmpty();
     }
 }
