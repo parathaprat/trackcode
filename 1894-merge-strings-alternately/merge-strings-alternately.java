@@ -3,18 +3,32 @@ class Solution {
         
         StringBuilder sb = new StringBuilder();
 
-        int i = 0;
-        int j = 0;
+        int pt1 = 0;
+        int pt2 = 0;
 
-        while(i < word1.length() || j < word2.length()){
 
-            if(i < word1.length()) sb.append(word1.charAt(i));
-            if(j < word2.length()) sb.append(word2.charAt(j));
-            i++;
-            j++;
+        while(pt1 < word1.length() && pt2 < word2.length()){
 
+            sb.append(word1.charAt(pt1));
+            pt1++;
+
+            sb.append(word2.charAt(pt2));
+            pt2++;
+
+        }
+
+        while(pt1 < word1.length()){
+            sb.append(word1.charAt(pt1));
+            pt1++;
+        }
+
+        while(pt2 < word2.length()){
+            sb.append(word2.charAt(pt2));
+            pt2++;
         }
 
         return sb.toString();
     }
+
+    
 }
