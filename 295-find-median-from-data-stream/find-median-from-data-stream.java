@@ -1,39 +1,44 @@
 class MedianFinder {
 
-    //maxHeap for smaller half 
-    //minHeap for larger half
+    //2 heaps needed
+    
+    //maxHeap -> first half
+    //minHeap -> 2nd half
+    
+    //keep balancing elements, until they are about the same length
 
-    PriorityQueue<Integer> smallHeap;
-    PriorityQueue<Integer> bigHeap; 
+    PriorityQueue<Integer> maxHeap;
+    PriorityQueue<Integer> minHeap;
 
     public MedianFinder() {
-        smallHeap = new PriorityQueue<>((a, b) -> b - a);
-        bigHeap = new PriorityQueue<>((a, b) -> a - b);
+
+        maxHeap = new PriorityQueue<>((a, b) -> b - a);
+        minHeap = new PriorityQueue<>((a, b) -> a - b);
+
     }
     
     public void addNum(int num) {
-        
-        smallHeap.add(num);
 
-        if(smallHeap.size() - bigHeap.size() > 1 || !bigHeap.isEmpty() && smallHeap.peek() > bigHeap.peek()){
+        //add to 1st heap, then balance
+        maxHeap.add(num);
 
-            bigHeap.add(smallHeap.poll());
+        //if first half is larger || first half got bigger elements than 2nd half, 2nd.add(1st)
+        if(maxHeap.size() - minHeap.size() > 1 || !minHeap.isEmpty() && maxHeap.peek() > minHeap.peek()) minHeap.add(maxHeap.poll());
 
-        }
-        if(bigHeap.size() - smallHeap.size() > 1){
-            smallHeap.add(bigHeap.poll());
-        }
+        //if 2nd half is larger, 1st half.add(2nd half)
+        if(minHeap.size() - maxHeap.size() > 1) maxHeap.add(minHeap.poll());
+
     }
     
     public double findMedian() {
+
+        double ans = 0;
         
-        if(bigHeap.size() == smallHeap.size()){
-            return (double)(bigHeap.peek() + smallHeap.peek()) / 2;
-        }
-        else if(smallHeap.size() > bigHeap.size()) return smallHeap.peek();
-        else{
-            return bigHeap.peek();
-        }
+        if(maxHeap.size() == minHeap.size()) ans = (double)(maxHeap.peek() + minHeap.peek()) / 2;
+        else if(maxHeap.size() > minHeap.size()) ans = (double)maxHeap.peek();
+        else ans = minHeap.peek();
+
+        return (double)ans;
     }
 }
 
