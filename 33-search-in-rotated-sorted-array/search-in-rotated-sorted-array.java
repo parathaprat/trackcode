@@ -17,25 +17,19 @@ class Solution {
 
         }
 
-        //pivot on left pointer
-        // if(target >= nums[0]){
-        //     r = l - 1;
-        //     l = 0;
-        // }
-        // else{
-        //     r = nums.length - 1;
-        // }
+        int pivot = l;
 
-          int pivot = l;
+        if(target >= nums[pivot] && target <= nums[nums.length - 1]){
 
-        // Step 2: Determine which half to search
-        if (target >= nums[pivot] && target <= nums[nums.length - 1]) {
             l = pivot;
             r = nums.length - 1;
-        } else {
-            l = 0;
-            r = pivot - 1;
+            
         }
+        else{
+            r = pivot - 1;
+            l = 0;
+        }
+
 
 
         //BS ont that portion 
