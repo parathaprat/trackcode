@@ -11,33 +11,17 @@
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         
-        // //approach1 -> use a tracker node, go left if both are lower and right if both are greater
-        // TreeNode currNode = root;
+        if(root == null) return null;
 
-        // while(currNode != null){
-        //     if(p.val > currNode.val && q.val > currNode.val){
-        //         currNode = currNode.right;
-        //     }
+        return getAns(root, p, q);
+    }
 
-        //     else if(p.val < currNode.val && q.val < currNode.val){
-        //         currNode = currNode.left;
-        //     }
-        //     else{
-        //         return currNode;
-        //     }
-        // }
+    private TreeNode getAns(TreeNode node, TreeNode p, TreeNode q){
 
-        // return null;
+        if(p.val > node.val && q.val > node.val) return getAns(node.right, p, q);
 
-        //approach 2 -> recursive approach; recursively call on right/left based on condition and return
-        if(p.val > root.val && q.val > root.val){
-            return lowestCommonAncestor(root.right, p, q);
-        }
+        if(p.val < node.val && q.val < node.val) return getAns(node.left, p, q);
 
-        if(p.val < root.val && q.val < root.val){
-            return lowestCommonAncestor(root.left, p, q);
-        }
-
-        return root;
+        return node;
     }
 }
