@@ -19,17 +19,15 @@ class Solution {
 
         if(node == null) return null;
 
-        if(node == p) return node;
-        if(node == q) return node;
+        if(node == p || node == q) return node;
 
         TreeNode left = getAns(node.left, p, q);
         TreeNode right = getAns(node.right, p, q);
 
-
+        //if both are non null, current node is LCA
         if(left != null && right != null) return node;
-        else if(left == null && right != null) return right;
-        else return left;
 
-
+        //if one of them is null, that side is LCA
+        return left == null ? right : left;
     }
 }
