@@ -18,9 +18,16 @@ class Solution {
         
         if(root == null) return 0;
 
-        int leftDepth = maxDepth(root.left);
-        int rightDepth = maxDepth(root.right);
+        return getAns(root);
+    }
+    
+    private int getAns(TreeNode node){
 
-        return Math.max(leftDepth, rightDepth) + 1;
+        if(node == null) return 0;
+
+        int leftDepth = 1 + getAns(node.left);
+        int rightDepth = 1 + getAns(node.right);
+
+        return Math.max(leftDepth, rightDepth);
     }
 }
