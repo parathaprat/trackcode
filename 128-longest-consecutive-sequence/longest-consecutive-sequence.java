@@ -9,6 +9,7 @@ class Solution {
         
         int maxLen = 0;
 
+        //iterate through the nums in set, because iterating thru array gives TLE
         for(int num : set){
 
             if(!set.contains(num - 1)){
