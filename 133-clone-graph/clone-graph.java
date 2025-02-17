@@ -20,16 +20,15 @@ class Node {
 
 class Solution {
     public Node cloneGraph(Node node) {
-
+        
         if(node == null) return null;
 
         Map<Node, Node> map = new HashMap<>();
 
-        return makeCopy(node, map);
-        
+        return getCopy(node, map);
     }
 
-    private Node makeCopy(Node node, Map<Node, Node> map){
+    private Node getCopy(Node node, Map<Node, Node> map){
 
         if(map.containsKey(node)) return map.get(node);
 
@@ -39,9 +38,10 @@ class Solution {
 
         for(Node nei : node.neighbors){
 
-            copy.neighbors.add(makeCopy(nei, map));
+            copy.neighbors.add(getCopy(nei, map));
+
         }
 
-        return copy;
+        return map.get(node);
     }
 }
