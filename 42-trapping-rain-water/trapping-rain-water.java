@@ -1,32 +1,35 @@
 class Solution {
     public int trap(int[] height) {
         
-        //main logc -> Min(Max(left, right)) - height(i)
+        int l = 0;
+        int r = height.length - 1;
 
-        int left = 0;
-        int right = height.length - 1;
+        int leftMax = height[l];
+        int rightMax = height[r];
 
-        int leftMax = height[left];
-        int rightMax = height[right];
+        int res = 0;
 
-        int water = 0;
-
-        while(left < right){
+        while(l < r){
 
             if(leftMax < rightMax){
 
-                left++;
-                leftMax = Math.max(leftMax, height[left]);
-                water += leftMax - height[left];
+                l++;
+                leftMax = Math.max(leftMax, height[l]);
+                res += leftMax - height[l];
+
             }
+
             else{
 
-                right--;
-                rightMax = Math.max(rightMax, height[right]);
-                water += rightMax - height[right];
-            }   
+                r--;
+                rightMax = Math.max(rightMax, height[r]);
+                res += rightMax - height[r];
+                
+            }
         }
 
-        return water;
+        
+
+        return res;
     }
 }
