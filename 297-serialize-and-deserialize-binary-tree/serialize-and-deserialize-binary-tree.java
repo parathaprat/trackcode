@@ -11,44 +11,38 @@ public class Codec {
 
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
-        
-        //do it with DFS using pre order trav
 
         StringBuilder res = new StringBuilder();
 
-        dfs1(root, res);
+        dfs1(res, root);
 
         return res.toString();
         
     }
 
-    private void dfs1(TreeNode node, StringBuilder res){
+    private void dfs1(StringBuilder res, TreeNode root){
 
-        //every "N " char it the preorder trav represents a null node
-        //we return since there will not be any children here 
-        if(node == null){
+        if(root == null){
             res.append("N ");
             return;
         }
 
-        //every nodes call is appended, then left and rigth is called
-        res.append(node.val + " ");
+        res.append(root.val + " ");
 
-        dfs1(node.left, res);
-        dfs1(node.right, res);
+        dfs1(res, root.left);
+        dfs1(res, root.right);
+
     }
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-
-        //build a Strign array split by spaces
+        
         String[] str = data.split(" ");
 
-        //since arrays are passed by ref and ints by value, we use array to track
         int[] i = {0};
 
         return dfs2(str, i);
-        
+
     }
 
     private TreeNode dfs2(String[] str, int[] i){
