@@ -24,10 +24,10 @@ class Solution {
         TreeNode left = getAns(node.left, p, q);
         TreeNode right = getAns(node.right, p, q);
 
-        //if both are non null, current node is LCA
         if(left != null && right != null) return node;
-
-        //if one of them is null, that side is LCA
+        
         return left == null ? right : left;
+
+        
     }
 }
