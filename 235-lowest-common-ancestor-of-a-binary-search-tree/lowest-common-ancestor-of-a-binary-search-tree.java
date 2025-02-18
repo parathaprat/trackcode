@@ -13,15 +13,10 @@ class Solution {
         
         if(root == null) return null;
 
-        return getAns(root, p, q);
-    }
+        if(p.val < root.val && q.val < root.val) return lowestCommonAncestor(root.left, p, q);
+        if(p.val > root.val && q.val > root.val) return lowestCommonAncestor(root.right, p, q);
 
-    private TreeNode getAns(TreeNode node, TreeNode p, TreeNode q){
+        return root;
 
-        if(p.val > node.val && q.val > node.val) return getAns(node.right, p, q);
-
-        if(p.val < node.val && q.val < node.val) return getAns(node.left, p, q);
-
-        return node;
     }
 }
