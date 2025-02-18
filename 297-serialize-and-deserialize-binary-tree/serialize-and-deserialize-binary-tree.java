@@ -12,59 +12,58 @@ public class Codec {
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
         
-        //DFS approach with a stringBuilder
+        //do it with DFS using pre order trav
+
         StringBuilder res = new StringBuilder();
 
-        //call recursive DFS function
-        dfs1(res, root);
+        dfs1(root, res);
 
-        //return stringBuilder in string form
         return res.toString();
+        
     }
 
-    public void dfs1(StringBuilder res, TreeNode node){
+    private void dfs1(TreeNode node, StringBuilder res){
 
-        //if null// end of leaf nodes appear, add an N
+        //every "N " char it the preorder trav represents a null node
+        //we return since there will not be any children here 
         if(node == null){
             res.append("N ");
             return;
         }
 
-        //if node, add the value to sb
+        //every nodes call is appended, then left and rigth is called
         res.append(node.val + " ");
 
-        //call on left and right children for preorder traversal
-        dfs1(res, node.left);
-        dfs1(res, node.right);
-
-
+        dfs1(node.left, res);
+        dfs1(node.right, res);
     }
-
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        
-        //split values from " ", and create string array
-        String[] vals = data.split(" ");
 
+        //build a Strign array split by spaces
+        String[] str = data.split(" ");
+
+        //since arrays are passed by ref and ints by value, we use array to track
         int[] i = {0};
-        return dfs2(vals, i);
 
+        return dfs2(str, i);
+        
     }
 
-    private TreeNode dfs2(String[] vals, int[] i){
+    private TreeNode dfs2(String[] str, int[] i){
 
-        if(vals[i[0]].equals("N")){
+        if(str[i[0]].equals("N")){
             i[0]++;
             return null;
         }
 
-        TreeNode node = new TreeNode(Integer.parseInt(vals[i[0]]));
+        TreeNode node = new TreeNode(Integer.parseInt(str[i[0]]));
         i[0]++;
-        
-        //no change since i++ was done before
-        node.left = dfs2(vals, i);
-        node.right = dfs2(vals, i);
+
+        node.left = dfs2(str, i);
+        node.right = dfs2(str, i);
+
         return node;
     }
 }
