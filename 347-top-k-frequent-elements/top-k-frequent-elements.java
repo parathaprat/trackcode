@@ -1,54 +1,51 @@
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
         
-        //HashMap for freq
-        //Array of Lists for bucks
+        //Create a frequency map
+        //Bucket sort the map -> each frequency is represented by an index, each index has values with that frequency
+        //iterate from the back and return top k elements
 
-        //bucket sort -> each index reps count, and each count holds a list of elements with that count
+        HashMap<Integer, Integer> map = new HashMap<>();
 
-        //freq map
-        Map<Integer, Integer> map = new HashMap<>();
-
+        //populating frequency map
         for(int i = 0; i < nums.length; i++){
 
             map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
 
         }
 
-        //buckets -> Array of Lists
-        List<Integer>[] bucks = new ArrayList[nums.length + 1];
+        //Create Array of Lists for buckets
+        List<Integer>[] buckets = new ArrayList[nums.length + 1];
 
-        //initialise each buck
+        //Initialize each bucket
         for(int i = 0; i <= nums.length; i++){
-
-            bucks[i] = new ArrayList<>();
+            buckets[i] = new ArrayList<>();
         }
 
-        //populating bucks using map
-        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
-
-            int num = entry.getKey();
+        //populating buckets
+        for(HashMap.Entry<Integer, Integer> entry : map.entrySet()){
+            int key = entry.getKey();
             int freq = entry.getValue();
 
-            bucks[freq].add(num);
+            buckets[freq].add(key);
         }
 
-        //populating ans but looking at elements with highest freqs
-
-        int index = 0;
+        //going from the back through buckets
 
         int[] ans = new int[k];
 
-        for(int i = bucks.length - 1; i >= 0; i--){
+        int count = 0;
 
-            for(int num : bucks[i]){
-                ans[index] = num;
-                index++;
+        for(int i = buckets.length - 1; i >= 0; i--){
 
-                if(index == k) return ans;
+            for(int num : buckets[i]){
+                ans[count++] = num;
+                if(count == k) break;
             }
-        }
 
+            if(count == k) break;
+        }
+        
         return ans;
     }
 }
