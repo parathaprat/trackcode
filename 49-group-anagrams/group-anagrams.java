@@ -1,9 +1,9 @@
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
         
-        //solution:
-        //map<freqArray to String, word>
-        //return map as arrayList
+        //Approach: freq array for each word
+        //map<freq.toString, List<words>>
+        //return values of map 
 
         HashMap<String, List<String>> map = new HashMap<>();
 
@@ -11,18 +11,21 @@ class Solution {
 
             int[] freq = new int[26];
 
-            for(char ch : strs[i].toCharArray()){
-                freq[ch - 'a']++;
+            //populating freq array
+            for(char c : strs[i].toCharArray()){
+
+                freq[c - 'a']++;
+
             }
 
             String key = Arrays.toString(freq);
-            
+
+            //if map does not have a arrayList for a key, add it in
             if(!map.containsKey(key)){
                 map.put(key, new ArrayList<>());
             }
 
             map.get(key).add(strs[i]);
-
         }
 
         return new ArrayList<>(map.values());
