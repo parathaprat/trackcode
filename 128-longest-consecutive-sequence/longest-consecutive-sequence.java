@@ -14,6 +14,7 @@ class Solution {
             set.add(nums[i]);
         }
 
+        //if not iterated over the entire set (iterate over nums array) we get hit with a TLE in java due to duplicates
         for(int num : set){
 
             if(!set.contains(num - 1)){
