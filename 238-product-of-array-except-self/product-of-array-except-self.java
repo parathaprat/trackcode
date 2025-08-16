@@ -1,36 +1,31 @@
 class Solution {
     public int[] productExceptSelf(int[] nums) {
         
-        int[] prefixLeft = new int[nums.length];
-        int[] prefixRight = new int[nums.length];
+        //calculate prefix left and prefix right
+        //multiply them tog
 
-        prefixLeft[0] = 1;
-
-        prefixRight[nums.length - 1] = 1; 
-
-        //populating prefixLeft
-        for(int i = 1; i < nums.length; i++){
-
-            prefixLeft[i] = prefixLeft[i - 1] * nums[i - 1];
-
-        }
-
-        //populating prefixRight
-        for(int i = nums.length - 2; i >= 0; i--){
-
-            prefixRight[i] = prefixRight[i + 1] * nums[i + 1];
-
-        }
+        //to avoid space complexity, prefixLeft in one pass from the left, prefixRight in another pass from the right
 
         int[] ans = new int[nums.length];
 
-        for(int i = 0; i < nums.length; i++){
+        ans[0] = 1;
 
-            ans[i] = prefixLeft[i] * prefixRight[i];
+        //first pass
+        for(int i = 1; i < nums.length; i++){
+
+            ans[i] = nums[i - 1] * ans[i - 1];
+
+        }
+
+        int post = 1;
+        //2nd pass
+        for(int i = nums.length - 1; i >= 0; i--){
+
+            ans[i] = ans[i] * post;
+            post *= nums[i];
 
         }
 
         return ans;
-
     }
 }
