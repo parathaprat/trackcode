@@ -1,25 +1,30 @@
 class Solution {
     public int maxArea(int[] height) {
         
-        //use 2pointer method
-        //run pointers, calculate area at each point and shift based on which height is shorter
+        //2 pointer
+        //height limited by smaller bar
+        //height in array, width with index
 
-        int a = 0;
-        int b = height.length - 1;
-        int maxArea = 0;
+        int left = 0;
+        int right = height.length - 1;
 
-        while(a < b){
+        int ans = 0;
 
-            if(height[a] < height[b]){
-                maxArea = Math.max(maxArea, (height[a] * (b - a)));
-                a++;
+        while(left < right){
+
+            if(height[left] < height[right]){
+
+                ans = Math.max(ans, height[left] * (right - left));
+                left++;
+
             }
             else{
-                maxArea = Math.max(maxArea, (height[b] * (b - a)));
-                b--;
+
+                ans = Math.max(ans, height[right] * (right - left));
+                right--;
             }
         }
 
-        return maxArea;
+        return ans;
     }
 }
