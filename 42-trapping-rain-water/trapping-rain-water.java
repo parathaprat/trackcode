@@ -6,20 +6,25 @@ class Solution {
 
         int leftMax = height[left];
         int rightMax = height[right];
-
+        
         int ans = 0;
 
         while(left < right){
 
             if(leftMax < rightMax){
+
                 left++;
-                leftMax = Math.max(height[left], leftMax);
+                leftMax = Math.max(leftMax, height[left]);
                 ans += leftMax - height[left];
+
             }
+
             else{
+
                 right--;
-                rightMax = Math.max(height[right], rightMax);
+                rightMax = Math.max(rightMax, height[right]);
                 ans += rightMax - height[right];
+
             }
         }
 
