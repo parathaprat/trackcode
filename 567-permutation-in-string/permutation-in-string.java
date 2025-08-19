@@ -10,8 +10,6 @@ class Solution {
             freq1[ch - 'a']++;
         }
 
-        //fill window and then slide
-
         int len = s1.length();
 
         for(int i = 0; i < len; i++){
@@ -23,12 +21,14 @@ class Solution {
         //slide the window
         for(int i = len; i < s2.length(); i++){
 
-            freq2[s2.charAt(i - len) - 'a']--;
             freq2[s2.charAt(i) - 'a']++;
+            freq2[s2.charAt(i - len) - 'a']--;
 
-            if(Arrays.equals(freq2, freq1)) return true;
+            if(Arrays.equals(freq1, freq2)) return true;
+
         }
 
         return false;
+
     }
 }
