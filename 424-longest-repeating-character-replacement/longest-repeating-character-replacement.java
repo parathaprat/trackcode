@@ -1,38 +1,37 @@
 class Solution {
     public int characterReplacement(String s, int k) {
         
-        int[] freq = new int[26];
+        //sliding window
+        //start pointers, keep updating frequeny of chars on right
+        //update maxFreq at each iteration
+        //if windowSize - maxFreq >  increament left
+
+        //track maximum windowSize and return as ans
 
         int left = 0;
+        int right = 0;
+
         int maxFreq = 0;
-        int longestAns = 0;
+        int[] freq = new int[26];
 
-        for(int right = 0; right < s.length(); right++){
+        int ans = 0;
 
-            //update in freq array, and update maxFreq so far
+        for(; right < s.length(); right++){
+
             freq[s.charAt(right) - 'A']++;
-
             maxFreq = Math.max(maxFreq, freq[s.charAt(right) - 'A']);
-
-            //calcualte window length, and check if it can accomodate k changes
-            //if not, ++ left pointer
 
             int windowSize = right - left + 1;
 
             if(windowSize - maxFreq > k){
-
                 freq[s.charAt(left) - 'A']--;
                 left++;
-
             }
 
-            //calculate updated windowSize after operations, and update longestAns
             windowSize = right - left + 1;
-            longestAns = Math.max(longestAns, windowSize);
+            ans = Math.max(ans, windowSize);
         }
 
-        return longestAns;
-
-
+        return ans;
     }
 }
