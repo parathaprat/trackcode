@@ -1,55 +1,53 @@
 class Solution {
     public String minWindow(String s, String t) {
+        
+        //sliding window problem
+        //have, want, resLen, resArray
+        //maps = countT, window
 
         if(t.isEmpty()) return "";
-        
-        //maintain countT and window maps
+
         Map<Character, Integer> countT = new HashMap<>();
         Map<Character, Integer> window = new HashMap<>();
 
-        for(char c : t.toCharArray()){
+        int resLen = Integer.MAX_VALUE;
+        int[] res = {-1, -1};
 
+        //populate countT
+        for(char c : t.toCharArray()){
             countT.put(c, countT.getOrDefault(c, 0) + 1);
         }
 
-        //have, need, res boundaries, resLen, l and r pointers
         int have = 0;
         int need = countT.size();
 
-        int[] res = {-1, -1};
-        int resLen = Integer.MAX_VALUE;
-        int l = 0;
+        int left = 0;
 
-        for(int r = 0; r < s.length(); r++){
+        for(int right = 0; right < s.length(); right++){
 
-            //getting char and updating freq in window map
-            char c = s.charAt(r);
+            char c = s.charAt(right);
             window.put(c, window.getOrDefault(c, 0) + 1);
-            
-            //have condition
-            if(countT.containsKey(c) && window.get(c).equals(countT.get(c))) have++;
 
+            if(countT.containsKey(c) && countT.get(c).equals(window.get(c))) have++;
+
+            //if substring obtained, reduce from left until not satified to few newer substrings
             while(have == need){
+                
+                if(right - left + 1 < resLen){
 
-                if(r - l + 1 < resLen){
-                    //update res and resLen when have and need are equal and new resLen is less than old
-                    res[0] = l;
-                    res[1] = r;
+                    res[0] = left;
+                    res[1] = right;
+                    resLen = right - left + 1;
 
-                    resLen = r - l + 1;
                 }
 
-                //work on reducing window size from the left -> reduce from window, l++
-                char leftChar = s.charAt(l);
-                window.put(leftChar, window.get(leftChar) - 1);
+                char leftc = s.charAt(left);
+                window.put(leftc, window.getOrDefault(leftc, 0) - 1);
 
-                //reduce have IF window count of char goes below countT count of char
-                if(countT.containsKey(leftChar) && window.get(leftChar) < countT.get(leftChar)) have--;
+                if(countT.containsKey(leftc) && countT.get(leftc) > window.get(leftc)) have--;
 
-                l++;
-    
+                left++;
             }
-
         }
 
         return resLen == Integer.MAX_VALUE? "" : s.substring(res[0], res[1] + 1);
