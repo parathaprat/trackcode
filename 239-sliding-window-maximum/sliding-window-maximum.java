@@ -1,33 +1,35 @@
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
         
-        //linkedlist monotonic queue strategy
-        //maintain deque, add to result when window is size k
-        //remove leftmost when outside window, remove rigthmost when nums[i] >
+        //use a montonic queue
+        //index -> q, result -> arrayList
+        //front of the q stores max index
+        //removeFirst if out of window
+        //removeLast if greater element appears
 
-        List<Integer> index = new LinkedList<>();
-        List<Integer> result = new ArrayList<>();
+        LinkedList<Integer> index = new LinkedList<>();
+        List<Integer> res = new ArrayList<>();
 
         for(int i = 0; i < nums.length; i++){
 
-            //remove from the front when it goes outside the window 
+            //keep removing front when outside the window
             while(!index.isEmpty() && index.getFirst() < i - k + 1){
                 index.removeFirst();
             }
 
-            //remove from the end if new element is > (new will always get picked in the window)
+            //keep removing back when nums[i]>
             while(!index.isEmpty() && nums[i] > nums[index.getLast()]){
                 index.removeLast();
             }
 
-            //add valid index after all removals
             index.add(i);
 
+            //if window is satisfied, pop front to res
             if(i >= k - 1){
-                result.add(nums[index.getFirst()]);
+                res.add(nums[index.getFirst()]);
             }
         }
 
-        return result.stream().mapToInt(Integer::intValue).toArray();
+        return res.stream().mapToInt(Integer::intValue).toArray();
     }
 }
