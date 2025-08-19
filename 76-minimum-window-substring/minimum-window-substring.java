@@ -2,18 +2,13 @@ class Solution {
     public String minWindow(String s, String t) {
         
         //sliding window problem
-        //have, want, resLen, resArray
-        //maps = countT, window
 
-        if(t.isEmpty()) return "";
+        int left = 0;
 
+        //maps -> count, window
         Map<Character, Integer> countT = new HashMap<>();
         Map<Character, Integer> window = new HashMap<>();
 
-        int resLen = Integer.MAX_VALUE;
-        int[] res = {-1, -1};
-
-        //populate countT
         for(char c : t.toCharArray()){
             countT.put(c, countT.getOrDefault(c, 0) + 1);
         }
@@ -21,8 +16,11 @@ class Solution {
         int have = 0;
         int need = countT.size();
 
-        int left = 0;
+        //res stores indices of substring, resLen stores min len
+        int[] res = {-1, -1};
+        int resLen = Integer.MAX_VALUE;
 
+        //comparing window freq map with countT freq map
         for(int right = 0; right < s.length(); right++){
 
             char c = s.charAt(right);
@@ -30,20 +28,20 @@ class Solution {
 
             if(countT.containsKey(c) && countT.get(c).equals(window.get(c))) have++;
 
-            //if substring obtained, reduce from left until not satified to few newer substrings
+            //whenever condition is met, we reduce the window from the left
             while(have == need){
-                
-                if(right - left + 1 < resLen){
 
+                if(right - left + 1 < resLen){
                     res[0] = left;
                     res[1] = right;
                     resLen = right - left + 1;
-
                 }
 
+                //reducing window
                 char leftc = s.charAt(left);
                 window.put(leftc, window.getOrDefault(leftc, 0) - 1);
 
+                //update have based on reduced window
                 if(countT.containsKey(leftc) && countT.get(leftc) > window.get(leftc)) have--;
 
                 left++;
@@ -51,6 +49,5 @@ class Solution {
         }
 
         return resLen == Integer.MAX_VALUE? "" : s.substring(res[0], res[1] + 1);
-
     }
 }
