@@ -2,11 +2,7 @@ class Solution {
     public int characterReplacement(String s, int k) {
         
         //sliding window
-        //start pointers, keep updating frequeny of chars on right
-        //update maxFreq at each iteration
-        //if windowSize - maxFreq >  increament left
-
-        //track maximum windowSize and return as ans
+        //keep expanding window until windowSize - maxFreq > k
 
         int left = 0;
         int right = 0;
