@@ -2,6 +2,8 @@ class MinStack {
 
     class tuple{
 
+        //each tuple {num, min}
+
         int num;
         int min;
 
@@ -9,31 +11,23 @@ class MinStack {
             this.num = num;
             this.min = min;
         }
+
     }
 
     Stack<tuple> st;
+
 
     public MinStack() {
         st = new Stack<>();
     }
     
     public void push(int val) {
-
-        //push tuple
-
-        if(st.isEmpty()){
-            st.push(new tuple(val, val));
-        }
-        else{
-            st.push(new tuple(val, Math.min(val, st.peek().min)));
-        }
-        
+        if(st.isEmpty()) st.push(new tuple(val, val));
+        else st.push(new tuple(val, Math.min(val, getMin())));
     }
     
     public void pop() {
-        
         if(!st.isEmpty()) st.pop();
-
     }
     
     public int top() {
