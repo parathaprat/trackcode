@@ -1,14 +1,15 @@
 class Solution {
     public int evalRPN(String[] tokens) {
         
-        //reverse polish -> postfix
-        //everytime we hit a operator, we use it on prev 2 numbers and replace all 3 with res
+        //reverse polish = postfix
+        //num, num, operator
+        //when op, pop2, perform op and replace all3 in stack
 
         Stack<Integer> st = new Stack<>();
 
         for(String t : tokens){
 
-            if(!"+/*-".contains(t)){
+            if(!"*+/-".contains(t)){
                 st.push(Integer.parseInt(t));
                 continue;
             }
@@ -17,6 +18,7 @@ class Solution {
             int num1 = st.pop();
 
             st.push(operate(t, num1, num2));
+
         }
 
         return st.pop();
@@ -24,27 +26,19 @@ class Solution {
 
     private int operate(String t, int num1, int num2){
 
-        int res = 0;
-
         switch(t){
-
             case "+":
-                res = num1 + num2;
-                break;
-            case "-":
-                res = num1 - num2;
-                break;
+                return num1 + num2;
             case "*":
-                res = num1 * num2;
-                break;
+                return num1 * num2;
+            case "-":
+                return num1 - num2;
             case "/":
-                res = num1 / num2;
-                break;
+                return num1 / num2;
             default:
                 break;
-            
         }
 
-        return res;
+        return -1;
     }
 }
