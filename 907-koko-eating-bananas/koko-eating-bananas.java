@@ -1,38 +1,38 @@
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
         
-        //binary search eating speed, from 1 to max in pile
+        //binary search speed, calculate hours and compare with h
+        //assume max speed = max(piles) first
 
         int k = 0;
-        
+
         for(int pile : piles){
-            if(pile > k) k = pile;
+            if(k < pile) k = pile;
         }
 
         int l = 1;
         int r = k;
-        
 
         while(l <= r){
 
-            //mid is our candidate speed
-            int mid = l + (r - l)/2;
+            int m = l + (r - l)/2;
 
-            //test if mid is a valid solution, compute hours and check with h
+            //calaculate hours to eat with speed m
             int hours = 0;
             for(int pile : piles){
-                hours += Math.ceil((double)pile/mid);
+                hours+= Math.ceil((double)pile/m);
             }
 
+            //<= since lesser is also a valid/better ans and we reduce search space to find better
             if(hours <= h){
-                k = mid;
-                r = mid - 1;
+                k = m;
+                r = m - 1;
             }
             else{
-                l = mid + 1;
+                l = m + 1;
             }
         }
 
-        return k;
+        return k; 
     }
 }
