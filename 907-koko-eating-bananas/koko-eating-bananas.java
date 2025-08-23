@@ -1,44 +1,38 @@
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
         
-        //the idea -> binary search No of bananas per four from 0 -> max(pile)
+        //binary search eating speed, from 1 to max in pile
 
         int k = 0;
-
-        for(int num : piles){
-
-            if(num > k) k = num;
-
+        
+        for(int pile : piles){
+            if(pile > k) k = pile;
         }
 
         int l = 1;
         int r = k;
-
-        int result = k;
+        
 
         while(l <= r){
 
-            int mid = l + (r - l) / 2;
+            //mid is our candidate speed
+            int mid = l + (r - l)/2;
 
+            //test if mid is a valid solution, compute hours and check with h
             int hours = 0;
-
             for(int pile : piles){
-
                 hours += Math.ceil((double)pile/mid);
-
             }
 
             if(hours <= h){
-                result = mid;
+                k = mid;
                 r = mid - 1;
             }
             else{
                 l = mid + 1;
             }
-
-           
         }
 
-        return result;
+        return k;
     }
 }
