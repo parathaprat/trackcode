@@ -1,30 +1,25 @@
 class Solution {
     public int findMin(int[] nums) {
         
-        //binary search the smallest element
+        //binary search
+        int l = 0;
+        int r = nums.length - 1;
 
-        int left = 0; 
-        int right = nums.length - 1;
+        while(l < r){
 
-        while(left < right){
+            int m = l + (r - l)/2;
 
-            int mid = left + (right - left) / 2;
-
-            if(nums[mid] >= nums[left] && nums[mid] > nums[right]){
-                left = mid + 1;
+            if(nums[m] >= nums[l] && nums[m] >= nums[r]){
+                l = m + 1;
             }
-            else if(nums[mid] < nums[left] && nums[mid] < nums[right] && nums[mid] < nums[mid - 1]){
-                return nums[mid];
+            else if(nums[m] < nums[l] && nums[m] < nums[r] && nums[m] < nums[m - 1]){
+                return nums[m];
             }
             else{
-                right = mid - 1;
+                r = m - 1;
             }
-
-
         }
 
-        return nums[left];
-
-        
+        return nums[l];
     }
 }
