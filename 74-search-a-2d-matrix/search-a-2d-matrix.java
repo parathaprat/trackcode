@@ -1,27 +1,25 @@
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         
-        //binary search over entire matric
+        //flatten it out and do binary search
+        int r = matrix.length;
+        int c = matrix[0].length;
 
-        int rows = matrix.length;
-        int cols = matrix[0].length;
+        int l = 0;
+        int ri = r * c - 1;
 
-        int left = 0;
-        int right = rows * cols - 1;
+        while(l <= ri){
 
-        while(left <= right){
+            int m = l + (ri - l)/2;
 
-            int mid = left + (right - left)/2;
-
-            //value of element -> mid/cols = how many rows skipped; mid%cols = how deep into the current ro ware you
-            if(matrix[mid/cols][mid%cols] == target){
+            if(matrix[m/c][m%c] == target){
                 return true;
             }
-            else if(matrix[mid/cols][mid%cols] < target){
-                left = mid + 1;
+            else if(matrix[m/c][m%c] < target){
+                l = m + 1;
             }
             else{
-                right = mid - 1;
+                ri = m - 1;
             }
         }
 
