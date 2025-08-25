@@ -1,62 +1,64 @@
 class TimeMap {
 
-    class Pair{
+    class pair{
+
         int timestamp;
         String val;
 
-        Pair(int timestamp, String val){
+        pair(int timestamp, String val){
             this.timestamp = timestamp;
             this.val = val;
         }
     }
 
-    HashMap<String, ArrayList<Pair>> hashMap;
+    HashMap<String, ArrayList<pair>> hashMap;
 
     public TimeMap() {
         hashMap = new HashMap<>();
     }
     
     public void set(String key, String value, int timestamp) {
-        
         if(hashMap.containsKey(key)){
-            hashMap.get(key).add(new Pair(timestamp, value));
+            hashMap.get(key).add(new pair(timestamp, value));
         }
         else{
-            ArrayList<Pair> pair = new ArrayList<>();
-            pair.add(new Pair(timestamp, value));
-            hashMap.put(key, pair);
+            ArrayList<pair> arr = new ArrayList<>();
+            arr.add(new pair(timestamp, value));
+            hashMap.put(key, arr);
         }
     }
     
     public String get(String key, int timestamp) {
         
-        String cand= "";
+        String ans = "";
 
-        if(hashMap.containsKey(key)) {
-            ArrayList<Pair> arr = hashMap.get(key);
-            int low = 0;
-            int high = arr.size() - 1;
+        if(hashMap.containsKey(key)){
 
-            while(low <= high){
+            ArrayList<pair> arr = hashMap.get(key);
 
-                int mid = low + (high - low)/2;
+            int l = 0;
+            int r = arr.size() - 1;
 
-                int timeVal = arr.get(mid).timestamp;
+            while(l <= r){
+
+                int m = l + (r - l)/2;
+
+                int timeVal = arr.get(m).timestamp;
 
                 if(timeVal == timestamp){
-                    return arr.get(mid).val;
+                    return arr.get(m).val;
                 }
                 else if(timeVal < timestamp){
-                    cand = arr.get(mid).val;
-                    low = mid + 1;
+                    ans = arr.get(m).val;
+                    l = m + 1;
                 }
                 else{
-                    high = mid - 1;
+                    r = m - 1;
                 }
             }
         }
 
-        return cand;
+        return ans;
     }
 }
 
