@@ -18,6 +18,7 @@ class TimeMap {
     }
     
     public void set(String key, String value, int timestamp) {
+        
         if(hashMap.containsKey(key)){
             hashMap.get(key).add(new pair(timestamp, value));
         }
@@ -29,9 +30,9 @@ class TimeMap {
     }
     
     public String get(String key, int timestamp) {
-        
-        String ans = "";
 
+        String ans = "";
+        
         if(hashMap.containsKey(key)){
 
             ArrayList<pair> arr = hashMap.get(key);
@@ -45,7 +46,7 @@ class TimeMap {
 
                 int timeVal = arr.get(m).timestamp;
 
-                if(timeVal == timestamp){
+                if(timestamp == timeVal){
                     return arr.get(m).val;
                 }
                 else if(timeVal < timestamp){
