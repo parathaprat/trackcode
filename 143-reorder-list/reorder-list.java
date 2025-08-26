@@ -11,13 +11,13 @@
 class Solution {
     public void reorderList(ListNode head) {
         
-        //use slow and fast pointers to get to middle
-        //reverse the 2nd half 
-        //merge alternatively
+        //slow and fast pointers
+        //reverse 2nd half
+        //join thrm
 
         if(head == null || head.next == null) return;
 
-        //head and tail of first half
+        //head and tail of first half;
         ListNode l1 = head;
         ListNode prev = null;
 
@@ -26,13 +26,15 @@ class Solution {
         ListNode fast = head;
 
         while(fast != null && fast.next != null){
+
             prev = slow;
             slow = slow.next;
             fast = fast.next.next;
+
         }
 
-        //disconnect prev and reverse
         prev.next = null;
+
         ListNode l2 = reverse(slow);
 
         merge(l1, l2);
@@ -49,6 +51,7 @@ class Solution {
             head.next = prev;
             prev = head;
             head = next;
+
         }
 
         return prev;
