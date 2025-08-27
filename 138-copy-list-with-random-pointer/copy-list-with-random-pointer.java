@@ -16,13 +16,15 @@ class Node {
 class Solution {
     public Node copyRandomList(Node head) {
         
-        Map<Node, Node> map = new HashMap<>();
+        //make a Map<node, node>
+        //1st pass = make copy nodes
+        //2nd pass = make connections 
 
-        //2 passes
-        //1st pass -> copy nodes
+        Map<Node, Node> map = new HashMap<>();
 
         Node track = head;
 
+        //1st pass = copy nodes and add to map
         while(track != null){
 
             Node node = new Node(track.val);
@@ -31,12 +33,11 @@ class Solution {
 
         }
 
-        //2nd pass
         track = head;
+
         while(track != null){
 
             Node copy = map.get(track);
-
             copy.next = map.get(track.next);
             copy.random = map.get(track.random);
 
