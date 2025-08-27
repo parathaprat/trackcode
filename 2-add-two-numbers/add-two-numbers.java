@@ -11,16 +11,13 @@
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         
-        //since these are reversed, carry can also be done from the back
-        //reversed == length does not matter
-
         ListNode temp = new ListNode(0);
         ListNode cur = temp;
 
         int carry = 0;
         int sum = 0;
 
-        while(l1 != null|| l2 != null || carry != 0){
+        while(l1 != null || l2 != null || carry != 0){
 
             sum = carry;
 
@@ -35,10 +32,12 @@ class Solution {
             }
 
             carry = sum/10;
-            cur.next = new ListNode(sum%10);
+            
+            ListNode node = new ListNode(sum%10);
+
+            cur.next = node;
 
             cur = cur.next;
-
         }
 
         return temp.next;
