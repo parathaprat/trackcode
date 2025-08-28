@@ -11,23 +11,22 @@
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
         
+        //maintain a minHeap (priorityQueue), add leading node of k lists, pop as we add to result
+
         PriorityQueue<ListNode> minHeap = new PriorityQueue<>((a, b) -> Integer.compare(a.val, b.val));
 
         for(ListNode node : lists){
-            if(node != null){
-                minHeap.add(node);
-            }
+            if(node != null) minHeap.add(node);
         }
 
         ListNode temp = new ListNode(0);
         ListNode cur = temp;
 
         while(!minHeap.isEmpty()){
-
             ListNode node = minHeap.poll();
-
             if(node.next != null) minHeap.add(node.next);
-
+            
+            //get pinter.next in the right place and move forward
             cur.next = node;
             cur = cur.next;
         }
