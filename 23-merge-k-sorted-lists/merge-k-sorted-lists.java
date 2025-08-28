@@ -11,33 +11,25 @@
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
         
-        //minHeap with the heads of each list, heap always maintians k elements
-
-        //pq sorted ascending 
-        PriorityQueue<ListNode> minHeap = new PriorityQueue<>((a, b) -> a.val - b.val);
+        PriorityQueue<ListNode> minHeap = new PriorityQueue<>((a, b) -> Integer.compare(a.val, b.val));
 
         for(ListNode node : lists){
-
             if(node != null){
                 minHeap.add(node);
             }
         }
 
         ListNode temp = new ListNode(0);
-        ListNode trac = temp;
+        ListNode cur = temp;
 
         while(!minHeap.isEmpty()){
 
             ListNode node = minHeap.poll();
 
-            if(node.next != null){
-                minHeap.add(node.next);
-            }
+            if(node.next != null) minHeap.add(node.next);
 
-            trac.next = node;
-
-            trac = trac.next;
-            
+            cur.next = node;
+            cur = cur.next;
         }
 
         return temp.next;
