@@ -11,19 +11,15 @@
 class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
         
-        //keep track of head (temp) and tail (prevLast) of each group
-        //reverse group
-        //join again
-        //handle cases where k nodes do not exists 
+        //split chunks, reverse and join
 
         ListNode temp = head;
         ListNode prevLast = null;
-        
+
         while(temp != null){
 
             ListNode kthNode = getKthNode(temp, k);
 
-            //case where k nodes do not exist
             if(kthNode == null){
                 if(prevLast != null){
                     prevLast.next = temp;
@@ -31,13 +27,10 @@ class Solution {
                 break;
             }
 
-            //diconnect, store and reverse
             ListNode nextNode = kthNode.next;
             kthNode.next = null;
-
             reverseLinkedList(temp);
 
-            //case where temp is on the first chunck, vs others
             if(temp == head){
                 head = kthNode;
             }
@@ -52,23 +45,7 @@ class Solution {
         return head;
     }
 
-    public ListNode reverseLinkedList(ListNode head){
-
-        ListNode prev = null;
-
-        while(head != null){
-
-            ListNode next = head.next;
-
-            head.next = prev;
-            prev = head;
-            head = next;
-        }
-
-        return prev;
-    }
-
-    public ListNode getKthNode(ListNode node, int k){
+    private ListNode getKthNode(ListNode node, int k){
 
         k--;
 
@@ -78,5 +55,20 @@ class Solution {
         }
 
         return node;
+    }
+
+    public ListNode reverseLinkedList(ListNode node){
+
+        ListNode prev = null;
+
+        while(node != null){
+            ListNode next = node.next;
+
+            node.next = prev;
+            prev = node;
+            node = next;
+        }
+
+        return prev;
     }
 }
