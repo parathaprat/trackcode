@@ -11,8 +11,6 @@
 class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
         
-        //split chunks, reverse and join
-
         ListNode temp = head;
         ListNode prevLast = null;
 
@@ -41,7 +39,7 @@ class Solution {
             prevLast = temp;
             temp = nextNode;
         }
-        
+
         return head;
     }
 
