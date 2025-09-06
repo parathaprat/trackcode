@@ -14,32 +14,31 @@
  * }
  */
 class Solution {
-
-    int preInd = 0;
-    int inInd = 0;
+    
+    int index = 0;
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-
-        return getAns(preorder, inorder, Integer.MAX_VALUE);
         
-    }
-
-    private TreeNode getAns(int[] preorder, int[] inorder, int limit){
-
-        if(preInd >= preorder.length) return null;
-
-        //approached the end of left subtree, sop return null
-        //we are trating the limit as the value itseld
-        if(inorder[inInd] == limit){
-            inInd++;
-            return null;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        
+        for(int i = 0; i < inorder.length; i++){
+            map.put(inorder[i], i);
         }
 
-        TreeNode node = new TreeNode(preorder[preInd]);
-        preInd++;
+        return helper(preorder, 0, inorder.length - 1, map);
+    }
 
-        node.left = getAns(preorder, inorder, node.val);
-        node.right = getAns(preorder, inorder, limit);
+    private TreeNode helper(int[] preorder, int start, int end, HashMap<Integer, Integer> map){
+
+        if(start > end) return null;
+
+        int nodeVal = preorder[index++];
+        TreeNode node = new TreeNode(nodeVal);
+
+        int inorderIndex = map.get(nodeVal);
+
+        node.left = helper(preorder, start, inorderIndex - 1, map);
+        node.right = helper(preorder, inorderIndex + 1, end, map);
 
         return node;
     }
