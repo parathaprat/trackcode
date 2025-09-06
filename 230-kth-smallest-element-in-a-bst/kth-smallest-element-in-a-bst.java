@@ -20,17 +20,12 @@ class Solution {
 
     public int kthSmallest(TreeNode root, int k) {
         
-        //maintian count
-        //traverse left
-        //increase count, when count == k, return
-        //traverse right
-
-        
         getAns(root, k);
+
         return ans;
     }
 
-    public void getAns(TreeNode node, int k){
+    private void getAns(TreeNode node, int k){
 
         if(node.left != null) getAns(node.left, k);
 
@@ -38,11 +33,8 @@ class Solution {
 
         if(count == k){
             ans = node.val;
-            return;
         }
 
         if(node.right != null) getAns(node.right, k);
     }
-
-
 }
