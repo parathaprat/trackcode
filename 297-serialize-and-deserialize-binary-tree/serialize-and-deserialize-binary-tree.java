@@ -13,9 +13,7 @@ public class Codec {
     public String serialize(TreeNode root) {
 
         StringBuilder res = new StringBuilder();
-
         dfs1(res, root);
-
         return res.toString();
         
     }
@@ -36,13 +34,13 @@ public class Codec {
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        
+
         String[] str = data.split(" ");
 
         int[] i = {0};
 
         return dfs2(str, i);
-
+        
     }
 
     private TreeNode dfs2(String[] str, int[] i){
