@@ -19,23 +19,19 @@ class Solution {
 
     public int maxPathSum(TreeNode root) {
         
-        getPathSum(root);
-
+        getAns(root);
         return sum;
     }
 
-    public int getPathSum(TreeNode node){
+    private int getAns(TreeNode node){
 
         if(node == null) return 0;
 
-        int leftSum = Math.max(0, getPathSum(node.left));
-        int rightSum = Math.max(0, getPathSum(node.right));
+        int leftSum = Math.max(0, getAns(node.left));
+        int rightSum = Math.max(0, getAns(node.right));
 
-        //2cases -> node involved, node not involved
+        sum = Math.max(node.val + leftSum + rightSum, sum);
 
-        sum = Math.max(sum, node.val + leftSum + rightSum);
-        
         return node.val + Math.max(leftSum, rightSum);
-
     }
 }
