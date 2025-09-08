@@ -1,13 +1,14 @@
 class Solution {
     public int[][] kClosest(int[][] points, int k) {
+
+        //minHeap, custom comparator, add all, poll k and return 
         
+        PriorityQueue<int[]> minHeap = new PriorityQueue<>((a, b) -> Integer.compare(getDist(a), getDist(b)));
 
         int[][] ans = new int[k][2];
 
-        PriorityQueue<int[]> minHeap = new PriorityQueue<>((a, b) -> getDist(a) - getDist(b));
-
-        for(int[] pt : points){
-            minHeap.add(pt);
+        for(int[] point : points){
+            minHeap.offer(point);
         }
 
         for(int i = 0; i < k; i++){
@@ -15,11 +16,9 @@ class Solution {
         }
 
         return ans;
-
     }
 
     private int getDist(int[] pt){
-
         return pt[0] * pt[0] + pt[1] * pt[1];
     }
 }
