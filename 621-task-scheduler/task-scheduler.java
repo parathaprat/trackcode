@@ -1,15 +1,13 @@
 class Solution {
     public int leastInterval(char[] tasks, int n) {
         
-        //maxHeap storing highest freq tasks
-        //queue storing eack task and its exit times
 
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> Integer.compare(b, a));
 
         int[] freq = new int[26];
 
-        for(char t : tasks){
-            freq[t - 'A']++;
+        for(char c : tasks){
+            freq[c - 'A']++;
         }
 
         for(int fre : freq){
@@ -30,19 +28,15 @@ class Solution {
 
                 int task = maxHeap.poll();
                 task-= 1;
-
                 if(task > 0) q.add(new int[]{task, time + n});
             }
 
-            if(!q.isEmpty() && q.peek()[1] == time){
+            if(!q.isEmpty() && time == q.peek()[1]){
 
-                maxHeap.add(q.poll()[0]);
-                
+                maxHeap.offer(q.poll()[0]);
             }
 
-
             time++;
-            
         }
 
         return time;
