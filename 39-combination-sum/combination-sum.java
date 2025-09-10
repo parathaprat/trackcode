@@ -2,38 +2,27 @@ class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         
         List<List<Integer>> result = new ArrayList<>();
-        List<Integer> ans = new ArrayList<>();
+        List<Integer> set = new ArrayList<>();
 
-
-
-        //find unique elements summing to target
-        getAns(candidates, ans, target, 0, result);
+        backtrack(candidates, target, 0, result, set);
 
         return result;
     }
 
-    private void getAns(int[] candidates, List<Integer> ans, int target, int ind, List<List<Integer>> result){
+    private void backtrack(int[] candidates, int target, int index, List<List<Integer>> result, List<Integer> set){
 
-        //base case
         if(target == 0){
-            result.add(new ArrayList<>(ans));
+            result.add(new ArrayList<>(set));
             return;
         }
-    
-        if(ind >= candidates.length) return;
 
-        //consider curr element
-        if(target - candidates[ind] >= 0){
-            ans.add(candidates[ind]);
-            //problem statement allows same element to be chosen multiple times, so we do not ++ ind
-            getAns(candidates, ans, target - candidates[ind], ind, result);
+        if(index == candidates.length || target < 0) return;
 
-            //backtrack
-            ans.remove(ans.size() - 1);
-        }
+        //include - same number may be chosen unlimited times
+        set.add(candidates[index]);
+        backtrack(candidates, target - candidates[index], index, result, set);
+        set.remove(set.size() - 1);
 
-        //not consider curr element
-        getAns(candidates, ans, target, ind + 1, result);
-
+        backtrack(candidates, target, index + 1, result, set);
     }
 }
