@@ -1,34 +1,31 @@
 class Twitter {
 
     private static int timeStamp = 0;
-    //map{userID, user}
-    private Map<Integer, User> userMap;
+    HashMap<Integer, User> userMap;
 
-    //Tweet class + User class
+    class Tweet {
 
-    //each tweet is linked to next Tweer
-    private class Tweet{
-        public int id;
-        public int time;
-        public Tweet next;
+        int id;
+        int time;
+        Tweet next;
 
-        public Tweet(int id){
+        public Tweet( int id){
             this.id = id;
             time = timeStamp++;
             next = null;
         }
     }
 
-    //user objext contains followed set
-    private class User{
-        public int id;
-        public Set<Integer> followed;
-        public Tweet tweet_head;
+    class User{
+
+        int id;
+        Set<Integer> followed;
+        Tweet tweet_head;
 
         public User(int id){
             this.id = id;
             followed = new HashSet<>();
-            follow(id); // follow self
+            follow(id);
             tweet_head = null;
         }
 
@@ -48,6 +45,7 @@ class Twitter {
     }
 
     public Twitter() {
+
         userMap = new HashMap<Integer, User>();
         
     }
@@ -55,17 +53,16 @@ class Twitter {
     public void postTweet(int userId, int tweetId) {
         
         if(!userMap.containsKey(userId)){
-
             User u = new User(userId);
             userMap.put(userId, u);
         }
+
         userMap.get(userId).post(tweetId);
     }
     
     public List<Integer> getNewsFeed(int userId) {
-        
-        List<Integer> res = new LinkedList<>();
 
+        List<Integer> res = new LinkedList<>();
         if(!userMap.containsKey(userId)) return res;
 
         Set<Integer> users = userMap.get(userId).followed;
@@ -74,25 +71,22 @@ class Twitter {
         for(int user : users){
             Tweet t = userMap.get(user).tweet_head;
 
-            if(t != null){
-                q.add(t);
-            }
+            if(t != null) q.add(t);
         }
 
         int n = 0;
-        
+
         while(!q.isEmpty() && n < 10){
 
             Tweet t = q.poll();
             res.add(t.id);
             n++;
 
-            if(t.next != null){
-                q.add(t.next);
-            }
+            if(t.next != null) q.add(t.next);
+            
         }
 
-        return res;
+        return res;  
     }
     
     public void follow(int followerId, int followeeId) {
@@ -108,6 +102,7 @@ class Twitter {
 
         userMap.get(followerId).follow(followeeId);
     }
+    
     
     public void unfollow(int followerId, int followeeId) {
         
