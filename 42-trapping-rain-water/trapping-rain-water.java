@@ -4,30 +4,26 @@ class Solution {
         int left = 0;
         int right = height.length - 1;
 
-        int leftMax = height[left];
-        int rightMax = height[right];
-        
-        int ans = 0;
+        int leftMax = 0;
+        int rightMax = 0;
+        int water = 0;
 
-        while(left < right){
+        while(left < right) {
 
-            if(leftMax < rightMax){
+            if(height[left] < height[right]) {
 
+                if(height[left] >= leftMax) leftMax = height[left];
+                else water += leftMax - height[left];
                 left++;
-                leftMax = Math.max(leftMax, height[left]);
-                ans += leftMax - height[left];
-
             }
-
             else{
-
+                if(height[right] >= rightMax) rightMax = height[right];
+                else water += rightMax - height[right];
                 right--;
-                rightMax = Math.max(rightMax, height[right]);
-                ans += rightMax - height[right];
 
             }
         }
 
-        return ans;
+        return water;
     }
 }
