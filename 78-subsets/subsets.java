@@ -16,10 +16,10 @@ class Solution {
             return;
         }
 
-        set.add(nums[index]);
         backtrack(nums, index + 1, res, set);
 
-        set.remove(set.size() - 1);
+        set.add(nums[index]);
         backtrack(nums, index + 1, res, set);
+        set.remove(set.size() - 1);
     }
 }
