@@ -1,11 +1,6 @@
 class Solution {
     public String longestPalindrome(String s) {
         
-        //go through each letter
-        //treat it as the center of an odd/even palindrome
-        //call lenPalindrome func, is len > maxLen, assign new left and right vals
-        //return substring
-
         int start = 0;
         int end = 0;
         int maxLen = 0;
@@ -39,6 +34,6 @@ class Solution {
             right++;
         }
 
-        return right - left - 1; 
+        return right - left - 1;
     }
 }
