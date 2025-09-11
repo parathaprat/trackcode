@@ -4,26 +4,25 @@ class Solution {
 
     public int countSubstrings(String s) {
 
-        if(s == null) return 0;
-        
         for(int i = 0; i < s.length(); i++){
 
-            checkPalindrome(s, i, i);
-            checkPalindrome(s, i, i + 1);
+            checkPal(i, i, s);
+            checkPal(i, i + 1, s);
+
         }
 
         return ans;
+        
     }
 
-    public void checkPalindrome(String s, int left, int right){
+    private void checkPal(int start, int end, String s){
 
-        if(s == null || left > right) return;
+        if(s == null || start > end) return;
 
-        while(left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)){
+        while(start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)){
             ans++;
-            left--;
-            right++;
+            start--;
+            end++;
         }
-
-    } 
+    }
 }
