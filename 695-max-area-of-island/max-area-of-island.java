@@ -1,31 +1,28 @@
 class Solution {
     public int maxAreaOfIsland(int[][] grid) {
-        int maxArea = 0;
+        
+        int max = 0;
 
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[0].length; j++){
 
-                if(grid[i][j] == 1){
-                    int currentArea = dfs(i, j, grid);
-                    maxArea = Math.max(currentArea, maxArea);
-                }
+                int cur = dfs(i, j, grid);
+                max = Math.max(cur, max);
             }
         }
 
-        return maxArea;
+        return max;
     }
 
     private int dfs(int i, int j, int[][] grid){
 
-        if(i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] == 0){
-            return 0;
-        }
+        if(i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] == 0) return 0;
 
         grid[i][j] = 0;
 
         return 1 + dfs(i + 1, j, grid)
-         + dfs(i - 1, j, grid)
-         + dfs(i, j + 1, grid)
-         + dfs(i, j - 1, grid);
+        + dfs(i - 1, j, grid)
+        + dfs(i, j + 1, grid)
+        + dfs(i, j - 1, grid);
     }
 }
