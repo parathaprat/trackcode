@@ -1,9 +1,10 @@
 class Solution {
+
     int fresh = 0;
 
     public int orangesRotting(int[][] grid) {
+        
         int time = 0;
-
         Queue<int[]> q = new LinkedList<>();
 
         for(int i = 0; i < grid.length; i++){
@@ -32,7 +33,7 @@ class Solution {
                 addOrange(coord[0], coord[1] - 1, grid, q);
             }
 
-            if(!q.isEmpty()) time++;
+            time++;
         }
 
         return fresh == 0 ? time : -1;
@@ -43,7 +44,7 @@ class Solution {
         if(i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] == 0 || grid[i][j] == 2) return;
 
         grid[i][j] = 2;
-        q.offer(new int[]{i, j});
         fresh--;
+        q.offer(new int[]{i, j});
     }
 }
