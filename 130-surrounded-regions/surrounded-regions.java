@@ -1,15 +1,12 @@
 class Solution {
 
     int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-
+    
     public void solve(char[][] board) {
         
-        //turn boundry connected O to T, switch O to x and T to O and return
-
         int r = board.length;
         int c = board[0].length;
 
-        //dfs to convert boundry connected Os
         for(int i = 0; i < r; i++){
             if(board[i][0] == 'O') dfs(i, 0, board);
             if(board[i][c - 1] == 'O') dfs(i, c - 1, board);
@@ -20,8 +17,7 @@ class Solution {
             if(board[r - 1][i] == 'O') dfs(r - 1, i, board);
         }
 
-        //change remainging Os to Xs, change Ts to Os
-        for(int i = 0; i < r; i ++){
+        for(int i = 0; i < r; i++){
             for(int j = 0; j < c; j++){
                 if(board[i][j] == 'O') board[i][j] = 'X';
                 if(board[i][j] == 'T') board[i][j] = 'O';
@@ -36,6 +32,7 @@ class Solution {
         board[i][j] = 'T';
 
         for(int[] dir : directions){
+
             int nr = i + dir[0];
             int nc = j + dir[1];
 
