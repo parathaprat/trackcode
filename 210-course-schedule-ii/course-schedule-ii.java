@@ -1,10 +1,9 @@
 class Solution {
 
     Map<Integer, List<Integer>> map = new HashMap<>();
-    Set<Integer> visited = new HashSet<>();
     Set<Integer> pros = new HashSet<>();
+    Set<Integer> visited = new HashSet<>();
     List<Integer> res = new LinkedList<>();
-
 
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         
@@ -20,7 +19,6 @@ class Solution {
         }
 
         int[] ans = new int[res.size()];
-
         for(int i = 0; i < res.size(); i++){
             ans[i] = res.get(i);
         }
