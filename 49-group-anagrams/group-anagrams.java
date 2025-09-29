@@ -5,7 +5,7 @@ class Solution {
 
         for(String str : strs){
 
-            int freq[] = new int[26];
+            int[] freq = new int[26];
 
             for(char ch : str.toCharArray()){
                 freq[ch - 'a']++;
