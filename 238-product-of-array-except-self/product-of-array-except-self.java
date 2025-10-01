@@ -1,8 +1,6 @@
 class Solution {
     public int[] productExceptSelf(int[] nums) {
         
-        //2 passes, left and right and return ans
-
         int[] ans = new int[nums.length];
         ans[0] = 1;
 
@@ -11,10 +9,9 @@ class Solution {
         }
 
         int post = 1;
-
         for(int i = nums.length - 1; i >= 0; i--){
             ans[i] = ans[i] * post;
-            post *= nums[i];
+            post = post * nums[i];
         }
 
         return ans;
