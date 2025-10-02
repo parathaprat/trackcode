@@ -1,8 +1,6 @@
 class Solution {
     public int[] twoSum(int[] numbers, int target) {
         
-        //2 pointer binary search
-        
         int left = 0;
         int right = numbers.length - 1;
 
