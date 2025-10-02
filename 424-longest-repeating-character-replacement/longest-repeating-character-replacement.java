@@ -1,9 +1,6 @@
 class Solution {
     public int characterReplacement(String s, int k) {
         
-        //sliding window
-        //keep expanding window until windowSize - maxFreq > k
-
         int left = 0;
         int right = 0;
 
