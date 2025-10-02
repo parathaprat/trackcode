@@ -3,9 +3,9 @@ class Solution {
         
         String ans = "";
 
-        for(char ch : s.toCharArray()){
-            if(Character.isDigit(ch) || Character.isLetter(ch)){
-                ans += ch;
+        for(char c : s.toCharArray()){
+            if(Character.isDigit(c) || Character.isLetter(c)){
+                ans += c;
             }
         }
 
@@ -15,7 +15,7 @@ class Solution {
         int left = 0;
 
         while(left <= right){
-            if(ans.charAt(left) != ans.charAt(right)) return false;
+            if(ans.charAt(right) != ans.charAt(left)) return false;
             left++;
             right--;
         }
