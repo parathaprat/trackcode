@@ -14,21 +14,17 @@ class Solution {
 
         for(int i = 0; i < len; i++){
             freq2[s2.charAt(i) - 'a']++;
-
             if(Arrays.equals(freq1, freq2)) return true;
         }
 
-        //slide the window
         for(int i = len; i < s2.length(); i++){
 
             freq2[s2.charAt(i) - 'a']++;
             freq2[s2.charAt(i - len) - 'a']--;
 
             if(Arrays.equals(freq1, freq2)) return true;
-
         }
 
         return false;
-
     }
 }
