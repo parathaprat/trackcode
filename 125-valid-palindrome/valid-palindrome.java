@@ -1,6 +1,6 @@
 class Solution {
     public boolean isPalindrome(String s) {
-        
+
         String ans = "";
 
         for(char c : s.toCharArray()){
@@ -11,13 +11,13 @@ class Solution {
 
         ans = ans.toLowerCase();
 
-        int right = ans.length() - 1;
-        int left = 0;
+        int r = ans.length() - 1;
+        int l = 0;
 
-        while(left <= right){
-            if(ans.charAt(right) != ans.charAt(left)) return false;
-            left++;
-            right--;
+        while(l <= r){
+            if(ans.charAt(l) != ans.charAt(r)) return false;
+            l++;
+            r--;
         }
 
         return true;
