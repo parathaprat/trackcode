@@ -24,6 +24,7 @@ class Solution {
         if(node == null) return null;
         Map<Node, Node> map = new HashMap<>();
         return getCopy(node, map);
+        
     }
 
     private Node getCopy(Node node, Map<Node, Node> map){
