@@ -1,7 +1,7 @@
 class Solution {
 
     int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-    
+
     public void solve(char[][] board) {
         
         int r = board.length;
@@ -32,11 +32,11 @@ class Solution {
         board[i][j] = 'T';
 
         for(int[] dir : directions){
-
             int nr = i + dir[0];
             int nc = j + dir[1];
 
             dfs(nr, nc, board);
+
         }
     }
 }
