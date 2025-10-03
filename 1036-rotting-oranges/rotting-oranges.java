@@ -1,7 +1,6 @@
 class Solution {
 
     int fresh = 0;
-
     public int orangesRotting(int[][] grid) {
         
         int time = 0;
@@ -41,10 +40,11 @@ class Solution {
 
     private void addOrange(int i, int j, int[][] grid, Queue<int[]> q){
 
-        if(i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] == 0 || grid[i][j] == 2) return;
+        if( i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] == 0 || grid[i][j] == 2) return;
 
         grid[i][j] = 2;
         fresh--;
         q.offer(new int[]{i, j});
-    }
+
+    } 
 }
