@@ -4,7 +4,7 @@ class Solution {
     Set<Integer> visit = new HashSet<>();
 
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        
+
         for(int i = 0; i < numCourses; i++){
             map.put(i, new ArrayList<>());
         }
@@ -20,7 +20,7 @@ class Solution {
         return true;
     }
 
-    private boolean dfs(int course){
+    private boolean dfs( int course){
 
         if(visit.contains(course)) return false;
 
