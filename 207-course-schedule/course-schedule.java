@@ -1,7 +1,7 @@
 class Solution {
 
     Map<Integer, List<Integer>> map = new HashMap<>();
-    Set<Integer> set = new HashSet<>();
+    Set<Integer> visit = new HashSet<>();
 
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         
@@ -22,18 +22,16 @@ class Solution {
 
     private boolean dfs(int course){
 
-        if(set.contains(course)) return false;
+        if(visit.contains(course)) return false;
 
-        set.add(course);
+        visit.add(course);
 
         for(int nei : map.get(course)){
             if(!dfs(nei)) return false;
         }
 
-        set.remove(course);
+        visit.remove(course);
         map.put(course, new ArrayList<>());
         return true;
     }
-
-
 }
