@@ -6,15 +6,14 @@ class Solution {
         int pt1 = 0;
         int pt2 = 0;
 
-
         while(pt1 < word1.length() && pt2 < word2.length()){
+
 
             sb.append(word1.charAt(pt1));
             pt1++;
 
             sb.append(word2.charAt(pt2));
             pt2++;
-
         }
 
         while(pt1 < word1.length()){
@@ -29,6 +28,4 @@ class Solution {
 
         return sb.toString();
     }
-
-    
 }
