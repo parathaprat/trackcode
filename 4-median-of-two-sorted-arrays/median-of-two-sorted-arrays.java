@@ -1,6 +1,6 @@
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        
+
         int p1 = 0;
         int p2 = 0;
         int k = 0;
@@ -32,24 +32,20 @@ class Solution {
             k++;
         }
 
-        for(int i = 0 ; i < finalArray.length; i++){
-            System.out.println(finalArray[i]);
-        }
-
         if(finalArray.length % 2 == 1){
             return finalArray[(finalArray.length) / 2];
         }
         else{
-            int x = finalArray.length/2;
 
-            System.out.println("X = " + x);
+            int x = finalArray.length/2;
 
             double p = finalArray[x];
             double q = finalArray[x - 1];
-            
-            double ans = (p + q)/2;
+
+            double ans = (p + q) / 2;
 
             return ans;
         }
+        
     }
 }
