@@ -1,33 +1,38 @@
 class Solution {
     public int findCircleNum(int[][] isConnected) {
+
+        //BFS imp
         
-        //find connected components from undirected graph
-        //given adj matrix
-        //perform dfs, maintian visited, return number of trav
-
-        int provinces = 0;
         Set<Integer> visited = new HashSet<>();
+        int provinces = 0;
 
-        for(int i = 0; i < isConnected.length; i++){
-            
+        Queue<Integer> q = new LinkedList<>();
+
+        for(int i = 0 ; i < isConnected.length; i++){
+
             if(!visited.contains(i)){
-                dfs(i, isConnected, visited);
+
+                q.add(i);
+
+                while(!q.isEmpty()){
+
+                    int node = q.poll();
+                    visited.add(node);
+
+                    for(int j = 0; j < isConnected[node].length; j++){
+
+                        if(isConnected[node][j] == 1 && !visited.contains(j)){
+                            visited.add(j);
+                            q.add(j);
+                        }
+                    }
+
+                }
+
                 provinces++;
             }
         }
 
-        return provinces;
-    }
-
-    private void dfs(int city, int[][] isConnected, Set<Integer> visited){
-
-        visited.add(city);
-
-        for(int i = 0; i < isConnected[city].length; i++){
-
-            if(isConnected[city][i] == 1 && !visited.contains(i)){
-                dfs(i, isConnected, visited);
-            }
-        }
+        return provinces;  
     }
 }
