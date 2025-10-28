@@ -1,38 +1,37 @@
 class Solution {
     public int findCircleNum(int[][] isConnected) {
-
-        //BFS imp
         
-        Set<Integer> visited = new HashSet<>();
-        int provinces = 0;
+        //BFS imp
+
+        Set<Integer> set = new HashSet<>();
+        int prov = 0;
 
         Queue<Integer> q = new LinkedList<>();
 
-        for(int i = 0 ; i < isConnected.length; i++){
+        for(int i = 0; i < isConnected.length; i++){
 
-            if(!visited.contains(i)){
+            if(!set.contains(i)){
 
                 q.add(i);
 
                 while(!q.isEmpty()){
 
                     int node = q.poll();
-                    visited.add(node);
+                    set.add(node);
 
                     for(int j = 0; j < isConnected[node].length; j++){
 
-                        if(isConnected[node][j] == 1 && !visited.contains(j)){
-                            visited.add(j);
+                        if(isConnected[node][j] == 1 && !set.contains(j)){
                             q.add(j);
                         }
                     }
-
                 }
 
-                provinces++;
+                prov++;
             }
+
         }
 
-        return provinces;  
+        return prov;
     }
 }
