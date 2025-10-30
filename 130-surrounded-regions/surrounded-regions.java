@@ -3,11 +3,11 @@ class Solution {
     int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
     public void solve(char[][] board) {
-        
+
         int r = board.length;
         int c = board[0].length;
 
-        for(int i = 0; i < r; i++){
+        for(int i = 0; i  < r; i++){
             if(board[i][0] == 'O') dfs(i, 0, board);
             if(board[i][c - 1] == 'O') dfs(i, c - 1, board);
         }
@@ -19,6 +19,7 @@ class Solution {
 
         for(int i = 0; i < r; i++){
             for(int j = 0; j < c; j++){
+
                 if(board[i][j] == 'O') board[i][j] = 'X';
                 if(board[i][j] == 'T') board[i][j] = 'O';
             }
@@ -32,11 +33,11 @@ class Solution {
         board[i][j] = 'T';
 
         for(int[] dir : directions){
+
             int nr = i + dir[0];
             int nc = j + dir[1];
 
             dfs(nr, nc, board);
-
         }
     }
 }
