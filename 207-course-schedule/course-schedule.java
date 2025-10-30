@@ -18,9 +18,10 @@ class Solution {
         }
 
         return true;
+        
     }
 
-    private boolean dfs( int course){
+    private boolean dfs(int course){
 
         if(visit.contains(course)) return false;
 
