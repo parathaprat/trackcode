@@ -3,9 +3,9 @@ class Solution {
     int[][] directions = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 
     public List<List<Integer>> pacificAtlantic(int[][] heights) {
-        
+
         List<List<Integer>> res = new ArrayList<>();
-        
+
         int rows = heights.length;
         int cols = heights[0].length;
 
@@ -31,7 +31,7 @@ class Solution {
         return res;
     }
 
-    private void dfs(int i, int j, boolean[][] visit, int[][] heights){
+    public void dfs(int i , int j, boolean[][] visit, int[][] heights){
 
         visit[i][j] = true;
 
