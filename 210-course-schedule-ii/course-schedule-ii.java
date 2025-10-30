@@ -20,12 +20,12 @@ class Solution {
         }
 
         int[] ans = new int[res.size()];
+
         for(int i = 0; i < res.size(); i++){
             ans[i] = res.get(i);
         }
-
-        return ans;
         
+        return ans;
     }
 
     public boolean dfs(int course){
