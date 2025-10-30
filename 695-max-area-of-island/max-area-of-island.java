@@ -8,12 +8,12 @@ class Solution {
 
                 if(grid[i][j] == 1){
                     int cur = dfs(i, j, grid);
-                    max = Math.max(cur, max);
+                    max = Math.max(max, cur);
                 }
             }
         }
 
-        return max; 
+        return max;
     }
 
     private int dfs(int i, int j, int[][] grid){
@@ -22,6 +22,9 @@ class Solution {
 
         grid[i][j] = 0;
 
-        return 1 + dfs(i + 1, j, grid) + dfs(i - 1, j, grid) + dfs(i, j + 1, grid) + dfs(i, j - 1, grid); 
+        return 1 + dfs(i + 1, j, grid) + 
+        dfs(i - 1, j, grid) + 
+        dfs(i, j + 1, grid) + 
+        dfs(i, j - 1, grid);
     }
 }
