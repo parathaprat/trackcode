@@ -22,9 +22,11 @@ class Solution {
     public Node cloneGraph(Node node) {
 
         if(node == null) return null;
-        
+
         Map<Node, Node> map = new HashMap<>();
+
         return getCopy(node, map);
+        
     }
 
     private Node getCopy(Node node, Map<Node, Node> map){
@@ -36,6 +38,7 @@ class Solution {
         map.put(node, copy);
 
         for(Node nei : node.neighbors){
+
             copy.neighbors.add(getCopy(nei, map));
         }
 
