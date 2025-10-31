@@ -4,26 +4,32 @@ class Solution {
         Set<Integer> visited = new HashSet<>();
         int prov = 0;
 
+        Queue<Integer> q = new LinkedList<>();
+
         for(int i = 0; i < isConnected.length; i++){
 
             if(!visited.contains(i)){
-                dfs(i, isConnected, visited);
+
+                q.offer(i);
+
+                while(!q.isEmpty()){
+
+                    int node = q.poll();
+                    visited.add(node);
+
+                    for(int j = 0; j < isConnected[node].length; j++){
+
+                        if(isConnected[node][j] == 1 && !visited.contains(j)){
+                            q.offer(j);
+                        }
+
+                    }
+                }
+
                 prov++;
             }
         }
 
-        return prov;
-    }
-
-    private void dfs(int city, int[][] isConnected, Set<Integer> visited){
-
-        visited.add(city);
-
-        for(int i = 0; i < isConnected[city].length; i++){
-
-            if(isConnected[city][i] == 1 && !visited.contains(i)){
-                dfs(i, isConnected, visited);
-            }
-        }
+        return prov;  
     }
 }
