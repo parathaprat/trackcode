@@ -7,8 +7,8 @@ class Solution {
             for(int j = 0; j < grid[0].length; j++){
 
                 if(grid[i][j] == '1'){
-                    count++;
                     dfs(i, j, grid);
+                    count++;
                 }
             }
         }
@@ -23,10 +23,9 @@ class Solution {
         grid[i][j] = '0';
 
         dfs(i + 1, j, grid);
-        dfs(i, j + 1, grid);
-        dfs(i, j - 1, grid);
         dfs(i - 1, j, grid);
+        dfs(i, j - 1, grid);
+        dfs(i, j + 1, grid);
 
-        return;
     }
 }
