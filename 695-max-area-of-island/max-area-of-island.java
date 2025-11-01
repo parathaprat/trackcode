@@ -16,15 +16,16 @@ class Solution {
         return max;
     }
 
-    private int dfs(int i, int j, int[][] grid){
+    public int dfs(int i, int j, int[][] grid){
 
         if(i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] == 0) return 0;
 
         grid[i][j] = 0;
 
-        return 1 + dfs(i + 1, j, grid) + 
+        return 1 + 
+        dfs(i + 1, j, grid) + 
         dfs(i - 1, j, grid) + 
         dfs(i, j + 1, grid) + 
-        dfs(i, j - 1, grid);
+        dfs(i, j - 1, grid); 
     }
 }
