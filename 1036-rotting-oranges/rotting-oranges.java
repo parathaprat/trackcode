@@ -25,21 +25,20 @@ class Solution {
 
                 int[] coord = q.poll();
 
-                addOranges(coord[0] + 1, coord[1], grid, q);
-                addOranges(coord[0] - 1, coord[1], grid, q);
-                addOranges(coord[0], coord[1] + 1, grid, q);
-                addOranges(coord[0], coord[1] - 1, grid, q);
+                addOrange(coord[0] + 1, coord[1], grid, q);
+                addOrange(coord[0] - 1, coord[1], grid, q);
+                addOrange(coord[0], coord[1] + 1, grid, q);
+                addOrange(coord[0], coord[1] - 1, grid, q);
 
             }
 
             time++;
         }
 
-        return fresh == 0 ? time : -1;
-        
+        return fresh == 0 ? time : - 1;
     }
 
-    private void addOranges(int i, int j, int[][] grid, Queue<int[]> q){
+    private void addOrange(int i, int j, int[][] grid, Queue<int[]> q){
 
         if(i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] != 1) return;
 
