@@ -16,27 +16,24 @@ class Solution {
 
         int prov = n;
 
-        //union connected edges
         for(int i = 0; i < n; i++){
             for(int j = i + 1; j < n; j++){
 
                 if(isConnected[i][j] == 1){
                     if(union(i, j)) prov--;
                 }
-
             }
         }
 
         return prov;
     }
 
-    //function to find the parent of a node
     private int find(int node){
 
         int cur = node;
 
         while(cur != parent[cur]){
-            parent[cur] = parent[parent[cur]]; // path compression 
+            parent[cur] = parent[parent[cur]];
             cur = parent[cur];
         }
 
@@ -50,10 +47,10 @@ class Solution {
 
         if(pu == pv) return false;
 
-        if(rank[pu] < rank[pv]) {
-            int temp = pu;
-            pu = pv;
-            pv = temp;
+        if(rank[pu] < rank[pv]){
+            int temp = pv;
+            pv = pu;
+            pu = temp;
         }
 
         parent[pv] = pu;
