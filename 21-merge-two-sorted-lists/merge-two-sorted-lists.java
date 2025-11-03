@@ -10,8 +10,7 @@
  */
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        
-        //iterate using 2 pointers
+
         ListNode temp = new ListNode(0);
         ListNode current = temp;
 
@@ -39,9 +38,10 @@ class Solution {
             current.next = list2;
             list2 = list2.next;
             current = current.next;
+
         }
 
         return temp.next;
-
+        
     }
 }
