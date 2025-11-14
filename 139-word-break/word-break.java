@@ -3,12 +3,11 @@ class Solution {
 
         Set<String> set = new HashSet<>(wordDict);
         Boolean[] dp = new Boolean[s.length()];
-
-        return getAns(s, dp, 0, set);
+        return getAns(s, dp, set, 0);
         
     }
 
-    private boolean getAns(String s, Boolean[] dp, int ind, Set<String> set){
+    public Boolean getAns(String s, Boolean[] dp, Set<String> set, int ind){
 
         if(ind >= s.length()) return true;
         if(dp[ind] != null) return dp[ind];
@@ -16,7 +15,8 @@ class Solution {
         for(int i = ind; i < s.length(); i++){
 
             if(set.contains(s.substring(ind, i + 1))){
-                if(getAns(s, dp, i + 1, set)){
+
+                if(getAns(s, dp, set, i + 1)){
                     return dp[ind] = true;
                 }
             }
