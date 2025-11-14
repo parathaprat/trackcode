@@ -1,9 +1,7 @@
 class Solution {
     public int lengthOfLongestSubstring(String s) {
 
-        //sliding window 
-        //NOT 2 pointers
-        //hence r < len nad not l < r
+        //sliding window
 
         int left = 0;
         int right = 0;
@@ -12,7 +10,7 @@ class Solution {
         Set<Character> set = new HashSet<>();
 
         while(right < s.length()){
-            
+
             if(!set.contains(s.charAt(right))){
                 set.add(s.charAt(right));
                 right++;
