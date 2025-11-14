@@ -6,14 +6,15 @@ class Solution {
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[0].length; j++){
 
-                if(dfs(board, i, j, word, visited, 0)) return true;
+                if(dfs(0, i, j, board, visited, word)) return true;
             }
         }
 
         return false;
+        
     }
 
-    private boolean dfs(char[][] board, int i, int j, String word, boolean[][] visited, int ind){
+    private boolean dfs(int ind, int i, int j, char[][] board, boolean[][] visited, String word){
 
         if(ind >= word.length()) return true;
 
@@ -21,10 +22,10 @@ class Solution {
 
         visited[i][j] = true;
 
-        boolean rest = dfs(board, i + 1, j, word, visited, ind + 1) ||
-                        dfs(board, i - 1, j, word, visited, ind + 1) ||
-                        dfs(board, i, j + 1, word, visited, ind + 1) ||
-                        dfs(board, i, j - 1, word, visited, ind + 1);
+        boolean rest =  dfs(ind + 1, i, j + 1, board, visited, word) || 
+        dfs(ind + 1, i + 1, j, board, visited, word) || 
+        dfs(ind + 1, i - 1, j, board, visited, word) || 
+        dfs(ind + 1, i, j - 1, board, visited, word);
 
         visited[i][j] = false;
 
