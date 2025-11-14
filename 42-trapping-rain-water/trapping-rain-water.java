@@ -12,20 +12,15 @@ class Solution {
         while(left < right){
 
             if(leftMax < rightMax){
-                
                 left++;
                 leftMax = Math.max(leftMax, height[left]);
                 ans += leftMax - height[left];
-        
             }
             else{
-
                 right--;
                 rightMax = Math.max(rightMax, height[right]);
                 ans += rightMax - height[right];
-
             }
-
         }
 
         return ans;
