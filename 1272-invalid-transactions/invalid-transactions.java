@@ -18,35 +18,34 @@ class Solution {
         }
     }
 
+
     public List<String> invalidTransactions(String[] transactions) {
 
         List<String> invalid = new ArrayList<>();
         Map<String, List<Transaction>> map = new HashMap<>();
 
-        //1st pass: populate transaction map
         for(String transaction : transactions){
 
             Transaction t = new Transaction(transaction);
+
             map.putIfAbsent(t.name, new ArrayList<>());
             map.get(t.name).add(t);
-            
         }
 
-        //2nd pass: check validity for each name
         for(String transaction : transactions){
 
             Transaction t = new Transaction(transaction);
-            
+
             if(!isValid(t, map.getOrDefault(t.name, new ArrayList<>()))){
                 invalid.add(transaction);
             }
         }
 
         return invalid;
+
     }
 
-    //is transaction > 100 || if neighors are elow 60 mins and in diff citys, return false;
-    private boolean isValid(Transaction t, List<Transaction> list){
+    public boolean isValid(Transaction t, List<Transaction> list){
 
         if(t.amount > 1000) return false;
 
