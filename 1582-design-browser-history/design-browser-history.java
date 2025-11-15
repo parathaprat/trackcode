@@ -1,14 +1,15 @@
 class BrowserHistory {
 
-    public class Node{
+    class Node{
+
         String url;
         Node next;
         Node prev;
 
-        public Node(String url){
+        Node(String url){
             this.url = url;
-            next = null;
-            prev = null;
+            this.next = null;
+            this.prev = null;
         }
     }
 
@@ -25,7 +26,8 @@ class BrowserHistory {
         Node node = new Node(url);
         curr.next = node;
         node.prev = curr;
-        curr = node;
+
+        curr = curr.next;
         
     }
     
