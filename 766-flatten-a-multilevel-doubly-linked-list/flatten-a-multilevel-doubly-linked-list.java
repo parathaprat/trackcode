@@ -11,10 +11,15 @@ class Node {
 class Solution {
     public Node flatten(Node head) {
 
-        if(head == null){
-            return null;
-        }
+        //if node has a child, 
+        //store next node
+        //traverse child to get the tail
+        //connect next and prev to childLast
+        //connect next of curr to child, and chill prev to curr, set child to null
 
+        if(head == null) return null;
+
+        //tracker node
         Node curr = head;
 
         while(curr != null){
@@ -22,14 +27,12 @@ class Solution {
             if(curr.child != null){
 
                 Node nextNode = curr.next;
-
                 Node childTail = curr.child;
 
-                while(childTail.next != null){
-                    childTail = childTail.next;
-                }
+                while(childTail.next != null) childTail = childTail.next;
 
                 if(nextNode != null){
+
                     childTail.next = nextNode;
                     nextNode.prev = childTail;
                 }
