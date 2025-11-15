@@ -11,41 +11,38 @@ class Node {
 class Solution {
     public Node flatten(Node head) {
 
-        //if node has a child, 
-        //store next node
-        //traverse child to get the tail
-        //connect next and prev to childLast
-        //connect next of curr to child, and chill prev to curr, set child to null
+        //traverse with a cur
+        //if child, store next, find child tail
+        //childTail.next = next; next.prev to child tail
+        //cur.next to child
 
         if(head == null) return null;
 
-        //tracker node
-        Node curr = head;
+        Node cur = head;
 
-        while(curr != null){
+        while(cur != null){
 
-            if(curr.child != null){
+            if(cur.child != null){
 
-                Node nextNode = curr.next;
-                Node childTail = curr.child;
+                Node next = cur.next;
+                Node childLast = cur.child;
 
-                while(childTail.next != null) childTail = childTail.next;
+                while(childLast.next != null) childLast = childLast.next;
 
-                if(nextNode != null){
-
-                    childTail.next = nextNode;
-                    nextNode.prev = childTail;
+                if(next != null){
+                    childLast.next = next;
+                    next.prev = childLast;
                 }
 
-                curr.next = curr.child;
-                curr.child.prev = curr;
-                curr.child = null;
+                cur.child.prev = cur;
+                cur.next = cur.child;
+                cur.child = null;
+
             }
 
-            curr = curr.next;
+            cur = cur.next;
         }
 
         return head;
-        
     }
 }
