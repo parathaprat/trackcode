@@ -1,12 +1,13 @@
 class MagicDictionary {
 
-    //group words by length into a map
-    //compare only same letter words
+    //group words by len into a map, compare same len diffs
 
     Map<Integer, List<String>> map;
 
     public MagicDictionary() {
+
         map = new HashMap<>();
+        
     }
     
     public void buildDict(String[] dictionary) {
@@ -33,16 +34,18 @@ class MagicDictionary {
             int diff = 0;
 
             for(int i = 0; i < len; i++){
-
+                
                 if(word.charAt(i) != searchWord.charAt(i)) diff++;
 
                 if(diff > 1) break;
+                
             }
 
             if(diff == 1) return true;
         }
 
         return false;
+        
     }
 }
 
