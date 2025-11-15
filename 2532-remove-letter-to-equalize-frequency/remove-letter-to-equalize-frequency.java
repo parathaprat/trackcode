@@ -16,7 +16,6 @@ class Solution {
         }
 
         return false;
-        
     }
 
     private boolean checkFreq(int[] freq){
@@ -27,8 +26,9 @@ class Solution {
 
             if(fr == 0) continue;
             else if(f == 0) f = fr;
-            else if(f == fr) continue;
+            else if(fr == f) continue;
             else return false;
+
         }
 
         return true;
