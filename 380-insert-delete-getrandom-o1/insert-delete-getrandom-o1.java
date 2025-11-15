@@ -1,52 +1,46 @@
 class RandomizedSet {
 
-    //map stores -> {element, Index}
-    Map<Integer, Integer> map;
-    List<Integer> list;
+    private List<Integer> values; //main ds
+    private Map<Integer, Integer> valuesIdx; //val -> index for o(1) ops
 
     public RandomizedSet() {
-
-        map = new HashMap<>();
-        list = new ArrayList<>();
-        
+        this.values = new ArrayList<>();
+        this.valuesIdx = new HashMap<>();
     }
     
     public boolean insert(int val) {
 
-        if(map.containsKey(val)) return false;
+        if(valuesIdx.containsKey(val)) return false;
 
-        list.add(val);
-        map.put(val, list.size() - 1);
+        valuesIdx.put(val, values.size());
+        values.add(val);
+
         return true;
         
     }
     
     public boolean remove(int val) {
-        
-        //move last element to the index of removed element
-        //update position in map
-        //remove from map 
 
-        if(!map.containsKey(val)) return false;
+        //get index, put last element into index, remove element
 
-        int index = map.get(val);
+        if(!valuesIdx.containsKey(val)) return false;
 
-        list.set(index, list.get(list.size() - 1));
+        int index = valuesIdx.get(val); //get index
+        valuesIdx.put(values.get(values.size() - 1), index); //replace w last element
+        valuesIdx.remove(val); //remove from map
 
-        map.put(list.get(index), index);
-
-        list.remove(list.size() - 1);
-
-        map.remove(val);
+        values.set(index, values.get(values.size() - 1)); //set last element to index in list
+        values.remove(values.size() - 1); //remove last element;
 
         return true;
+
+        
     }
     
     public int getRandom() {
 
-        Random rd = new Random();
-
-        return list.get(rd.nextInt(list.size()));
+        int index = (int)(Math.random() * values.size());
+        return values.get(index);
         
     }
 }
