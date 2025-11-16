@@ -1,5 +1,8 @@
 class Solution {
 
+    //sort by power in a max heap of size k, return top of heap
+    //use map to store pows
+
     class tuple{
 
         int num;
@@ -9,6 +12,7 @@ class Solution {
             this.num = num;
             this.pow = pow;
         }
+
     }
 
     Map<Integer, Integer> map = new HashMap<>();
@@ -21,13 +25,11 @@ class Solution {
 
             maxHeap.add(new tuple(i, getPow(i)));
 
-            if(maxHeap.size() > k){
-                maxHeap.poll();
-            }
+            if(maxHeap.size() > k) maxHeap.poll();
         }
 
         return maxHeap.poll().num;
-        
+
     }
 
     private int getPow(int i){
@@ -39,7 +41,6 @@ class Solution {
         int pow = 1 + (i % 2 == 0 ? getPow(i / 2) : getPow(3 * i + 1));
 
         map.put(i, pow);
-
         return pow;
 
     }
