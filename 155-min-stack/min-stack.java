@@ -1,5 +1,5 @@
 class MinStack {
-
+    
     class tuple{
 
         int num;
@@ -22,7 +22,9 @@ class MinStack {
     public void push(int val) {
 
         if(st.isEmpty()) st.push(new tuple(val, val));
-        else st.push(new tuple(val, Math.min(val, getMin())));
+        else{
+            st.push(new tuple(val, Math.min(val, st.peek().min)));
+        }
         
     }
     
