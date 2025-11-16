@@ -13,11 +13,14 @@ class Solution {
 
     private void helper(String s, int i, Set<String> dict, List<String> res, List<String> cur){
 
+        //if cur has a valid sentence
         if(i == s.length()){
 
             if(cur.size() > 0){
 
+                //break it down using sb and append to res
                 StringBuilder sb = new StringBuilder();
+
                 for(int j = 0; j < cur.size(); j++){
 
                     if(j > 0) sb.append(' ');
@@ -30,7 +33,8 @@ class Solution {
             return;
         }
 
-        for(int j = i + 1; j <= s.length(); j++){
+        //if no target, check if dict has validsubstring, add to cur and call helper again, then backtrak
+        for(int j = i; j <= s.length(); j++){
 
             if(dict.contains(s.substring(i, j))){
 
@@ -40,4 +44,6 @@ class Solution {
             }
         }
     }
+
+
 }
