@@ -26,6 +26,6 @@ class Solution {
 
         if(node.val <= min || node.val >= max) return false;
 
-        return valid(node.left, min, node.val) && valid(node.right, node.val, max); 
+        return valid(node.left, min, node.val) && valid(node.right, node.val, max);
     }
 }
