@@ -3,23 +3,23 @@ class Solution {
 
         Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
 
-        int[] in = intervals[0];
+        List<int[]> res = new ArrayList<>();
 
-        List<int[]> result = new ArrayList<>();
+        int[] in = intervals[0];
 
         for(int i = 1; i < intervals.length; i++){
 
-            if(in[1] < intervals[i][0]){
-                result.add(in);
-                in = intervals[i];
+            if(in[1] >= intervals[i][0]){
+                in[1] = Math.max(intervals[i][1], in[1]);
             }
             else{
-                in[1] = Math.max(in[1], intervals[i][1]);
+                res.add(in);
+                in = intervals[i];
             }
         }
 
-        result.add(in);
-        return result.toArray(new int[result.size()][2]);
+        res.add(in);
+        return res.toArray(new int[res.size()][2]);
         
     }
 }
