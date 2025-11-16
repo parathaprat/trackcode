@@ -11,29 +11,28 @@ class Solution {
 
         int res = 0;
 
-        if(topRight[0] >= bottomLeft[0] && topRight[1] >= bottomLeft[1] && 
-        sea.hasShips(topRight, bottomLeft)){
-            
+        if(bottomLeft[0] <= topRight[0] && bottomLeft[1] <= topRight[1] && sea.hasShips(topRight, bottomLeft) == true){
+
             if(topRight[0] == bottomLeft[0] && topRight[1] == bottomLeft[1]) return 1;
 
-            int newX = (bottomLeft[0] + topRight[0])/2;
-            int newY = (bottomLeft[1] + topRight[1])/2;
-
-            //top-right
-            res += countShips(sea, topRight, new int[]{newX + 1, newY + 1});
+            int newX = (topRight[0] + bottomLeft[0])/2;
+            int newY = (topRight[1] + bottomLeft[1])/2;
 
             //topLeft
             res += countShips(sea, new int[]{newX, topRight[1]}, new int[]{bottomLeft[0], newY + 1});
 
-            //bottom-left
-            res += countShips(sea, new int[]{newX, newY}, bottomLeft);
+            //topRight
+            res += countShips(sea, topRight, new int[]{newX + 1, newY + 1});
 
-            //bottom-right
+            //bottomRight
             res += countShips(sea, new int[]{topRight[0], newY}, new int[]{newX + 1, bottomLeft[1]});
 
-        } 
+            //bottomLeft
+            res += countShips(sea, new int[]{newX, newY}, bottomLeft);
+
+        }
 
         return res;
-        
+
     }
 }
