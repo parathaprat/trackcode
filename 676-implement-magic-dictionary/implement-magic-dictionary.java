@@ -1,13 +1,13 @@
 class MagicDictionary {
 
-    //group words by len into a map, compare same len diffs
+    //group words by len into a map, compare same len words
 
     Map<Integer, List<String>> map;
 
-    public MagicDictionary() {
 
-        map = new HashMap<>();
+    public MagicDictionary() {
         
+        map = new HashMap<>();
     }
     
     public void buildDict(String[] dictionary) {
@@ -29,19 +29,21 @@ class MagicDictionary {
 
         if(!map.containsKey(len)) return false;
 
-        for(String word : map.get(len)){
-
+        for(String words : map.get(len)){
+            
             int diff = 0;
-
+            
             for(int i = 0; i < len; i++){
-                
-                if(word.charAt(i) != searchWord.charAt(i)) diff++;
+
+                if(searchWord.charAt(i) != words.charAt(i)) diff++;
 
                 if(diff > 1) break;
-                
+
             }
 
             if(diff == 1) return true;
+
+            
         }
 
         return false;
