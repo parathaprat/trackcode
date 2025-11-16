@@ -5,12 +5,12 @@ class Solution {
 
         int[] in = intervals[0];
 
-        List<int[]> finalAns = new ArrayList<>();
+        List<int[]> result = new ArrayList<>();
 
         for(int i = 1; i < intervals.length; i++){
 
             if(in[1] < intervals[i][0]){
-                finalAns.add(in);
+                result.add(in);
                 in = intervals[i];
             }
             else{
@@ -18,11 +18,8 @@ class Solution {
             }
         }
 
-        finalAns.add(in);
-
-        return finalAns.toArray(new int[finalAns.size()][2]);
-
-
+        result.add(in);
+        return result.toArray(new int[result.size()][2]);
         
     }
 }
