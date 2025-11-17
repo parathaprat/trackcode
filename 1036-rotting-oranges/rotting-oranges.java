@@ -4,21 +4,22 @@ class Solution {
 
     public int orangesRotting(int[][] grid) {
 
-        Queue<int[]> q = new LinkedList<>();
+        //multi BFS with fresh count
 
+        Queue<int[]> q = new LinkedList<>();
+        
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[0].length; j++){
 
-                if(grid[i][j] == 2) q.offer(new int[]{i, j});
-
                 if(grid[i][j] == 1) fresh++;
+                if(grid[i][j] == 2) q.add(new int[]{i, j});
+
             }
         }
 
         int time = 0;
 
         while(!q.isEmpty() && fresh != 0){
-
             int level = q.size();
 
             for(int i = 0; i < level; i++){
@@ -35,17 +36,18 @@ class Solution {
             time++;
         }
 
-        return fresh == 0 ? time : - 1;
+        return fresh == 0 ? time : -1;
+        
     }
 
-    private void addOrange(int i, int j, int[][] grid, Queue<int[]> q){
+    private void addOrange(int x, int y, int[][] grid, Queue<int[]> q){
 
-        if(i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] != 1) return;
+        if(x < 0 || x >= grid.length || y < 0 || y >= grid[0].length || grid[x][y] != 1) return;
 
-        grid[i][j] = 2;
+        grid[x][y] = 2;
         fresh--;
 
-        q.offer(new int[]{i, j});
+        q.add(new int[]{x, y});
 
         return;
     }
