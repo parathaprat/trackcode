@@ -1,23 +1,22 @@
 class Solution {
     public int findTheWinner(int n, int k) {
 
-        LinkedList<Integer> participants = new LinkedList<>();
+        LinkedList<Integer> q = new LinkedList<>();
 
         for(int i = 1; i <= n; i++){
-            participants.add(i);
+            q.add(i);
         }
 
         int lost = 0;
 
         for(int i = 0; i < n; i++){
             for(int j = 0; j < k - 1; j++){
-                participants.add(participants.poll());
+                q.add(q.poll());
             }
 
-            lost = participants.poll();
+            lost = q.poll();
         }
 
-        return lost;
-        
+        return lost; 
     }
 }
