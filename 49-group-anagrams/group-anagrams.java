@@ -7,8 +7,8 @@ class Solution {
 
             int[] freq = new int[26];
 
-            for(char ch : str.toCharArray()){
-                freq[ch - 'a']++;
+            for(char c : str.toCharArray()){
+                freq[c - 'a']++;
             }
 
             String key = Arrays.toString(freq);
@@ -21,6 +21,5 @@ class Solution {
         }
 
         return new ArrayList<>(map.values());
-        
     }
 }
