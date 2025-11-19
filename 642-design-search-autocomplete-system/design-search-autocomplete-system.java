@@ -4,25 +4,24 @@ class AutocompleteSystem {
     StringBuilder current;
 
     public AutocompleteSystem(String[] sentences, int[] times) {
-
+        
         freq = new HashMap<>();
         current = new StringBuilder();
 
+        ///store all frequencies in a map
         for(int i = 0; i < sentences.length; i++){
             freq.put(sentences[i], times[i]);
         }
-        
     }
     
     public List<String> input(char c) {
 
+        //if # excountered, add to map, update freq, reset sb, return empty list
         if(c == '#'){
-
             String sentence = current.toString();
             freq.put(sentence, freq.getOrDefault(sentence, 0) + 1);
             current = new StringBuilder();
             return new ArrayList<>();
-
         }
 
         current.append(c);
@@ -45,7 +44,7 @@ class AutocompleteSystem {
         }
 
         List<String> result = new ArrayList<>();
-        
+
         while(!pq.isEmpty()){
             result.add(0, pq.poll());
         }
