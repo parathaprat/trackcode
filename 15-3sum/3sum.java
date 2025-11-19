@@ -5,11 +5,10 @@ class Solution {
 
         List<List<Integer>> ans = new ArrayList<>();
 
-        for(int i = 0; i < nums.length - 2; i++){
+        for(int i = 0; i < nums.length; i++){
 
             if(i == 0 || nums[i] != nums[i - 1]){
 
-                //i is -ve target
                 int left = i + 1;
                 int right = nums.length - 1;
 
@@ -18,8 +17,7 @@ class Solution {
                 while(left < right){
 
                     if(nums[left] + nums[right] == target){
-                        
-                        ans.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                        ans.add(Arrays.asList(nums[left], nums[right], nums[i]));
 
                         while(left < right && nums[left] == nums[left + 1]) left++;
                         while(left < right && nums[right] == nums[right - 1]) right--;
@@ -37,7 +35,8 @@ class Solution {
                 }
             }
         }
-        
+
         return ans;
+        
     }
 }
