@@ -7,31 +7,32 @@ class Solution {
         int amount;
         String city;
 
-        public Transaction(String line){
-
-            String[] split = line.split(",");
-            name = split[0];
-            time = Integer.parseInt(split[1]);
-            amount = Integer.parseInt(split[2]);
-            city = split[3];
-
+        Transaction(String line){
+            String[] tran = line.split(",");
+            name = tran[0];
+            time = Integer.parseInt(tran[1]);
+            amount = Integer.parseInt(tran[2]);
+            city = tran[3];
         }
+
     }
-
-
     public List<String> invalidTransactions(String[] transactions) {
 
         List<String> invalid = new ArrayList<>();
+        //name -> transactions
         Map<String, List<Transaction>> map = new HashMap<>();
 
+        //first pass -> populate map
         for(String transaction : transactions){
 
             Transaction t = new Transaction(transaction);
 
             map.putIfAbsent(t.name, new ArrayList<>());
             map.get(t.name).add(t);
+
         }
 
+        //2nd pass -> check validity
         for(String transaction : transactions){
 
             Transaction t = new Transaction(transaction);
@@ -42,10 +43,9 @@ class Solution {
         }
 
         return invalid;
-
     }
 
-    public boolean isValid(Transaction t, List<Transaction> list){
+    private boolean isValid(Transaction t, List<Transaction> list){
 
         if(t.amount > 1000) return false;
 
