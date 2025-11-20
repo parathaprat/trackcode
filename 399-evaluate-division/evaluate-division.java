@@ -1,12 +1,12 @@
 class Solution {
     public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
 
-        //nodes = equations, edges = values
         HashMap<String, HashMap<String, Double>> gr = buildGraph(equations, values);
 
         double[] finalAns = new double[queries.size()];
 
         for(int i = 0; i < queries.size(); i++){
+
             String dividend = queries.get(i).get(0);
             String divisor = queries.get(i).get(1);
 
@@ -18,18 +18,18 @@ class Solution {
                 double temp = 1.0;
 
                 dfs(dividend, divisor, gr, vis, ans, temp);
-                finalAns[i] = ans [0];
+                finalAns[i] = ans[0];
+
             }
         }
 
         return finalAns;
+        
     }
 
-    //dfs into each of the unvisited neighboring nodes while multiplying vals. if dest is reached, store in ans and return
     private void dfs(String node, String dest, HashMap<String, HashMap<String, Double>> gr, HashSet<String> vis, double[] ans, double temp){
 
         if(vis.contains(node)) return;
-
         vis.add(node);
 
         if(node.equals(dest)){
@@ -38,6 +38,7 @@ class Solution {
         }
 
         for(Map.Entry<String, Double> entry : gr.get(node).entrySet()){
+
             String ne = entry.getKey();
             double val = entry.getValue();
 
@@ -45,8 +46,13 @@ class Solution {
         }
     }
 
-    //build a graph with nodes and edge values, both directions
+    
+
     private HashMap<String, HashMap<String, Double>> buildGraph(List<List<String>> equations, double[] values){
+
+        //Add both directions when building the buidGraph
+        //dividend - > divisor, value
+        //divisor -> dividend, 1/value
 
         HashMap<String, HashMap<String, Double>> gr = new HashMap<>();
 
@@ -55,13 +61,11 @@ class Solution {
             String dividend = equations.get(i).get(0);
             String divisor = equations.get(i).get(1);
 
-            double value = values[i];
-
             gr.putIfAbsent(dividend, new HashMap<>());
-            gr.putIfAbsent(divisor, new HashMap<>());
+            gr.get(dividend).put(divisor, values[i]);
 
-            gr.get(dividend).put(divisor, value);
-            gr.get(divisor).put(dividend, 1.0 / value);
+            gr.putIfAbsent(divisor, new HashMap<>());
+            gr.get(divisor).put(dividend, 1.0 / values[i]);
         }
 
         return gr;
