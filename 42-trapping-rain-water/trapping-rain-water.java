@@ -1,7 +1,7 @@
 class Solution {
     public int trap(int[] height) {
 
-        //Min(max(left), right) - height[i];
+        //min(max(left), max(right)) - height
 
         int left = 0;
         int right = height.length - 1;
@@ -15,14 +15,15 @@ class Solution {
 
             if(leftMax < rightMax){
                 left++;
-                leftMax = Math.max(height[left], leftMax);
+                leftMax = Math.max(leftMax, height[left]);
                 ans += leftMax - height[left];
             }
             else{
                 right--;
-                rightMax = Math.max(height[right], rightMax);
+                rightMax = Math.max(rightMax, height[right]);
                 ans += rightMax - height[right];
             }
+
         }
 
         return ans;
