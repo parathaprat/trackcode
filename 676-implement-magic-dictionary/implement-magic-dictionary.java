@@ -1,5 +1,7 @@
 class MagicDictionary {
 
+    //map -> len to list of words in dictionary
+
     Map<Integer, List<String>> map;
 
     public MagicDictionary() {
@@ -9,16 +11,14 @@ class MagicDictionary {
     }
     
     public void buildDict(String[] dictionary) {
-
+        
         for(String word : dictionary){
 
-            if(!map.containsKey(word.length())){
-                map.put(word.length(), new ArrayList<>());
-            }
+            int len = word.length();
 
-            map.get(word.length()).add(word);
+            map.putIfAbsent(len, new ArrayList<>());
+            map.get(len).add(word);
         }
-        
     }
     
     public boolean search(String searchWord) {
@@ -27,20 +27,26 @@ class MagicDictionary {
 
         if(!map.containsKey(len)) return false;
 
-        for(String word : map.get(len)){
+        int diff = 0;
 
-            int diff = 0;
+        for(String words : map.get(len)){
+
+            diff = 0;
 
             for(int i = 0; i < len; i++){
-                if(searchWord.charAt(i) != word.charAt(i)) diff++;
 
-                if(diff > 1) break;
+                if(words.charAt(i) != searchWord.charAt(i)) diff++;
+
+                if(diff > 1) continue;
+
             }
 
             if(diff == 1) return true;
+
         }
 
         return false;
+        
     }
 }
 
