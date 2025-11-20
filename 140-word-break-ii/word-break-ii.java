@@ -1,49 +1,42 @@
 class Solution {
     public List<String> wordBreak(String s, List<String> wordDict) {
 
-        Set<String> dict = new HashSet<>(wordDict);
         List<String> res = new ArrayList<>();
-        List<String> cur = new ArrayList<>();
+        List<String> cur =  new ArrayList<>();
+        Set<String> set = new HashSet<>(wordDict);
 
-        helper(s, 0, dict, res, cur);
+        helper(0, res, cur, set, s);
 
         return res;
         
     }
 
-    private void helper(String s, int i, Set<String> dict, List<String> res, List<String> cur){
+    private void helper(int ind, List<String> res, List<String> cur, Set<String> set, String s){
 
-        //if cur has a valid sentence
-        if(i == s.length()){
+        if(ind >= s.length()){
 
             if(cur.size() > 0){
-
-                //break it down using sb and append to res
+                
                 StringBuilder sb = new StringBuilder();
+                for(int i = 0; i < cur.size(); i++){
 
-                for(int j = 0; j < cur.size(); j++){
-
-                    if(j > 0) sb.append(' ');
-                    sb.append(cur.get(j));
+                    if(i > 0) sb.append(" ");
+                    sb.append(cur.get(i));
                 }
 
                 res.add(sb.toString());
             }
-
-            return;
         }
 
-        //if no target, check if dict has validsubstring, add to cur and call helper again, then backtrak
-        for(int j = i; j <= s.length(); j++){
+        for(int i = ind; i < s.length(); i++){
 
-            if(dict.contains(s.substring(i, j))){
-
-                cur.add(s.substring(i, j));
-                helper(s, j, dict, res, cur);
+            if(set.contains(s.substring(ind, i + 1))){
+                cur.add(s.substring(ind, i + 1));
+                helper(i + 1, res, cur, set, s);
                 cur.remove(cur.size() - 1);
             }
         }
+
+
     }
-
-
 }
