@@ -1,25 +1,37 @@
 class RandomizedSet {
 
-    Map<Integer, Integer> map;
+    //list of vals
+    //map<val, index in list>
+
     List<Integer> vals;
+    Map<Integer, Integer> map;
 
     public RandomizedSet() {
-        map = new HashMap<>();
+
         vals = new ArrayList<>();
+        map = new HashMap<>();
+        
     }
     
-    public boolean insert(int val) {
+    public boolean insert(int val) {    
 
         if(map.containsKey(val)) return false;
 
         map.put(val, vals.size());
         vals.add(val);
+
         return true;
+
+        
     }
     
     public boolean remove(int val) {
 
         if(!map.containsKey(val)) return false;
+
+        //get index of val in Map
+        //use that index to replace last element in list at index
+        //remove the last element from vals
 
         int index = map.get(val);
         map.put(vals.get(vals.size() - 1), index);
@@ -27,6 +39,7 @@ class RandomizedSet {
 
         vals.set(index, vals.get(vals.size() - 1));
         vals.remove(vals.size() - 1);
+
         return true;
     }
     
