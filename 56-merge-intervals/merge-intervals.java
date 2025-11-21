@@ -3,9 +3,9 @@ class Solution {
 
         Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
 
-        int[] in = intervals[0];
-
         List<int[]> res = new ArrayList<>();
+
+        int[] in = intervals[0];
 
         for(int i = 1; i < intervals.length; i++){
 
@@ -19,7 +19,10 @@ class Solution {
         }
 
         res.add(in);
+
         return res.toArray(new int[res.size()][2]);
+
+
         
     }
 }
