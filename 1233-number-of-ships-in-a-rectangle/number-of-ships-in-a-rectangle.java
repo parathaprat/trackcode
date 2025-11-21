@@ -13,34 +13,30 @@ class Solution {
 
         if(bottomLeft[0] <= topRight[0] && bottomLeft[1] <= topRight[1] && sea.hasShips(topRight, bottomLeft)){
 
-            if(bottomLeft[1] == topRight[1] && bottomLeft[1] == topRight[1]) return 1;
+            if(bottomLeft[0] == topRight[0] && bottomLeft[1] == topRight[1]) return 1;
 
-            int newX = (topRight[0] + bottomLeft[0])/2;
-            int newY = (topRight[1] + bottomLeft[1])/2;
+            int newX = (bottomLeft[0] + topRight[0])/2;
+            int newY = (bottomLeft[1] + topRight[1])/2;
 
             //topLeft
-            int[] topLeftTopRight = {newX, topRight[1]};
-            int[] topLeftBottomRight = {bottomLeft[0], newY + 1};
-
-            res += countShips(sea, topLeftTopRight, topLeftBottomRight);
+            int[] topLeftTR = {newX, topRight[1]};
+            int[] topLeftBL = {bottomLeft[0], newY + 1};
+            res += countShips(sea, topLeftTR, topLeftBL);
 
             //topRight
-            int[] topRightTopRight = topRight;
-            int[] topRightBottomLeft = {newX + 1, newY + 1};
-
-            res += countShips(sea, topRightTopRight, topRightBottomLeft);
+            int[] topRightTR = topRight;
+            int[] topRightBL = {newX + 1, newY + 1};
+            res += countShips(sea, topRightTR, topRightBL);
 
             //bottomRight
-            int[] bottomRightTopRight = {topRight[0], newY};
-            int[] bottomRightBottomLeft = {newX + 1, bottomLeft[1]};
-
-            res += countShips(sea, bottomRightTopRight, bottomRightBottomLeft);
+            int[] bottomRightTR = {topRight[0], newY};
+            int[] bottomRightBL = {newX + 1, bottomLeft[1]};
+            res += countShips(sea, bottomRightTR, bottomRightBL);
 
             //bottomLeft
-            int[] bottomLeftTopRight = {newX, newY};
-            int[] bottomLeftBottomLeft = bottomLeft;
-
-            res += countShips(sea, bottomLeftTopRight, bottomLeftBottomLeft);
+            int[] bottomLeftTR = {newX, newY};
+            int[] bottomLeftBL = bottomLeft;
+            res+= countShips(sea, bottomLeftTR, bottomLeftBL);
         }
 
         return res;
