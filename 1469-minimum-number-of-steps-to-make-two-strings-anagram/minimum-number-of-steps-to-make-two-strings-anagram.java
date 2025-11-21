@@ -1,21 +1,21 @@
 class Solution {
     public int minSteps(String s, String t) {
 
-        int[] freqS = new int[26];
-        int[] freqT = new int[26];
-
-        for(char c : s.toCharArray()){
-            freqS[c - 'a']++;
-        }
-
-        for(char c : t.toCharArray()){
-            freqT[c - 'a']++;
-        }
+        int[] ss = new int[26];
+        int[] tt = new int[26];
 
         int steps = 0;
 
+        for(char c : s.toCharArray()){
+            ss[c - 'a']++;
+        }
+
+        for(char c : t.toCharArray()){
+            tt[c - 'a']++;
+        }
+
         for(int i = 0; i < 26; i++){
-            steps += Math.abs(freqS[i] - freqT[i]);
+            steps += Math.abs(ss[i] - tt[i]);
         }
 
         return steps/2;
