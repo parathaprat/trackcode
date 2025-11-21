@@ -1,6 +1,6 @@
 class BrowserHistory {
 
-    //url, next, prev
+    //we need to store url, a next pointer and a prev pointer
 
     class Node{
 
@@ -17,11 +17,9 @@ class BrowserHistory {
 
     Node cur;
 
-
     public BrowserHistory(String homepage) {
-        
-        cur = new Node(homepage);
 
+        cur = new Node(homepage);
         
     }
     
