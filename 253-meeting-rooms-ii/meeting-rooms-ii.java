@@ -1,15 +1,13 @@
 class Solution {
     public int minMeetingRooms(int[][] intervals) {
 
-        //we want to reuse the room with the earliest ending meeting;
-        //sort array by start times
-        //iterate through, store end times in a min heap
-        //if end time of a meeting does not overlap, pop from pq
-        //return size of pq
+        //we want to reuse the room with the earliest end times
+        //sort meetings by start times, create a min heap of end times
+        //if ending <= start(next), pq.poll(), since room can be resused
+        //add end times to meetings, return pq.size()
 
         Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
-
-        PriorityQueue<Integer> pq = new PriorityQueue<>(); //pq stores end times
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
 
         for(int[] in : intervals){
 
@@ -18,7 +16,6 @@ class Solution {
             }
 
             pq.offer(in[1]);
-
         }
 
         return pq.size();
