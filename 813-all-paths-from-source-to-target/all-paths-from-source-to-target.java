@@ -1,10 +1,11 @@
 class Solution {
     public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
-
+        
         List<List<Integer>> paths = new ArrayList<>();
         List<Integer> path = new ArrayList<>();
 
         path.add(0);
+
         dfs(0, paths, path, graph);
 
         return paths;
@@ -18,9 +19,11 @@ class Solution {
         }
 
         for(int nei : graph[node]){
+
             path.add(nei);
             dfs(nei, paths, path, graph);
             path.remove(path.size() - 1);
+
         }
     }
 }
