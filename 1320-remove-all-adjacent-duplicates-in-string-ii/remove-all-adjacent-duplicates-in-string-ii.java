@@ -9,22 +9,18 @@ class Solution {
             this.c = c;
             this.freq = freq;
         }
+
     }
 
     Stack<tuple> st;
 
-
     public String removeDuplicates(String s, int k) {
-
-        //use a tuple of char and freq in a stack to track freqs and pop accordingly
 
         st = new Stack<>();
 
         for(char c : s.toCharArray()){
 
-            if(!st.isEmpty() && st.peek().c == c){
-                st.peek().freq++;
-            }
+            if(!st.isEmpty() && st.peek().c == c) st.peek().freq++;
             else{
                 st.add(new tuple(c, 1));
             }
@@ -36,12 +32,15 @@ class Solution {
 
         for(tuple tp : st){
 
-            sb.append(String.valueOf(tp.c).repeat(tp.freq));
+            int f = tp.freq;
+
+            while(f > 0){
+                sb.append(tp.c);
+                f--;
+            }
         }
 
         return sb.toString();
-
-    
         
     }
 }
