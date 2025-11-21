@@ -10,7 +10,7 @@ class Solution {
         for(int i = 1; i < intervals.length; i++){
 
             if(in[1] >= intervals[i][0]){
-                in[1] = Math.max(in[1], intervals[i][1]);
+                in[1] = Math.max(in[1], Math.max(in[1], intervals[i][1]));
             }
             else{
                 res.add(in);
@@ -21,8 +21,6 @@ class Solution {
         res.add(in);
 
         return res.toArray(new int[res.size()][2]);
-
-
         
     }
 }
