@@ -1,12 +1,15 @@
 class Solution {
     public String decodeString(String s) {
 
+        //Strinbuilder to store chars until num
+        //Stack to store nums
+        //sb staack to store string
+
         Stack<Integer> st = new Stack<>();
         Stack<StringBuilder> sbStack = new Stack<>();
 
-        int n = 0;
-
         StringBuilder sb = new StringBuilder();
+        int n = 0;
 
         for(char c : s.toCharArray()){
 
@@ -23,17 +26,16 @@ class Solution {
             }
             else if(c == ']'){
 
-                int k = st.pop();
-
                 StringBuilder temp = sb;
                 sb = sbStack.pop();
+
+                int k = st.pop();
 
                 while(k > 0){
                     sb.append(temp);
                     k--;
                 }
             }
-
             else sb.append(c);
         }
 
