@@ -1,7 +1,11 @@
 class Solution {
     public String minRemoveToMakeValid(String s) {
 
-        //2 passes with strinbuilders to remove invalid (s and )s
+        //first pass with a sb to remove all unwanted )
+        //if ) and openCount == 0, skip
+        
+        //2nd pass from the back to remove unwanted (
+        //if ( and open count > 0, skip, open--
 
         StringBuilder sb = new StringBuilder();
 
@@ -29,10 +33,11 @@ class Solution {
             }
 
             res.append(sb.charAt(i));
+
         }
 
         return res.reverse().toString();
-
+ 
 
         
     }
