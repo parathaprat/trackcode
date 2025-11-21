@@ -21,7 +21,7 @@ class MagicDictionary {
     }
     
     public boolean search(String searchWord) {
-
+        
         int len = searchWord.length();
 
         for(String word : map.getOrDefault(len, new ArrayList<>())){
@@ -29,12 +29,11 @@ class MagicDictionary {
             int diff = 0;
 
             for(int i = 0; i < len; i++){
-                
+
                 if(word.charAt(i) != searchWord.charAt(i)) diff++;
 
                 if(diff > 1) continue;
             }
-
 
             if(diff == 1) return true;
         }
