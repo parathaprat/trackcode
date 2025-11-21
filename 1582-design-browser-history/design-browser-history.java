@@ -1,5 +1,7 @@
 class BrowserHistory {
 
+    //url, next, prev
+
     class Node{
 
         String url;
@@ -8,46 +10,50 @@ class BrowserHistory {
 
         Node(String url){
             this.url = url;
-            this.next = null;
-            this.prev = null;
+            next = null;
+            prev = null;
         }
     }
 
-    Node curr;
+    Node cur;
+
 
     public BrowserHistory(String homepage) {
+        
+        cur = new Node(homepage);
 
-        curr = new Node(homepage);
         
     }
     
     public void visit(String url) {
 
         Node node = new Node(url);
-        curr.next = node;
-        node.prev = curr;
+        cur.next = node;
+        node.prev = cur;
 
-        curr = curr.next;
+        cur = cur.next;
         
     }
     
     public String back(int steps) {
 
-        while(curr.prev != null && steps-- > 0){
-            curr = curr.prev;
+        while(cur.prev != null && steps > 0){
+            cur = cur.prev;
+            steps--;
         }
 
-        return curr.url;
+        return cur.url;
         
     }
     
     public String forward(int steps) {
 
-        while(curr.next != null && steps-- > 0){
-            curr = curr.next;
+        while(cur.next != null && steps > 0){
+            cur = cur.next;
+            steps--;
         }
 
-        return curr.url;
+        return cur.url;
         
     }
 }
