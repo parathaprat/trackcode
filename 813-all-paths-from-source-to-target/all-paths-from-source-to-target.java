@@ -1,6 +1,6 @@
 class Solution {
     public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
-        
+
         List<List<Integer>> paths = new ArrayList<>();
         List<Integer> path = new ArrayList<>();
 
@@ -23,7 +23,6 @@ class Solution {
             path.add(nei);
             dfs(nei, paths, path, graph);
             path.remove(path.size() - 1);
-
         }
     }
 }
