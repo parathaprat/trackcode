@@ -1,34 +1,43 @@
 class Solution {
     public boolean equalFrequency(String word) {
 
+        //get a freq array
+        //reduce freq of each letter, check if all freq vals match
+
         int[] freq = new int[26];
 
         for(char c : word.toCharArray()){
+
             freq[c - 'a']++;
         }
 
         for(char c : word.toCharArray()){
+
             freq[c - 'a']--;
 
             if(checkFreq(freq)) return true;
 
             freq[c - 'a']++;
+
         }
 
         return false;
+        
     }
 
     private boolean checkFreq(int[] freq){
 
-        int f = 0;
+        int fr = 0;
 
-        for(int fr : freq){
+        for(int num : freq){
 
-            if(fr == 0) continue;
-            else if(f == 0) f = fr;
-            else if(fr == f) continue;
+            if(num == 0) continue;
+
+            if(fr == 0) fr = num;
+
+            if(fr == num) continue;
+
             else return false;
-
         }
 
         return true;
