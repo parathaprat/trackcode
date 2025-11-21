@@ -1,6 +1,8 @@
 class Solution {
     public String minRemoveToMakeValid(String s) {
 
+        //2 passes with strinbuilders to remove invalid (s and )s
+
         StringBuilder sb = new StringBuilder();
 
         int open = 0;
@@ -8,7 +10,8 @@ class Solution {
         for(char c : s.toCharArray()){
 
             if(c == '(') open++;
-            else if(c == ')'){
+
+            if(c == ')'){
                 if(open == 0) continue;
                 open--;
             }
@@ -16,16 +19,21 @@ class Solution {
             sb.append(c);
         }
 
-        StringBuilder result = new StringBuilder();
+        StringBuilder res = new StringBuilder();
 
-        for(int i = sb.length() - 1; i>= 0; i--){
+        for(int i = sb.length() - 1; i >= 0; i--){
 
-            if(sb.charAt(i) == '(' && open-- > 0) continue;
+            if(sb.charAt(i) == '(' && open > 0){
+                open--;
+                continue;
+            }
 
-            result.append(sb.charAt(i));
+            res.append(sb.charAt(i));
         }
 
-        return result.reverse().toString();
+        return res.reverse().toString();
+
+
         
     }
 }
