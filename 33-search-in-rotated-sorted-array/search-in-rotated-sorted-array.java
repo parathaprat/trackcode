@@ -1,52 +1,52 @@
 class Solution {
     public int search(int[] nums, int target) {
-        
-        //BS to find pivot, then BS again on the correct side to find element
 
-        int l = 0;
-        int r = nums.length - 1;
+        //BS to find pivot, find correct side, and bs to find element
 
-        //finding pivot
-        while(l < r){
+        int left = 0;
+        int right = nums.length - 1;
 
-            int m = l + (r - l)/2;
+        while(left < right){
 
-            if(nums[m] > nums[r]){
-                l = m + 1;
+            int mid = left + (right - left)/2;
+
+            if(nums[mid] > nums[right]){
+                left = mid + 1;
             }
             else{
-                r = m;
+                right = mid;
             }
         }
 
-        int pivot = l;
+        int pivot = left;
 
-        //finding partition
         if(target >= nums[pivot] && target <= nums[nums.length - 1]){
-            l = pivot;
-            r = nums.length - 1;
+            left = pivot;
+            right = nums.length - 1;
         }
         else{
-            r = pivot - 1;
-            l = 0;
+            right = pivot - 1;
+            left = 0;
         }
 
-        //finding element
-        while(l <= r){
+        while(left <= right){
 
-            int m = l + (r - l)/2;
+            int mid = left + (right - left)/2;
 
-            if(nums[m] == target){
-                return m;
+            if(nums[mid] == target){
+                return mid;
             }
-            else if(nums[m] < target){
-                l = m + 1;
+            else if(nums[mid] < target){
+                left = mid + 1;
             }
             else{
-                r = m - 1;
+                right = mid - 1;
             }
         }
 
         return -1;
+
+
+        
     }
 }
