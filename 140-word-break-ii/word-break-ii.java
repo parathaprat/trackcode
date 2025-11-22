@@ -1,24 +1,21 @@
 class Solution {
-
-    //form valid words in cur list recrusively
-    //use sb to concatenate, and add to list when wne do the string is reached
-
     public List<String> wordBreak(String s, List<String> wordDict) {
 
-        Set<String> set = new HashSet<>(wordDict);
         List<String> res = new ArrayList<>();
         List<String> cur = new ArrayList<>();
+        HashSet<String> set = new HashSet<>(wordDict);
 
-        helper(0, set, res, cur, s);
+        dfs(0, s, res, cur, set);
 
         return res;
+        
     }
 
-    private void helper(int ind, Set<String> set, List<String> res, List<String> cur, String s){
+    private void dfs(int ind, String s, List<String> res, List<String> cur, HashSet<String> set){
 
         if(ind >= s.length()){
 
-            if(cur.size() != 0){
+            if(cur.size() > 0){
 
                 StringBuilder sb = new StringBuilder();
 
@@ -36,11 +33,12 @@ class Solution {
         for(int i = ind; i < s.length(); i++){
 
             if(set.contains(s.substring(ind, i + 1))){
-
                 cur.add(s.substring(ind, i + 1));
-                helper(i + 1, set, res, cur, s);
+                dfs(i + 1, s, res, cur, set);
                 cur.remove(cur.size() - 1);
             }
         }
+
+        return;
     }
 }
