@@ -6,23 +6,22 @@ class Solution {
 
         int[] dp = new int[cols];
 
+        //number ways to reach 0, 0 from start -> 1
         dp[0] = 1;
 
         for(int i = 0; i < rows; i++){
             for(int j = 0; j < cols; j++){
 
-                if(obstacleGrid[i][j] == 1){
-                    dp[j] = 0;
-                }
+                if(obstacleGrid[i][j] == 1) dp[j] = 0;
                 else{
-                    if(j > 0){
-                        dp[j] += dp[j - 1];
-                    }
+                    if(j > 0) dp[j] += dp[j - 1];
                 }
             }
         }
 
         return dp[cols - 1];
+
+
         
     }
 }
