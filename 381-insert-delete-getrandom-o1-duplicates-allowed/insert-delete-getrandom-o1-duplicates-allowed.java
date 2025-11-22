@@ -1,11 +1,14 @@
 class RandomizedCollection {
 
+    //for each val, store all its indexs
     Map<Integer, Set<Integer>> map;
     List<Integer> vals;
 
     public RandomizedCollection() {
+
         map = new HashMap<>();
         vals = new ArrayList<>();
+        
     }
     
     public boolean insert(int val) {
@@ -17,6 +20,8 @@ class RandomizedCollection {
         vals.add(val);
 
         return notPresent;
+
+        
     }
     
     public boolean remove(int val) {
@@ -34,16 +39,15 @@ class RandomizedCollection {
         map.get(lastVal).remove(vals.size());
 
         if(map.get(val).isEmpty()) map.remove(val);
-
         return true;
-
         
     }
     
     public int getRandom() {
 
-        return vals.get((int)(Math.random() * vals.size()));
-
+        int index = (int)(Math.random() * vals.size());
+        return vals.get(index);
+        
     }
 }
 
