@@ -1,34 +1,26 @@
 class Solution {
     public int uniquePaths(int m, int n) {
-        
-        //bottom up dp appraoch
-        //there is only 1 way to get from star to star -> 1
-        //therefore only onw way to get to star from the last row and last col
-        //populate last row and last col of dp array with 1s
 
-        int[][] dp = new int[m][n];
+        int rows = m;
+        int cols = n;
 
-        //dp[i] = ways to get from that place to star
+        int[][] dp = new int[rows][cols];
 
-        for(int i = 0; i < m; i++){
-            dp[i][n - 1] = 1;
-        }
+        dp[0][0] = 1;
 
-        for(int i = 0; i < n; i ++){
-            dp[m - 1][i] = 1;
-        }
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < cols; j++){
 
-        //dp[i] = ways to star from down + ways to star from right
-        
-        for(int i = m - 2; i >= 0; i--){
-            for(int j = n - 2; j >= 0; j--){
+                if(i == 0 && j == 0) continue;
 
-                dp[i][j] = dp[i + 1][j] + dp[i][j + 1];
+                int fromTop = i > 0 ? dp[i - 1][j] : 0;
+                int fromLeft = j > 0 ? dp[i][j - 1] : 0;
 
+                dp[i][j] = fromTop + fromLeft;
             }
         }
 
-        return dp[0][0];
-
+        return dp[rows - 1][cols - 1];
+        
     }
 }
