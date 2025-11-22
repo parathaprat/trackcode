@@ -6,18 +6,22 @@ class Solution {
 
         Map<Integer, Integer> freq = new HashMap<>();
 
+        //get ans for first window
         for(int i = 0; i < k; i++){
             freq.put(nums[i], freq.getOrDefault(nums[i], 0) + 1);
         }
 
         ans[0] = computeXSum(freq, x);
 
+        //calculate ans for all other windows
         for(int i = k; i < n; i++){
+
             int add = nums[i];
             int rem = nums[i - k];
 
             freq.put(add, freq.getOrDefault(add, 0) + 1);
             int fr = freq.get(rem) - 1;
+
             if(fr == 0) freq.remove(rem);
             else freq.put(rem, fr);
 
@@ -25,16 +29,15 @@ class Solution {
         }
 
         return ans;
+        
     }
-    
+
     private int computeXSum(Map<Integer, Integer> freq, int x){
 
         List<int[]> items = new ArrayList<>();
 
         for(Map.Entry<Integer, Integer> e : freq.entrySet()){
-
             items.add(new int[]{e.getKey(), e.getValue()});
-
         }
 
         items.sort((a, b) -> {
@@ -42,13 +45,14 @@ class Solution {
             return b[0] - a[0];
         });
 
-        long sum = 0;
+        int sum = 0;
         int take = Math.min(x, items.size());
 
         for(int i = 0; i < take; i++){
             sum += items.get(i)[0] * items.get(i)[1];
         }
 
-        return (int)sum;
+        return sum;
+
     }
 }
