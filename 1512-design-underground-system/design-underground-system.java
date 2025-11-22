@@ -1,5 +1,6 @@
 class UndergroundSystem {
 
+    //passenenger class to handle check in, check out stations + times
     class Passenger{
 
         int checkInTime;
@@ -19,6 +20,7 @@ class UndergroundSystem {
     }
 
     class Route{
+        
         String startStation;
         String endStation;
         int totalNoTrips;
@@ -30,11 +32,11 @@ class UndergroundSystem {
         }
 
         double getAvgTime(){
-            return (double) totalTimeTrips / totalNoTrips;
+            return (double) totalTimeTrips/totalNoTrips;
         }
 
-        void addTrip(int startTime, int endTime){
-            totalTimeTrips += endTime - startTime;
+        void addTrip(int starTime, int endTime){
+            totalTimeTrips += endTime - starTime;
             totalNoTrips++;
         }
     }
@@ -52,10 +54,10 @@ class UndergroundSystem {
     public void checkIn(int id, String stationName, int t) {
 
         if(!currentPassengerMap.containsKey(id)){
+            
             Passenger passenger = new Passenger(stationName, t);
             currentPassengerMap.put(id, passenger);
         }
-        
     }
     
     public void checkOut(int id, String stationName, int t) {
@@ -67,13 +69,12 @@ class UndergroundSystem {
 
             String routeKey = passenger.checkInLoc + "," + passenger.checkOutLoc;
             Route route = routeMap.getOrDefault(routeKey, new Route(passenger.checkInLoc, passenger.checkOutLoc));
+
             route.addTrip(passenger.checkInTime, passenger.checkOutTime);
             routeMap.put(routeKey, route);
 
             currentPassengerMap.remove(id);
-
         }
-        
     }
     
     public double getAverageTime(String startStation, String endStation) {
