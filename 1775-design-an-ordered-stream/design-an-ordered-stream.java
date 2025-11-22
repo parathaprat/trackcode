@@ -13,10 +13,10 @@ class OrderedStream {
     public List<String> insert(int idKey, String value) {
 
         stream[idKey - 1] = value;
-
         List<String> res = new ArrayList<>();
 
         while(pointer < stream.length && stream[pointer] != null){
+
             res.add(stream[pointer]);
             pointer++;
         }
