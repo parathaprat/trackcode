@@ -1,8 +1,7 @@
 class Solution {
 
-    //create a tuple of each num and its power
-    //store k tuples in a max Heap of size k;
-    //return top of stack as the ans 
+    //store num and pow in a maxHeap of size k, return top of maxHeap
+    //store nums and pows in a map to avoid duplicate class
 
     class tuple{
 
@@ -15,17 +14,16 @@ class Solution {
         }
     }
 
-    //map storing num -> pow to avoid duplicates
+    //num -> pow
     Map<Integer, Integer> map = new HashMap<>();
 
     public int getKth(int lo, int hi, int k) {
 
+        //handles sorting
         PriorityQueue<tuple> maxHeap = new PriorityQueue<>((a, b) -> b.pow != a.pow ? b.pow - a.pow : b.num - a.num);
 
         for(int i = lo; i <= hi; i++){
-
             maxHeap.add(new tuple(i, getPow(i)));
-
             if(maxHeap.size() > k) maxHeap.poll();
         }
 
@@ -38,12 +36,9 @@ class Solution {
 
         if(map.containsKey(num)) return map.get(num);
 
-        int pow = 1 + (num % 2 == 0 ? getPow(num/2) : getPow(3 * num + 1));
+        int pow = 1 + (num%2 == 0 ? getPow(num / 2) : getPow(3 * num + 1));
 
         map.put(num, pow);
-
         return pow;
-
-
     }
 }
