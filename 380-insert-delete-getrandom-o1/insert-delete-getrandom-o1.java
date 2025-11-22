@@ -4,10 +4,8 @@ class RandomizedSet {
     Map<Integer, Integer> map;
 
     public RandomizedSet() {
-
-        map = new HashMap<>();
         vals = new ArrayList<>();
-        
+        map = new HashMap<>();
     }
     
     public boolean insert(int val) {
@@ -26,22 +24,22 @@ class RandomizedSet {
         if(!map.containsKey(val)) return false;
 
         int index = map.get(val);
-        int lastVal = vals.get(vals.size() - 1);
+        int last = vals.get(vals.size() - 1);
 
-        map.put(lastVal, index);
+        map.put(last, index);
         map.remove(val);
 
-        vals.set(index, lastVal);
+        vals.set(index, last);
         vals.remove(vals.size() - 1);
 
-        return true;
-        
+        return true;   
     }
     
     public int getRandom() {
 
         int index = (int)(Math.random() * vals.size());
         return vals.get(index);
+
         
     }
 }
