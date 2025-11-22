@@ -1,17 +1,16 @@
 class Solution {
     public int maxProfit(int[] prices) {
 
-        //o(n), track min and update profit
+        int prof = 0;
+        int buy = Integer.MAX_VALUE;
 
-        int min = Integer.MAX_VALUE;
-        int profit = 0;
+        for(int i = 0; i < prices.length; i++){
 
-        for(int price : prices){
-            if(price < min) min = price;
-            profit = Math.max(profit, price - min);
+            if(prices[i] < buy) buy = prices[i];
+            prof = Math.max(prof, prices[i] - buy);
         }
 
-        return profit;
+        return prof;
         
     }
 }
