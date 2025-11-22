@@ -1,5 +1,5 @@
 
-import java.lang.classfile.AnnotationValue.OfAnnotation;class Solution {
+class Solution {
     public int numberOfSubarrays(int[] nums, int k) {
 
         int[] prefixCount = new int[nums.length + 1];
