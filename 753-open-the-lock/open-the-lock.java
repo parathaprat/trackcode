@@ -1,19 +1,19 @@
 class Solution {
     public int openLock(String[] deadends, String target) {
 
-        //Set -> deadends, Set -> visited combs
-        //BFS with Q
-        //add 0000 to q, explore unvisited combs that are not deadlocked
+        //set for deadends
+        //visited set
+        //BFS
 
-        HashSet<String> set = new HashSet<>(Arrays.asList(deadends));
-        HashSet<String> vis = new HashSet<>();
+        Set<String> set = new HashSet<>(Arrays.asList(deadends));
+        Set<String> vis = new HashSet<>();
 
         Queue<String> q = new LinkedList<>();
 
         q.add("0000");
         vis.add("0000");
 
-        int res = 0;
+        int num = 0;
 
         while(!q.isEmpty()){
 
@@ -24,19 +24,17 @@ class Solution {
                 String cur = q.poll();
 
                 if(set.contains(cur)) continue;
-
-                if(cur.equals(target)) return res;
+                if(cur.equals(target)) return num;
 
                 for(int j = 0; j < cur.length(); j++){
-                    
-                    String up = goUp(cur, j);
-                    String down = goDown(cur, j);
+
+                    String up = goUp(j, cur);
+                    String down = goDown(j, cur);
 
                     if(!vis.contains(up)){
                         q.add(up);
                         vis.add(up);
                     }
-
                     if(!vis.contains(down)){
                         q.add(down);
                         vis.add(down);
@@ -44,31 +42,29 @@ class Solution {
                 }
             }
 
-            res++;
+            num++;
         }
 
-        return -1;
+        return -1; 
     }
 
-    private String goUp(String cur, int j){
+    private String goUp(int j, String cur){
 
-        char[] curArr = cur.toCharArray();
+        char[] currArr = cur.toCharArray();
 
-        if(curArr[j] == '9') curArr[j] = '0';
-        else curArr[j]++;
+        if(currArr[j] == '9') currArr[j] = '0';
+        else currArr[j]++;
 
-        return new String(curArr);
-
+        return new String(currArr);
     }
 
-    private String goDown(String cur, int j){
+    private String goDown(int j, String cur){
 
-        char[] curArr = cur.toCharArray();
+        char[] currArr = cur.toCharArray();
 
-        if(curArr[j] == '0') curArr[j] = '9';
-        else curArr[j]--;
+        if(currArr[j] == '0') currArr[j] = '9';
+        else currArr[j]--;
 
-        return new String(curArr);
-
+        return new String(currArr);
     }
 }
