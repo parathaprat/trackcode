@@ -1,23 +1,17 @@
 class Solution {
     public int missingNumber(int[] nums) {
 
-        //find sum of all nos in range 0, no
-        //find actual sum
-        //subtract and return
-
-        int sum = 0;
-
-        for(int i = 0; i <= nums.length; i++){
-            sum += i;
-        }
+        Set<Integer> set = new HashSet<>();
 
         for(int num : nums){
-            sum -= num;
+            set.add(num);
         }
 
-        return sum;
-
-
+        for(int i = 0; i <= nums.length; i++){
+            if(!set.contains(i)) return i;
+        }
+        
+        return -1;
         
     }
 }
