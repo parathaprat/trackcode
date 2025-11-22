@@ -1,6 +1,6 @@
 class Solution {
     public int romanToInt(String s) {
-        
+
         int res = 0;
 
         Map<Character, Integer> map = new HashMap<>();
@@ -14,14 +14,12 @@ class Solution {
 
         for(int i = 0; i < s.length() - 1; i++){
 
-            if(map.get(s.charAt(i)) < map.get(s.charAt(i + 1))){
-                res -= map.get(s.charAt(i));
-            }
-            else{
-                res += map.get(s.charAt(i));
-            }
+            if(map.get(s.charAt(i)) < map.get(s.charAt(i + 1))) res -= map.get(s.charAt(i));
+            else res += map.get(s.charAt(i));
+
         }
 
         return res + map.get(s.charAt(s.length() - 1));
+        
     }
 }
