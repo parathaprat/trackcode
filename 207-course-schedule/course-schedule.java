@@ -1,11 +1,11 @@
 class Solution {
 
-    HashMap<Integer, List<Integer>> map = new HashMap<>();
-    HashSet<Integer> visit = new HashSet<>();
+    Map<Integer, List<Integer>> map = new HashMap<>();
+    Set<Integer> visit = new HashSet<>();
+    Set<Integer> pros = new HashSet<>();
 
     public boolean canFinish(int numCourses, int[][] prerequisites) {
 
-        //populate map
         for(int i = 0; i < numCourses; i++){
             map.put(i, new ArrayList<>());
         }
@@ -14,17 +14,18 @@ class Solution {
             map.get(pre[0]).add(pre[1]);
         }
 
-        //check for cycle at each numCourses
         for(int i = 0; i < numCourses; i++){
             if(!dfs(i)) return false;
         }
 
         return true;
+        
     }
 
     private boolean dfs(int course){
 
         if(visit.contains(course)) return false;
+        if(pros.contains(course)) return true;
 
         visit.add(course);
 
@@ -33,7 +34,7 @@ class Solution {
         }
 
         visit.remove(course);
-        map.put(course, new ArrayList<>());
+        pros.add(course);
         return true;
     }
 }
