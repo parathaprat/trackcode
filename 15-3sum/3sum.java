@@ -10,13 +10,11 @@ class Solution {
 
             int left = i + 1;
             int right = nums.length - 1;
-
             int target = -nums[i];
 
             while(left < right){
 
                 if(nums[left] + nums[right] == target){
-
                     res.add(Arrays.asList(nums[left], nums[right], nums[i]));
 
                     while(left < right && nums[left] == nums[left + 1]) left++;
@@ -31,7 +29,7 @@ class Solution {
                 else{
                     right--;
                 }
-            }
+            } 
         }
 
         return res;
