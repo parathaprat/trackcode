@@ -24,38 +24,24 @@ class Node {
 class Solution {
     public Node connect(Node root) {
 
-        //approach: build a level order trav, connect all nodes in a level
+        //current.left.next = cur.right
+        //cur.right.next = cur.next.left
 
-        if(root == null) return root;
+        if(root == null) return null;
 
-        Queue<Node> q = new LinkedList<>();
-        q.add(root);
+        Node levelStart = root;
 
-        List<List<Node>> levelOrderTrav = new ArrayList<>();
+        while(levelStart.left != null){
 
-        while(!q.isEmpty()){
+            Node cur = levelStart;
 
-            int size = q.size();
-            List<Node> level = new ArrayList<>();
-
-            for(int i = 0; i < size; i++){
-
-                Node node = q.poll();
-                level.add(node);
-
-                if(node.left != null) q.add(node.left);
-                if(node.right != null) q.add(node.right);
+            while(cur != null){
+                cur.left.next = cur.right;
+                if(cur.next != null) cur.right.next = cur.next.left;
+                cur = cur.next;
             }
 
-            levelOrderTrav.add(level);
-        }
-
-        for(List<Node> row : levelOrderTrav){
-
-            for(int i = 0; i < row.size() - 1; i++){
-                row.get(i).next = row.get(i + 1);
-            }
-
+            levelStart = levelStart.left;
         }
 
         return root;
