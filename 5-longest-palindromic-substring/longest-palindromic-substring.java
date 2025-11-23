@@ -1,37 +1,42 @@
 class Solution {
+
+    int left = 0;
+    int right = 0;
+    int ans = 0;
+
     public String longestPalindrome(String s) {
 
-        int start = 0;
-        int end = 0;
-        int maxLen = 0;
+        //at each index, assume odd len and even len palindromes
+        //explore all pals and keep track of the longest length
 
-        for(int i = 0; i < s.length(); i++){
+        for(int i = 0; i < s.length() - 1; i++){
+            checkPal(i, i, s);
+            checkPal(i, i + 1, s);
+        }  
 
-            int oddLen = getLen(i, i, s);
-            int evenLen = getLen(i, i + 1, s);
+        return s.substring(left, right + 1); 
 
-            int max = Math.max(oddLen, evenLen);
-
-            if(max > maxLen){
-                maxLen = max;
-
-                start = i - (maxLen - 1)/2;
-                end = i + maxLen/2;
-            }
-        }
-
-        return s.substring(start, end + 1);
+        
+        
     }
 
-    private int getLen(int start, int end, String s){
+    private void checkPal(int leftp, int rightp, String s){
 
-        if(start < 0 || end >= s.length() || s.charAt(start) != s.charAt(end)) return 0;
+        if(leftp < 0 || rightp >= s.length() || s.charAt(leftp) != s.charAt(rightp)) return;
 
-        while(start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)){
-            start--;
-            end++;
+        //if longer pal found, update index
+        if(ans < rightp - leftp + 1){
+
+            ans = rightp - leftp + 1;
+
+            left = leftp;
+            right = rightp;
+
         }
 
-        return end - start - 1;
+        leftp--;
+        rightp++;
+
+        checkPal(leftp, rightp, s);
     }
 }
