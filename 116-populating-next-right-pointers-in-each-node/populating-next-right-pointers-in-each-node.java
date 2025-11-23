@@ -24,9 +24,6 @@ class Node {
 class Solution {
     public Node connect(Node root) {
 
-        //cur.left.next = cur.right
-        //cur.right.next = cur.next.left
-
         if(root == null) return null;
 
         Node levelStart = root;
