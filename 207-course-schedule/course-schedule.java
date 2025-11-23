@@ -1,6 +1,6 @@
 class Solution {
 
-    Map<Integer, List<Integer>> map = new HashMap<>();
+    HashMap<Integer, List<Integer>> map = new HashMap<>();
     Set<Integer> visit = new HashSet<>();
 
     public boolean canFinish(int numCourses, int[][] prerequisites) {
@@ -18,7 +18,7 @@ class Solution {
         }
 
         return true;
-        
+
     }
 
     private boolean dfs(int course){
