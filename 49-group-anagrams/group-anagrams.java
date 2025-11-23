@@ -12,14 +12,14 @@ class Solution {
             }
 
             String key = Arrays.toString(freq);
-
-            if(!map.containsKey(key)){
-                map.put(key, new ArrayList<>());
-            }
+            map.putIfAbsent(key, new ArrayList<>());
 
             map.get(key).add(str);
         }
 
         return new ArrayList<>(map.values());
+
+        
+        
     }
 }
