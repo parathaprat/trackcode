@@ -1,27 +1,28 @@
 class Solution {
-
-    int ans = 0;
-
     public int countSubstrings(String s) {
 
+        //from each letter, assume odd and even palindromic substrings
+
+        int ans = 0;
+
         for(int i = 0; i < s.length(); i++){
+            int odd = checkPal(i, i, s);
+            int even = checkPal(i, i + 1, s);
 
-            checkPal(i, i, s);
-            checkPal(i, i + 1, s);
-
+            ans += odd + even;
         }
 
         return ans;
     }
 
-    private void checkPal(int l, int r, String s){
+    private int checkPal(int left, int right, String s){
 
-        while(l >= 0 && r < s.length() && l <= r && s != null && s.charAt(l) == s.charAt(r)){
-            ans++;
-            l--;
-            r++;
-        }
+        if(left < 0 || right >= s.length() || s.charAt(left) != s.charAt(right)) return 0;
 
-        return;
-    }
+        left--;
+        right++;
+        
+        return 1 + checkPal(left, right, s);
+
+    }  
 }
