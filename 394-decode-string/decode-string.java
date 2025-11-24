@@ -1,10 +1,6 @@
 class Solution {
     public String decodeString(String s) {
 
-        //Strinbuilder to store chars until num
-        //Stack to store nums
-        //sb staack to store string
-
         Stack<Integer> st = new Stack<>();
         Stack<StringBuilder> sbStack = new Stack<>();
 
@@ -17,7 +13,6 @@ class Solution {
                 n = n * 10 + (c - '0');
             }
             else if(c == '['){
-
                 st.push(n);
                 n = 0;
 
@@ -36,10 +31,12 @@ class Solution {
                     k--;
                 }
             }
+
             else sb.append(c);
         }
 
         return sb.toString();
+
         
     }
 }
