@@ -1,20 +1,13 @@
 class Solution {
     public String minRemoveToMakeValid(String s) {
 
-        //first pass with a sb to remove all unwanted )
-        //if ) and openCount == 0, skip
-        
-        //2nd pass from the back to remove unwanted (
-        //if ( and open count > 0, skip, open--
-
         StringBuilder sb = new StringBuilder();
-
         int open = 0;
 
         for(char c : s.toCharArray()){
 
             if(c == '(') open++;
-
+            
             if(c == ')'){
                 if(open == 0) continue;
                 open--;
@@ -33,12 +26,9 @@ class Solution {
             }
 
             res.append(sb.charAt(i));
-
         }
 
         return res.reverse().toString();
- 
-
         
     }
 }
