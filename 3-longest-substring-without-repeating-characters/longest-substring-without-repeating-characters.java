@@ -1,11 +1,9 @@
 class Solution {
     public int lengthOfLongestSubstring(String s) {
 
-        //sliding window
-
         int left = 0;
         int right = 0;
-        int ans = 0;
+        int max = 0;
 
         Set<Character> set = new HashSet<>();
 
@@ -14,16 +12,15 @@ class Solution {
             if(!set.contains(s.charAt(right))){
                 set.add(s.charAt(right));
                 right++;
+                max = Math.max(max, right - left);
             }
             else{
                 set.remove(s.charAt(left));
                 left++;
             }
-
-            ans = Math.max(ans, right - left);
         }
 
-        return ans;
+        return max;
         
     }
 }
