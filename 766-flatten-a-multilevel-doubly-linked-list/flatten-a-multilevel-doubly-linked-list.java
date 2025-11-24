@@ -11,25 +11,21 @@ class Node {
 class Solution {
     public Node flatten(Node head) {
 
-        //if child, navigate to end of child
-        //childlast.next = node.next
-        //node.next.prev = childlast
-        //node.next = child
-
-        Node cur = head;
+        Node temp = head;
+        Node cur = temp;
 
         while(cur != null){
 
             if(cur.child != null){
-                
-                Node childLast = cur.child;
 
+                Node childLast = cur.child;
                 while(childLast.next != null) childLast = childLast.next;
 
                 childLast.next = cur.next;
                 if(cur.next != null) cur.next.prev = childLast;
-                cur.child.prev = cur;
+
                 cur.next = cur.child;
+                cur.child.prev = cur;
 
                 cur.child = null;
             }
@@ -37,6 +33,7 @@ class Solution {
             cur = cur.next;
         }
 
-        return head;
+        return temp;
+        
     }
 }
