@@ -7,7 +7,6 @@ class Solution {
         for(char c : s.toCharArray()){
 
             if(c == '(') open++;
-            
             if(c == ')'){
                 if(open == 0) continue;
                 open--;
