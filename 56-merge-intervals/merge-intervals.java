@@ -3,14 +3,14 @@ class Solution {
 
         Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
 
-        List<int[]> res = new ArrayList<>();
-
         int[] in = intervals[0];
+
+        List<int[]> res = new ArrayList<>();
 
         for(int i = 1; i < intervals.length; i++){
 
             if(in[1] >= intervals[i][0]){
-                in[1] = Math.max(in[1], Math.max(in[1], intervals[i][1]));
+                in[1] = Math.max(in[1], intervals[i][1]);
             }
             else{
                 res.add(in);
