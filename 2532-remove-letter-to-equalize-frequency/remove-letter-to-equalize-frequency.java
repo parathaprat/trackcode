@@ -9,26 +9,23 @@ class Solution {
 
         for(char c : word.toCharArray()){
             freq[c - 'a']--;
-
             if(check(freq)) return true;
-
             freq[c - 'a']++;
         }
 
-        return false;   
+        return false;
     }
 
     private boolean check(int[] freq){
 
-        int fr = 0;
+        int f = 0;
 
-        for(int num : freq){
+        for(int fr : freq){
 
-            if(num == 0) continue;
-            if(fr == 0) fr = num;
-            if(fr == num) continue;
+            if(fr == 0) continue;
+            if(f == 0) f = fr;
+            if(fr == f) continue;
             else return false;
-
         }
 
         return true;
