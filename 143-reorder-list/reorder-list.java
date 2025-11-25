@@ -63,7 +63,6 @@ class Solution {
 
             l1 = l1next;
             l2 = l2next;
-
         }
     }
 
