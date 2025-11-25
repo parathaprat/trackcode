@@ -7,9 +7,9 @@ class Solution {
         int oddCountSoFar = 0;
         int result = 0;
 
-        for(int i = 0; i < nums.length; i++){
+        for(int num : nums){
 
-            if(nums[i] % 2 == 1) oddCountSoFar++;
+            if(num % 2 == 1) oddCountSoFar++;
 
             if(oddCountSoFar - k >= 0){
                 result += prefixCount[oddCountSoFar - k];
