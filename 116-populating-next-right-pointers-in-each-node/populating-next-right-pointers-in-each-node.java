@@ -23,12 +23,8 @@ class Node {
 
 class Solution {
     public Node connect(Node root) {
-
-        //current.left.next = cur.right
-        //cur.right.next = cur.next.left
-
+        
         if(root == null) return null;
-
         Node levelStart = root;
 
         while(levelStart.left != null){
@@ -36,8 +32,10 @@ class Solution {
             Node cur = levelStart;
 
             while(cur != null){
+
                 cur.left.next = cur.right;
                 if(cur.next != null) cur.right.next = cur.next.left;
+
                 cur = cur.next;
             }
 
@@ -45,6 +43,5 @@ class Solution {
         }
 
         return root;
-        
     }
 }
