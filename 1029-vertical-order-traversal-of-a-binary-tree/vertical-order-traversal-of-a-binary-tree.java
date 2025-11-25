@@ -16,22 +16,20 @@
 class Solution {
     public List<List<Integer>> verticalTraversal(TreeNode root) {
 
-        //sort by col -> row -> val
-        //col -> min to max iterations
-        //row and val through a pq
+        //we have to sort the nodes by col -> then row -> then val
+        //Map<Col -> pq(row, val)>
 
-        Map<Integer, PriorityQueue<int[]>> map = new HashMap<>(); //col -> row, val
-        Queue<TreeNode> q = new LinkedList<>();
-        Queue<int[]> meta = new LinkedList<>(); // row -> col
+        Map<Integer, PriorityQueue<int[]>> map = new HashMap<>();
+        Queue<TreeNode> q = new LinkedList<>(); 
+        Queue<int[]> meta = new LinkedList<>(); //row -> col
 
         List<List<Integer>> res = new ArrayList<>();
-        if(root == null) return res;
-
-        q.add(root);
-        meta.add(new int[]{0, 0});
 
         int min = 0;
         int max = 0;
+
+        q.add(root);
+        meta.add(new int[]{0, 0});
 
         while(!q.isEmpty()){
 
@@ -59,6 +57,7 @@ class Solution {
         for(int i = min; i <= max; i++){
 
             List<Integer> level = new ArrayList<>();
+
             PriorityQueue<int[]> pq = map.get(i);
 
             while(!pq.isEmpty()){
