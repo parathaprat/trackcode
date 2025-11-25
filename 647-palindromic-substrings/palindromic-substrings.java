@@ -1,15 +1,14 @@
 class Solution {
     public int countSubstrings(String s) {
 
-        //from each letter, assume odd and even palindromic substrings
-
         int ans = 0;
 
         for(int i = 0; i < s.length(); i++){
-            int odd = checkPal(i, i, s);
-            int even = checkPal(i, i + 1, s);
 
-            ans += odd + even;
+            int oddPal = checkPal(i, i, s);
+            int evenPal = checkPal(i, i + 1, s);
+
+            ans += oddPal + evenPal;
         }
 
         return ans;
@@ -21,8 +20,7 @@ class Solution {
 
         left--;
         right++;
-        
-        return 1 + checkPal(left, right, s);
 
-    }  
+        return 1 + checkPal(left, right, s);
+    }
 }
