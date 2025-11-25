@@ -1,7 +1,5 @@
 class Solution {
 
-    //multilevel bfs
-
     int fresh = 0;
 
     public int orangesRotting(int[][] grid) {
@@ -10,8 +8,9 @@ class Solution {
 
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[0].length; j++){
-                if(grid[i][j] == 2) q.add(new int[]{i, j});
+
                 if(grid[i][j] == 1) fresh++;
+                if(grid[i][j] == 2) q.add(new int[]{i, j});
             }
         }
 
@@ -25,10 +24,13 @@ class Solution {
 
                 int[] rc = q.poll();
 
-                addOrange(rc[0] + 1, rc[1], grid, q);
-                addOrange(rc[0] - 1, rc[1], grid, q);
-                addOrange(rc[0], rc[1] + 1, grid, q);
-                addOrange(rc[0], rc[1] - 1, grid, q);
+                int row = rc[0];
+                int col = rc[1];
+
+                addOrange(row + 1, col, grid, q);
+                addOrange(row - 1, col, grid, q);
+                addOrange(row, col + 1, grid, q);
+                addOrange(row, col - 1, grid, q);
             }
 
             time++;
@@ -43,9 +45,7 @@ class Solution {
 
         grid[i][j] = 2;
         fresh--;
-
-        q.offer(new int[]{i, j});
+        q.add(new int[]{i, j});
         return;
-
     }
 }
