@@ -10,12 +10,13 @@ class Solution {
 
             if(num == 0) break;
 
-            while(num >= values[i]){
-                sb.append(symbols[i]);
+            while(values[i] <= num){
                 num -= values[i];
+                sb.append(symbols[i]);
             }
         }
 
         return sb.toString();
+        
     }
 }
