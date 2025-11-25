@@ -3,7 +3,6 @@ class Solution {
 
         Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
 
-        //pq of meeting end time
         PriorityQueue<Integer> pq = new PriorityQueue<>();
 
         for(int[] in : intervals){
@@ -13,11 +12,9 @@ class Solution {
             }
             
             pq.add(in[1]);
-            
         }
 
         return pq.size();
-
 
         
     }
