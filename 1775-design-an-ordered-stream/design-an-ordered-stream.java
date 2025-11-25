@@ -1,11 +1,10 @@
 class OrderedStream {
 
-    int pointer;
+    int ptr = 0;
     String[] stream;
 
     public OrderedStream(int n) {
 
-        pointer = 0;
         stream = new String[n];
         
     }
@@ -15,13 +14,14 @@ class OrderedStream {
         stream[idKey - 1] = value;
         List<String> res = new ArrayList<>();
 
-        while(pointer < stream.length && stream[pointer] != null){
-
-            res.add(stream[pointer]);
-            pointer++;
+        while(ptr < stream.length && stream[ptr] != null){
+            res.add(stream[ptr]);
+            ptr++;
         }
 
         return res;
+
+
         
     }
 }
