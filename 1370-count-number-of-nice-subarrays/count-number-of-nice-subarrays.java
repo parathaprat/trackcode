@@ -1,4 +1,3 @@
-
 class Solution {
     public int numberOfSubarrays(int[] nums, int k) {
 
@@ -8,17 +7,18 @@ class Solution {
         int oddCountSoFar = 0;
         int result = 0;
 
-        for(int num : nums){
+        for(int i = 0; i < nums.length; i++){
 
-            if(num % 2 == 1) oddCountSoFar++;
+            if(nums[i] % 2 == 1) oddCountSoFar++;
 
             if(oddCountSoFar - k >= 0){
                 result += prefixCount[oddCountSoFar - k];
             }
 
             prefixCount[oddCountSoFar]++;
-        }        
+        }
 
         return result;
+        
     }
 }
