@@ -1,5 +1,6 @@
 class UndergroundSystem {
 
+    //id -> passenger
     class Passenger{
 
         String checkInLoc;
@@ -18,6 +19,7 @@ class UndergroundSystem {
         }
     }
 
+    //start + end -> route
     class Route{
 
         String startStation;
@@ -39,10 +41,10 @@ class UndergroundSystem {
             totalNoTrips++;
         }
     }
+    
 
-    //id -> Passenger for passengers currently travelling
     Map<Integer, Passenger> currentPassengerMap;
-    Map<String, Route> routeMap; //start + end -> Route
+    Map<String, Route> routeMap;
 
     public UndergroundSystem() {
 
@@ -54,6 +56,7 @@ class UndergroundSystem {
     public void checkIn(int id, String stationName, int t) {
 
         if(!currentPassengerMap.containsKey(id)){
+
             Passenger passenger = new Passenger(stationName, t);
             currentPassengerMap.put(id, passenger);
         }
@@ -74,7 +77,6 @@ class UndergroundSystem {
             routeMap.put(routeKey, route);
 
             currentPassengerMap.remove(id);
-
         }
         
     }
