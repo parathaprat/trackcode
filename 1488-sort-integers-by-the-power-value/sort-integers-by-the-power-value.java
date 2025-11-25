@@ -1,8 +1,5 @@
 class Solution {
 
-    //store num and pow in a maxHeap of size k, return top of maxHeap
-    //store nums and pows in a map to avoid duplicate class
-
     class tuple{
 
         int num;
@@ -18,27 +15,34 @@ class Solution {
     Map<Integer, Integer> map = new HashMap<>();
 
     public int getKth(int lo, int hi, int k) {
-
-        //handles sorting
-        PriorityQueue<tuple> maxHeap = new PriorityQueue<>((a, b) -> b.pow != a.pow ? b.pow - a.pow : b.num - a.num);
-
+        
         for(int i = lo; i <= hi; i++){
-            maxHeap.add(new tuple(i, getPow(i)));
-            if(maxHeap.size() > k) maxHeap.poll();
+
+            map.put(i, getPow(i));
+
         }
 
-        return maxHeap.poll().num;
+        PriorityQueue<tuple> pq = new PriorityQueue<>((a, b) -> a.pow != b.pow ? b.pow - a.pow : b.num - a.num);
+
+        for(int i = lo; i <= hi; i++){
+
+            pq.add(new tuple(i, map.get(i)));
+
+            if(pq.size() > k) pq.poll();
+
+        }
+
+        return pq.poll().num;
     }
 
     private int getPow(int num){
 
-        if(num == 1) return 0;
+        if(num == 1) return 1;
 
         if(map.containsKey(num)) return map.get(num);
 
-        int pow = 1 + (num%2 == 0 ? getPow(num / 2) : getPow(3 * num + 1));
+        int pow = num % 2 == 0 ? 1 + getPow(num / 2) : 1 + getPow(3 * num + 1);
 
-        map.put(num, pow);
         return pow;
     }
 }
