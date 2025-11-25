@@ -1,24 +1,25 @@
 class Solution {
     public int leastBricks(List<List<Integer>> wall) {
 
-        Map<Integer, Integer> map = new HashMap<>(); //position -> no of gaps
+        //map position -> number of gaps
+        //add line at the position with max gaps, crossing the least leastBricks
 
-        int max = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int maxGaps = 0;
 
         for(List<Integer> row : wall){
 
-            int gapPos = 0;
+            int gap = 0;
 
             for(int i = 0; i < row.size() - 1; i++){
-                gapPos += row.get(i);
-
-                map.put(gapPos, map.getOrDefault(gapPos, 0) + 1);
-                max = Math.max(max, map.get(gapPos));
+                gap += row.get(i);
+                map.put(gap, map.getOrDefault(gap, 0) + 1);
+                maxGaps = Math.max(maxGaps, map.get(gap));
             }
+
         }
 
-        return wall.size() - max;
-
+        return wall.size() - maxGaps;
         
     }
 }
