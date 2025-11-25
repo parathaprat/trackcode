@@ -1,8 +1,10 @@
 class Solution {
     public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
 
-        HashMap<String, HashMap<String, Double>> gr = buildGraph(equations, values);
+        //dividend -> divisor, values
+        //divisor -> dividend, 1/va;
 
+        HashMap<String, HashMap<String, Double>> gr = buildGraph(equations, values);
         double[] finalAns = new double[queries.size()];
 
         for(int i = 0; i < queries.size(); i++){
@@ -11,48 +13,39 @@ class Solution {
             String divisor = queries.get(i).get(1);
 
             if(!gr.containsKey(dividend) || !gr.containsKey(divisor)) finalAns[i] = -1.0;
-            else{
 
-                HashSet<String> vis = new HashSet<>();
+            else{
+                HashSet<String> visit = new HashSet<>();
                 double[] ans = {-1.0};
                 double temp = 1.0;
 
-                dfs(dividend, divisor, gr, vis, ans, temp);
-                finalAns[i] = ans[0];
+                dfs(dividend, divisor, temp, gr, visit, ans);
 
+                finalAns[i] = ans[0];
             }
         }
 
         return finalAns;
-        
     }
 
-    private void dfs(String node, String dest, HashMap<String, HashMap<String, Double>> gr, HashSet<String> vis, double[] ans, double temp){
+    private void dfs(String node, String dest, double temp, HashMap<String, HashMap<String, Double>> gr, HashSet<String> visit, double[] ans){
 
-        if(vis.contains(node)) return;
-        vis.add(node);
+        if(visit.contains(node)) return;
 
-        if(node.equals(dest)){
-            ans[0] = temp;
-            return;
-        }
+        if(node.equals(dest)) ans[0] = temp;
+
+        visit.add(node);
 
         for(Map.Entry<String, Double> entry : gr.get(node).entrySet()){
 
             String ne = entry.getKey();
-            double val = entry.getValue();
+            Double val = entry.getValue();
 
-            dfs(ne, dest, gr, vis, ans, temp * val);
+            dfs(ne, dest, temp * val, gr, visit, ans);
         }
     }
 
-    
-
     private HashMap<String, HashMap<String, Double>> buildGraph(List<List<String>> equations, double[] values){
-
-        //Add both directions when building the buidGraph
-        //dividend - > divisor, value
-        //divisor -> dividend, 1/value
 
         HashMap<String, HashMap<String, Double>> gr = new HashMap<>();
 
@@ -62,10 +55,11 @@ class Solution {
             String divisor = equations.get(i).get(1);
 
             gr.putIfAbsent(dividend, new HashMap<>());
-            gr.get(dividend).put(divisor, values[i]);
-
             gr.putIfAbsent(divisor, new HashMap<>());
+
+            gr.get(dividend).put(divisor, values[i]);
             gr.get(divisor).put(dividend, 1.0 / values[i]);
+
         }
 
         return gr;
