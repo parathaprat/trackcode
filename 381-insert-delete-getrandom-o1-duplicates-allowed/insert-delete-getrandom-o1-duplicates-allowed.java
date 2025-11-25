@@ -1,13 +1,12 @@
 class RandomizedCollection {
 
-    //for each val, store all its indexs
-    Map<Integer, Set<Integer>> map;
     List<Integer> vals;
+    Map<Integer, Set<Integer>> map;
 
     public RandomizedCollection() {
 
         map = new HashMap<>();
-        vals = new ArrayList<>();
+        vals = new ArrayList();
         
     }
     
@@ -17,11 +16,10 @@ class RandomizedCollection {
 
         map.putIfAbsent(val, new HashSet<>());
         map.get(val).add(vals.size());
-        vals.add(val);
 
+        vals.add(val);
         return notPresent;
 
-        
     }
     
     public boolean remove(int val) {
@@ -40,7 +38,6 @@ class RandomizedCollection {
 
         if(map.get(val).isEmpty()) map.remove(val);
         return true;
-        
     }
     
     public int getRandom() {
