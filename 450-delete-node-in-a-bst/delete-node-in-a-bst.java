@@ -16,53 +16,53 @@
 class Solution {
     public TreeNode deleteNode(TreeNode root, int key) {
 
+        //find leftMost of right subtree, connect left subtree to it
+
         if(root == null) return null;
-        if(root.val == key) return helper(root);
+        if(root.val == key) return remove(root);
 
         TreeNode dummy = root;
 
         while(root != null){
-            if(root.val < key){
+            if(key < root.val){
 
-                if(root.right != null && root.right.val == key){
-                    root.right = helper(root.right);
-                    break;
-                }
-                else{
-                    root = root.right;
-                }
-            }
-            else{
                 if(root.left != null && root.left.val == key){
-                    root.left = helper(root.left);
-                    break;
+                    root.left = remove(root.left);
                 }
                 else{
                     root = root.left;
                 }
-            }
+            }     
+            else{
+
+                if(root.right != null && root.right.val == key){
+                    root.right = remove(root.right);
+                } 
+                else{
+                    root = root.right;
+                }
+            }  
         }
 
-        return dummy;
+        return dummy; 
     }
 
-    //connect leftMost of right subtree to left subtree
-    private TreeNode helper(TreeNode root){
+    private TreeNode remove(TreeNode node){
 
-        if(root.left == null) return root.right;
-        if(root.right == null) return root.left;
+        if(node.left == null) return node.right;
+        if(node.right == null) return node.left;
 
-        TreeNode leftSubtree = root.left;
-        TreeNode leftMost = findLeftMost(root.right);
+        TreeNode leftSubtree = node.left;
+        TreeNode leftMost = findLeftMost(node.right);
 
         leftMost.left = leftSubtree;
 
-        return root.right;
+        return node.right;
     }
 
-    private TreeNode findLeftMost(TreeNode root){
+    private TreeNode findLeftMost(TreeNode node){
 
-        if(root.left == null) return root;
-        return findLeftMost(root.left);
+        if(node.left == null) return node;
+        return findLeftMost(node.left);
     }
 }
