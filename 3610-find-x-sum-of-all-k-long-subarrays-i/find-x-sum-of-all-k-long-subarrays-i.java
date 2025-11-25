@@ -1,19 +1,17 @@
 class Solution {
     public int[] findXSum(int[] nums, int k, int x) {
-
+        
         int n = nums.length;
         int[] ans = new int[Math.max(0, n - k + 1)];
 
         Map<Integer, Integer> freq = new HashMap<>();
 
-        //get ans for first window
         for(int i = 0; i < k; i++){
             freq.put(nums[i], freq.getOrDefault(nums[i], 0) + 1);
         }
 
         ans[0] = computeXSum(freq, x);
 
-        //calculate ans for all other windows
         for(int i = k; i < n; i++){
 
             int add = nums[i];
@@ -29,7 +27,6 @@ class Solution {
         }
 
         return ans;
-        
     }
 
     private int computeXSum(Map<Integer, Integer> freq, int x){
@@ -42,7 +39,7 @@ class Solution {
 
         items.sort((a, b) -> {
             if(a[1] != b[1]) return b[1] - a[1];
-            return b[0] - a[0];
+            else return b[0] - a[0];
         });
 
         int sum = 0;
@@ -53,6 +50,5 @@ class Solution {
         }
 
         return sum;
-
     }
 }
