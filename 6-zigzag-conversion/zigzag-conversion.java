@@ -7,19 +7,20 @@ class Solution {
 
         StringBuilder sb = new StringBuilder();
 
-        for(int i = 0; i < numRows; i++){
-            for(int j = i; j < s.length(); j += cycle){
+        for(int row = 0; row < numRows; row++){
+            for(int j = row; j < s.length(); j+= cycle){
 
                 sb.append(s.charAt(j));
 
-                boolean isMiddle = i > 0 && i < numRows - 1;
-                int diagonalIndex = j + (cycle - 2 * i);
+                boolean isMiddle = (row > 0 && row < numRows - 1);
 
-                if(isMiddle && diagonalIndex < s.length()) sb.append(s.charAt(diagonalIndex));
+                int mIndex = j + (cycle - 2 * row);
+                if(isMiddle && mIndex < s.length()) sb.append(s.charAt(mIndex));
 
             }
         }
-        
+
         return sb.toString();
+        
     }
 }
