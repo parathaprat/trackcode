@@ -1,11 +1,10 @@
 class UndergroundSystem {
 
-    //id -> passenger
     class Passenger{
 
         String checkInLoc;
-        int checkInTime;
         String checkOutLoc;
+        int checkInTime;
         int checkOutTime;
 
         Passenger(String checkInLoc, int checkInTime){
@@ -19,48 +18,42 @@ class UndergroundSystem {
         }
     }
 
-    //start + end -> route
     class Route{
-
         String startStation;
         String endStation;
-        int totalNoTrips;
-        long totalTimeTrips;
+        int totalNoTrip;
+        long totalTripTime;
 
         Route(String startStation, String endStation){
             this.startStation = startStation;
             this.endStation = endStation;
         }
 
-        double getAvgTime(){
-            return (double) totalTimeTrips/totalNoTrips;
+        void addTrip(int startTime, int endTime){
+            totalTripTime += endTime - startTime;
+            totalNoTrip++;
         }
 
-        void addTrip(int startTime, int endTime){
-            totalTimeTrips += endTime - startTime;
-            totalNoTrips++;
+        double getAvgTime(){
+            return (double) totalTripTime / totalNoTrip;
         }
     }
-    
 
     Map<Integer, Passenger> currentPassengerMap;
     Map<String, Route> routeMap;
 
-    public UndergroundSystem() {
 
+    public UndergroundSystem() {
         currentPassengerMap = new HashMap<>();
         routeMap = new HashMap<>();
-        
     }
     
     public void checkIn(int id, String stationName, int t) {
 
         if(!currentPassengerMap.containsKey(id)){
-
             Passenger passenger = new Passenger(stationName, t);
             currentPassengerMap.put(id, passenger);
         }
-        
     }
     
     public void checkOut(int id, String stationName, int t) {
@@ -69,14 +62,13 @@ class UndergroundSystem {
 
             Passenger passenger = currentPassengerMap.get(id);
             passenger.checkout(stationName, t);
+            currentPassengerMap.remove(id);
 
             String routeKey = passenger.checkInLoc + "," + passenger.checkOutLoc;
-            Route route = routeMap.getOrDefault(routeKey, new Route(passenger.checkInLoc, passenger.checkOutLoc));
+            routeMap.putIfAbsent(routeKey, new Route(passenger.checkInLoc, passenger.checkOutLoc));
 
+            Route route = routeMap.get(routeKey);
             route.addTrip(passenger.checkInTime, passenger.checkOutTime);
-            routeMap.put(routeKey, route);
-
-            currentPassengerMap.remove(id);
         }
         
     }
