@@ -2,6 +2,7 @@ class Solution {
     public int minMeetingRooms(int[][] intervals) {
 
         Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+
         PriorityQueue<Integer> pq = new PriorityQueue<>();
 
         for(int[] in : intervals){
