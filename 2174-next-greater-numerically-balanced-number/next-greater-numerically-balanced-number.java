@@ -26,7 +26,7 @@ class Solution {
 
             if(count[d] < d){
                 count[d]++;
-                generate(num * 10 + d, list, count);
+                generate(num * 10 + d, list,count);
                 count[d]--;
             }
         }
