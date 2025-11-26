@@ -1,12 +1,12 @@
 class Solution {
 
-    HashMap<Integer, List<Integer>> map = new HashMap<>();
     Set<Integer> visit = new HashSet<>();
     Set<Integer> pros = new HashSet<>();
-
-    List<Integer> res = new ArrayList<>();
+    Map<Integer, List<Integer>> map = new HashMap<>();
 
     public int[] findOrder(int numCourses, int[][] prerequisites) {
+
+        List<Integer> res = new ArrayList<>();
 
         for(int i = 0; i < numCourses; i++){
             map.put(i, new ArrayList<>());
@@ -17,19 +17,21 @@ class Solution {
         }
 
         for(int i = 0; i < numCourses; i++){
-            if(!dfs(i)) return new int[0];
+            if(!dfs(i, res)) return new int[0];
         }
 
-        int[] ans = new int[res.size()];
+        int size = res.size();
+        int[] ans = new int[size];
 
-        for(int i = 0; i < res.size(); i++){
+        for(int i = 0; i < size; i++){
             ans[i] = res.get(i);
         }
 
         return ans;
+        
     }
 
-    private boolean dfs(int course){
+    private boolean dfs(int course, List<Integer> res){
 
         if(visit.contains(course)) return false;
         if(pros.contains(course)) return true;
@@ -37,7 +39,8 @@ class Solution {
         visit.add(course);
 
         for(int nei : map.get(course)){
-            if(!dfs(nei)) return false;
+
+            if(!dfs(nei, res)) return false;
         }
 
         visit.remove(course);
