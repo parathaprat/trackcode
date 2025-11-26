@@ -4,8 +4,8 @@ class Solution {
         int i = a.length() - 1;
         int j = b.length() - 1;
 
-        int sum = 0;
         int carry = 0;
+        int sum = 0;
 
         StringBuilder sb = new StringBuilder();
 
@@ -23,9 +23,8 @@ class Solution {
                 j--;
             }
 
+            carry = sum / 2;
             sb.append(sum%2);
-            carry = sum/2;
-
         }
 
         return sb.reverse().toString();
