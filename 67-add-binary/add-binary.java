@@ -4,8 +4,8 @@ class Solution {
         int i = a.length() - 1;
         int j = b.length() - 1;
 
-        int carry = 0;
         int sum = 0;
+        int carry = 0;
 
         StringBuilder sb = new StringBuilder();
 
@@ -13,14 +13,18 @@ class Solution {
 
             sum = carry;
 
-            if(i >= 0) sum += a.charAt(i) - '0';
-            if(j >= 0) sum += b.charAt(j) - '0';
+            if(i >= 0){
+                sum += a.charAt(i) - '0';
+                i--;
+            }
 
-            sb.append(sum % 2);
-            carry = sum / 2;
+            if(j >= 0){
+                sum += b.charAt(j) - '0';
+                j--;
+            }
 
-            i--;
-            j--;
+            sb.append(sum%2);
+            carry = sum/2;
 
         }
 
