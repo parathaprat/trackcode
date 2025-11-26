@@ -18,6 +18,7 @@ class Solution {
         }
 
         res.add(in);
+
         return res.toArray(new int[res.size()][2]);
         
     }
