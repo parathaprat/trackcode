@@ -1,10 +1,11 @@
 class MagicDictionary {
 
-    //map -> length to list of words of that length in a dictionary
     Map<Integer, List<String>> map;
 
     public MagicDictionary() {
+
         map = new HashMap<>();
+        
     }
     
     public void buildDict(String[] dictionary) {
@@ -21,10 +22,12 @@ class MagicDictionary {
     }
     
     public boolean search(String searchWord) {
-        
+
         int len = searchWord.length();
 
-        for(String word : map.getOrDefault(len, new ArrayList<>())){
+        if(!map.containsKey(len)) return false;
+
+        for(String word : map.get(len)){
 
             int diff = 0;
 
