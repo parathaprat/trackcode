@@ -7,9 +7,8 @@ class Solution {
         path.add(0);
 
         dfs(0, path, paths, graph);
-
-        return paths;
         
+        return paths;
     }
 
     private void dfs(int node, List<Integer> path, List<List<Integer>> paths, int[][] graph){
@@ -20,7 +19,6 @@ class Solution {
         }
 
         for(int nei : graph[node]){
-
             path.add(nei);
             dfs(nei, path, paths, graph);
             path.remove(path.size() - 1);
