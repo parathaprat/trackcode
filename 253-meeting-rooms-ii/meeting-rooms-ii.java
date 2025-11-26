@@ -11,11 +11,11 @@ class Solution {
                 pq.poll();
             }
             
-            pq.add(in[1]);
+            pq.offer(in[1]);
+            
         }
 
         return pq.size();
-
         
     }
 }
