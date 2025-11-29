@@ -1,18 +1,15 @@
 class Solution {
     public String reorganizeString(String s) {
-        
-        //Freq map
-        //maxHeap -> arrange freqs
+
+        //freq map <Char, count>
+        //max heap with custom comparator from map
+        //pop two, append alternatively
 
         Map<Character, Integer> map = new HashMap<>();
-
         PriorityQueue<Character> maxHeap = new PriorityQueue<>((a, b) -> map.get(b) - map.get(a));
 
-        //populating our map
         for(char c : s.toCharArray()){
-
             map.put(c, map.getOrDefault(c, 0) + 1);
-
         }
 
         maxHeap.addAll(map.keySet());
@@ -32,7 +29,6 @@ class Solution {
 
             if(map.get(c1) > 0) maxHeap.add(c1);
             if(map.get(c2) > 0) maxHeap.add(c2);
-
         }
 
         if(!maxHeap.isEmpty()){
@@ -45,14 +41,9 @@ class Solution {
             else{
                 sb.append(c);
             }
-
         }
 
         return sb.toString();
-
-
-
         
-
     }
 }
