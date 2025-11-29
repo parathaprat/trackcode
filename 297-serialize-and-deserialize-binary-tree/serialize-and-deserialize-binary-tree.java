@@ -9,13 +9,14 @@
  */
 public class Codec {
 
+    //preorder trav with N for serialize
+
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
 
         StringBuilder res = new StringBuilder();
         dfs1(res, root);
         return res.toString();
-        
     }
 
     private void dfs1(StringBuilder res, TreeNode root){
@@ -29,11 +30,12 @@ public class Codec {
 
         dfs1(res, root.left);
         dfs1(res, root.right);
+
     }
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        
+
         String[] str = data.split(" ");
         int[] i = {0};
 
