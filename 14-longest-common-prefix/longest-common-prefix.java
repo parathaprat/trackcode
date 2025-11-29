@@ -6,6 +6,7 @@ class Solution {
         for(String str : strs){
 
             while(str.indexOf(prefix) != 0) prefix = prefix.substring(0, prefix.length() - 1);
+
         }
 
         return prefix;
