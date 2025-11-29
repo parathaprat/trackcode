@@ -12,12 +12,13 @@ class Solution {
             if(!set.contains(s.charAt(right))){
                 set.add(s.charAt(right));
                 right++;
-                max = Math.max(max, right - left);
             }
             else{
                 set.remove(s.charAt(left));
                 left++;
             }
+
+            max = Math.max(max, right - left);
         }
 
         return max;
