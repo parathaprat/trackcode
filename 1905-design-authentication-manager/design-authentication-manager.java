@@ -1,9 +1,10 @@
 class AuthenticationManager {
 
-    HashMap<String, Integer> map; //token, currentTime
+    HashMap<String, Integer> map;
     int ttl;
 
     public AuthenticationManager(int timeToLive) {
+
         map = new HashMap<>();
         ttl = timeToLive;
         
@@ -17,7 +18,6 @@ class AuthenticationManager {
     
     public void renew(String tokenId, int currentTime) {
 
-        //check if ttl hasnt been hit first
         if(map.containsKey(tokenId) && currentTime - map.get(tokenId) < ttl){
             map.put(tokenId, currentTime);
         }
@@ -28,7 +28,7 @@ class AuthenticationManager {
 
         int count = 0;
 
-        HashMap<String, Integer> temp = new HashMap<>(map); //duplicate map since same map cannot be modified
+        HashMap<String, Integer> temp = new HashMap<>(map);
 
         for(Map.Entry<String, Integer> e : temp.entrySet()){
 
