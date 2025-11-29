@@ -31,13 +31,15 @@ class Solution {
                 l2 = l2.next;
             }
 
-            ListNode node = new ListNode(sum % 10);
-            carry = sum / 10;
+            carry = sum/10;
+            sum = sum%10;
 
+            ListNode node = new ListNode(sum);
             cur.next = node;
             cur = cur.next;
         }
 
         return temp.next;
+        
     }
 }
