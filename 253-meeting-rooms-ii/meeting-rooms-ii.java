@@ -1,8 +1,10 @@
 class Solution {
     public int minMeetingRooms(int[][] intervals) {
 
-        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+        //pq with min end times to see if a room can be freed for next minMeetingRooms
+        //sort intervals by start time
 
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
         PriorityQueue<Integer> pq = new PriorityQueue<>();
 
         for(int[] in : intervals){
@@ -12,6 +14,7 @@ class Solution {
             }
 
             pq.add(in[1]);
+
         }
 
         return pq.size();
