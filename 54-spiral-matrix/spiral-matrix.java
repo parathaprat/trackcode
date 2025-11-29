@@ -24,7 +24,6 @@ class Solution {
                 for(int i = colEnd; i >= colBegin; i--){
                     res.add(matrix[rowEnd][i]);
                 }
-
                 rowEnd--;
             }
 
@@ -32,7 +31,6 @@ class Solution {
                 for(int i = rowEnd; i >= rowBegin; i--){
                     res.add(matrix[i][colBegin]);
                 }
-
                 colBegin++;
             }
         }
