@@ -9,8 +9,6 @@
  */
 public class Codec {
 
-    //dfs in preorder and then reverse dfs
-
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
 
@@ -35,13 +33,11 @@ public class Codec {
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-
+        
         String[] str = data.split(" ");
-
         int[] i = {0};
 
         return dfs2(str, i);
-        
     }
 
     private TreeNode dfs2(String[] str, int[] i){
@@ -56,7 +52,7 @@ public class Codec {
 
         node.left = dfs2(str, i);
         node.right = dfs2(str, i);
-        
+
         return node;
     }
 }
