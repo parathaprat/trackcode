@@ -1,28 +1,22 @@
 class Solution {
     public int subarraySum(int[] nums, int k) {
-        
-        //Maintain a hashmap of {prefixSum, count}
-        //if map contains (sum - k), add its count to result
 
-        int result = 0;
-        int sum = 0;
+        //ans += prefixSum[sumSoFar - k]
 
-        Map<Integer, Integer> map = new HashMap<>();
+        int ans = 0;
+        int curSum = 0;
 
-        map.put(0, 1);
+        Map<Integer,Integer> map = new HashMap<>(); //prefixSum -> count
+        map.put(0, 1); //empty array = prefix sum of 0
 
-        for(int i = 0; i < nums.length; i++){
+        for(int num : nums){
 
-            sum += nums[i];
-
-            if(map.containsKey(sum - k)) result += map.getOrDefault(sum - k, 0);
-
-            map.put(sum, map.getOrDefault(sum, 0) + 1);
-
+            curSum += num;
+            ans += map.getOrDefault(curSum - k, 0);
+            map.put(curSum, map.getOrDefault(curSum, 0) + 1);
         }
 
-        return result;
-
-
+        return ans;
+        
     }
 }
