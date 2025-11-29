@@ -16,14 +16,12 @@ class Solution {
         for(int i = 0; i < s.length() - 1; i++){
 
             if(map.get(s.charAt(i)) < map.get(s.charAt(i + 1))) ans -= map.get(s.charAt(i));
-            else{
-                ans += map.get(s.charAt(i));
-            }
+            else ans += map.get(s.charAt(i));
+
         }
 
         ans += map.get(s.charAt(s.length() - 1));
 
         return ans;
-        
     }
 }
