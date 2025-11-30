@@ -23,6 +23,10 @@ class Node {
 
 class Solution {
     public Node connect(Node root) {
+        
+
+        //node.left.next = node.right
+        //node.right.next = node.next.left
 
         if(root == null) return null;
 
@@ -36,6 +40,7 @@ class Solution {
 
                 cur.left.next = cur.right;
                 if(cur.next != null) cur.right.next = cur.next.left;
+
                 cur = cur.next;
             }
 
