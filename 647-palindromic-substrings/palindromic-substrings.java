@@ -4,23 +4,20 @@ class Solution {
         int ans = 0;
 
         for(int i = 0; i < s.length(); i++){
+            int odd = checkPal(i, i, s);
+            int even = checkPal(i, i + 1, s);
 
-            int oddPal = checkPal(i, i, s);
-            int evenPal = checkPal(i, i + 1, s);
-
-            ans += oddPal + evenPal;
+            ans += odd + even;
         }
 
         return ans;
+        
     }
 
-    private int checkPal(int left, int right, String s){
+    private int checkPal(int l, int r, String s){
 
-        if(left < 0 || right >= s.length() || s.charAt(left) != s.charAt(right)) return 0;
+        if(l < 0 || r >= s.length() || s.charAt(l) != s.charAt(r)) return 0;
 
-        left--;
-        right++;
-
-        return 1 + checkPal(left, right, s);
+        return 1 + checkPal(l - 1, r + 1, s);
     }
 }
