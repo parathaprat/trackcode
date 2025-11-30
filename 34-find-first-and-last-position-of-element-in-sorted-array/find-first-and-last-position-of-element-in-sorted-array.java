@@ -1,7 +1,7 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        
-        int[] result = new int[2];
+
+        int[] result = new int[2]; 
 
         result[0] = getStartInd(nums, target);
         result[1] = getEndInd(nums, target);
@@ -11,23 +11,23 @@ class Solution {
 
     private int getStartInd(int[] nums, int target){
 
+        int left = 0;
+        int right = nums.length - 1;
+
         int index = -1;
 
-        int start = 0;
-        int end = nums.length - 1;
+        while(left <= right){
 
-        while(start <= end){
+            int mid = left + (right - left)/2;
 
-            int midpoint = start + (end - start)/2;
-
-            if(nums[midpoint] >= target){
-                end = midpoint - 1;
+            if(nums[mid] >= target){ //keep exploring left half even when found
+                right = mid - 1;
             }
             else{
-                start = midpoint + 1;
+                left = mid + 1;
             }
 
-            if(nums[midpoint] == target) index = midpoint;
+            if(nums[mid] == target) index = mid;
         }
 
         return index;
@@ -35,22 +35,22 @@ class Solution {
 
     private int getEndInd(int[] nums, int target){
 
+        int left = 0;
+        int right = nums.length - 1;
         int index = -1;
-        int start = 0;
-        int end = nums.length - 1;
 
-        while(start <= end){
+        while(left <= right){
 
-            int midpoint = start + (end - start)/2;
+            int mid = left + (right - left)/2;
 
-            if(nums[midpoint] <= target){
-                start = midpoint + 1;
+            if(nums[mid] <= target){ //keep exploring right half even when found
+                left = mid + 1;
             }
             else{
-                end = midpoint - 1;
+                right = mid - 1;
             }
 
-            if(nums[midpoint] == target) index = midpoint;
+            if(nums[mid] == target) index = mid;
         }
 
         return index;
