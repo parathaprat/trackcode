@@ -3,9 +3,10 @@ class Solution {
 
         int left = 0;
         int right = 0;
-        int max = 0;
 
         Set<Character> set = new HashSet<>();
+
+        int ans = 0;
 
         while(right < s.length()){
 
@@ -18,10 +19,11 @@ class Solution {
                 left++;
             }
 
-            max = Math.max(max, right - left);
+            ans = Math.max(right - left, ans);
+
         }
 
-        return max;
+        return ans;
         
     }
 }
