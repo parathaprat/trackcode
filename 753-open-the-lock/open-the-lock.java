@@ -1,26 +1,25 @@
 class Solution {
     public int openLock(String[] deadends, String target) {
-
+        
         Set<String> set = new HashSet<>(Arrays.asList(deadends));
-        Set<String> vis = new HashSet<>();
 
+        Set<String> vis = new HashSet<>();
         Queue<String> q = new LinkedList<>();
 
         q.add("0000");
         vis.add("0000");
 
-        int num = 0;
-
+        int steps = 0;
         while(!q.isEmpty()){
 
-            int size = q.size();
+            int level = q.size();
 
-            for(int i = 0; i < size; i++){
+            for(int i = 0; i < level; i++){
 
                 String cur = q.poll();
+                if(cur.equals(target)) return steps;
 
                 if(set.contains(cur)) continue;
-                if(cur.equals(target)) return num;
 
                 for(int j = 0; j < cur.length(); j++){
 
@@ -39,15 +38,15 @@ class Solution {
                 }
             }
 
-            num++;
+            steps++;
         }
 
         return -1;
     }
 
-    private String goUp(int j, String cur){
+    private String goUp(int j, String s){
 
-        char[] curArr = cur.toCharArray();
+        char[] curArr = s.toCharArray();
 
         if(curArr[j] == '9') curArr[j] = '0';
         else curArr[j]++;
@@ -55,9 +54,9 @@ class Solution {
         return new String(curArr);
     }
 
-    private String goDown(int j, String cur){
+    private String goDown(int j, String s){
 
-        char[] curArr = cur.toCharArray();
+        char[] curArr = s.toCharArray();
 
         if(curArr[j] == '0') curArr[j] = '9';
         else curArr[j]--;
