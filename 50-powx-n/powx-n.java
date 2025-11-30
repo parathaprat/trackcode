@@ -15,6 +15,6 @@ class Solution {
 
         double half = getAns(x, n/2);
 
-        return n % 2 == 0 ? half*half : half*x*half;
+        return n%2 == 0? half*half : half*x*half;
     }
 }
