@@ -1,10 +1,6 @@
 class Solution {
     public int openLock(String[] deadends, String target) {
 
-        //set for deadends
-        //visited set
-        //BFS
-
         Set<String> set = new HashSet<>(Arrays.asList(deadends));
         Set<String> vis = new HashSet<>();
 
@@ -35,6 +31,7 @@ class Solution {
                         q.add(up);
                         vis.add(up);
                     }
+
                     if(!vis.contains(down)){
                         q.add(down);
                         vis.add(down);
@@ -45,26 +42,26 @@ class Solution {
             num++;
         }
 
-        return -1; 
+        return -1;
     }
 
     private String goUp(int j, String cur){
 
-        char[] currArr = cur.toCharArray();
+        char[] curArr = cur.toCharArray();
 
-        if(currArr[j] == '9') currArr[j] = '0';
-        else currArr[j]++;
+        if(curArr[j] == '9') curArr[j] = '0';
+        else curArr[j]++;
 
-        return new String(currArr);
+        return new String(curArr);
     }
 
     private String goDown(int j, String cur){
 
-        char[] currArr = cur.toCharArray();
+        char[] curArr = cur.toCharArray();
 
-        if(currArr[j] == '0') currArr[j] = '9';
-        else currArr[j]--;
+        if(curArr[j] == '0') curArr[j] = '9';
+        else curArr[j]--;
 
-        return new String(currArr);
+        return new String(curArr);
     }
 }
