@@ -8,18 +8,16 @@ class Solution {
 
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[0].length; j++){
-
-                if(grid[i][j] == 1) fresh++;
+                if(grid[i][j] == 1)fresh++;
                 if(grid[i][j] == 2) q.add(new int[]{i, j});
             }
         }
 
         int time = 0;
-
         while(!q.isEmpty() && fresh != 0){
 
             int level = q.size();
-
+            
             for(int i = 0; i < level; i++){
 
                 int[] rc = q.poll();
@@ -46,6 +44,7 @@ class Solution {
         grid[i][j] = 2;
         fresh--;
         q.add(new int[]{i, j});
+
         return;
     }
 }
