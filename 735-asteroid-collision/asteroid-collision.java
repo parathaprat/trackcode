@@ -1,36 +1,41 @@
 class Solution {
     public int[] asteroidCollision(int[] asteroids) {
 
+        //Stack
+        //st.peek +ve, incoming -ve
+        //-ve > +ve : st.pop, add -ve
+        //+ve > -ve : nothing, do not add -ve
+        //+ve == -ve : pop and do not add -ve
+        //use boolean to add -ve
+
         Stack<Integer> st = new Stack<>();
 
         for(int a : asteroids){
 
-            boolean alive = true;
+            boolean isAlive = true;
 
             while(!st.isEmpty() && st.peek() > 0 && a < 0){
 
-                int top = st.peek();
-
-                if(top < -a){
-                    st.pop(); //incoming -ve is larger, pop current +ve
-                } 
-                else if(top == -a){ //incoming -ve == current +ve
+                if(st.peek() < -a){
                     st.pop();
-                    alive = false;
+                }
+                else if(st.peek() == -a){
+                    st.pop();
+                    isAlive = false;
                     break;
                 }
-                else{ //+ve larger than incoming -ve
-                    alive = false;
+                else{
+                    isAlive = false;
                     break;
                 }
             }
 
-            if(alive) st.push(a);
+            if(isAlive) st.add(a);
         }
 
         int[] res = new int[st.size()];
-
-        for(int i = 0; i < res.length; i++){
+        
+        for(int i = 0; i < st.size(); i++){
             res[i] = st.get(i);
         }
 
