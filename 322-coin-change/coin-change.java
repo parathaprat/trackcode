@@ -8,7 +8,7 @@ class Solution {
 
         dp[0] = 0;
 
-        for(int i = 0 ; i <= amount; i++){
+        for(int i = 0; i <= amount; i++){
             for(int j = 0; j < coins.length; j++){
 
                 if(coins[j] <= i){
@@ -16,9 +16,7 @@ class Solution {
                 }
             }
         }
-
-        return dp[amount] == amount + 1 ? -1 : dp[amount];
-
         
+        return dp[amount] != amount + 1 ? dp[amount] : -1;
     }
 }
