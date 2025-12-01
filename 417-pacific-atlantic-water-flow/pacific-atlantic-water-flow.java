@@ -31,7 +31,7 @@ class Solution {
         return res;
     }
 
-    public void dfs(int i , int j, boolean[][] visit, int[][] heights){
+    public void dfs(int i, int j, boolean[][] visit, int[][] heights){
 
         visit[i][j] = true;
 
