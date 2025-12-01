@@ -16,7 +16,6 @@ class Solution {
         int comp = n;
 
         for(int[] edge : edges){
-
             if(union(edge[0], edge[1])) comp--;
         }
 
@@ -28,7 +27,7 @@ class Solution {
         int pu = find(u);
         int pv = find(v);
 
-        if(pu == pv) return false; //alr in the same component
+        if(pu == pv) return false;
 
         if(rank[pu] < rank[pv]){
             int temp = pu;
