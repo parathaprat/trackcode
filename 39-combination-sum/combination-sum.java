@@ -1,6 +1,6 @@
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        
+
         List<List<Integer>> result = new ArrayList<>();
         List<Integer> set = new ArrayList<>();
 
@@ -18,11 +18,9 @@ class Solution {
 
         if(index == candidates.length || target < 0) return;
 
-        //include - same number may be chosen unlimited times
         set.add(candidates[index]);
-        backtrack(candidates, target - candidates[index], index, result, set);
+        backtrack(candidates, target - candidates[index], index, result, set); //include same
         set.remove(set.size() - 1);
-
-        backtrack(candidates, target, index + 1, result, set);
+        backtrack(candidates, target, index + 1, result, set); //skip completly
     }
 }
