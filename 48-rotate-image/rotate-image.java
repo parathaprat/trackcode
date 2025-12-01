@@ -16,7 +16,7 @@ class Solution {
             }
         }
 
-        //reverse
+        //reverse rows
         for(int i = 0; i < n; i++){
             
             int left = 0;
