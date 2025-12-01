@@ -5,11 +5,8 @@ class Solution {
         int maxSum = Integer.MIN_VALUE;
 
         for(int num : nums){
-
             sum += num;
-
             maxSum = Math.max(maxSum, sum);
-
             if(sum < 0) sum = 0;
         }
 
