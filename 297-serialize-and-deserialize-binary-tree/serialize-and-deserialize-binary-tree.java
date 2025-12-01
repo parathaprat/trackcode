@@ -9,28 +9,28 @@
  */
 public class Codec {
 
-    //preorder trav with N for serialize
+    //encode preorder trav with N in place of nulls
 
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
 
-        StringBuilder res = new StringBuilder();
-        dfs1(res, root);
-        return res.toString();
+        StringBuilder sb = new StringBuilder();
+
+        dfs1(root, sb);
+
+        return sb.toString();
     }
 
-    private void dfs1(StringBuilder res, TreeNode root){
+    private void dfs1(TreeNode root, StringBuilder sb){
 
         if(root == null){
-            res.append("N ");
+            sb.append("N ");
             return;
         }
 
-        res.append(root.val + " ");
-
-        dfs1(res, root.left);
-        dfs1(res, root.right);
-
+        sb.append(root.val + " ");
+        dfs1(root.left, sb);
+        dfs1(root.right, sb);
     }
 
     // Decodes your encoded data to tree.
