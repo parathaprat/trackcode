@@ -1,6 +1,8 @@
 class Solution {
     public String minWindow(String s, String t) {
-        
+
+        //sliding window while calculating frequencies and storing left and right ind
+
         int left = 0;
 
         Map<Character, Integer> countT = new HashMap<>();
@@ -20,7 +22,7 @@ class Solution {
 
             char c = s.charAt(right);
             window.put(c, window.getOrDefault(c, 0) + 1);
-
+            
             if(countT.containsKey(c) && countT.get(c).equals(window.get(c))) have++;
 
             while(have == need){
@@ -34,11 +36,14 @@ class Solution {
                 char leftc = s.charAt(left);
                 window.put(leftc, window.getOrDefault(leftc, 0) - 1);
 
-                if(countT.containsKey(leftc) && countT.get(leftc) > window.get(leftc)) have--;
+                if(countT.containsKey(leftc) && countT.get(leftc) > window.get(leftc
+                )) have--;
                 left++;
             }
         }
 
-        return resLen == Integer.MAX_VALUE? "" : s.substring(res[0], res[1] + 1);
+        return resLen == Integer.MAX_VALUE ? "" : s.substring(res[0], res[1] + 1);
+
+        
     }
 }
