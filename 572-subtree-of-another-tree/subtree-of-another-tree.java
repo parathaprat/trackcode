@@ -14,8 +14,6 @@
  * }
  */
 class Solution {
-
-    //isSubtree finds the head, isSame compares the tree
     public boolean isSubtree(TreeNode root, TreeNode subRoot) {
 
         if(root == null) return false;
