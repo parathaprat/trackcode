@@ -15,11 +15,9 @@ class Solution {
 
         int comp = n;
 
-        //decrement comp count for every valid union
         for(int[] edge : edges){
-            if(union(edge[0], edge[1])){
-                comp--;
-            }
+
+            if(union(edge[0], edge[1])) comp--;
         }
 
         return comp;
@@ -30,26 +28,24 @@ class Solution {
         int pu = find(u);
         int pv = find(v);
 
-        if(pu == pv) return false; //alr connected if parents are equal
+        if(pu == pv) return false; //alr in the same component
 
-        if(rank[pu] < rank[pv]){ //swap since we will set pv's parent as pu
+        if(rank[pu] < rank[pv]){
             int temp = pu;
             pu = pv;
             pv = temp;
         }
 
         parent[pv] = pu;
-        rank[pu] += rank[pv]; //add the rank/size of pv componenet to pu
-
+        rank[pu] += rank[pv];
         return true;
     }
 
-    //find parent of a node
     private int find(int node){
 
         int cur = node;
 
-        while(cur != parent[cur]){
+        while(parent[cur] != cur){
             parent[cur] = parent[parent[cur]];
             cur = parent[cur];
         }
