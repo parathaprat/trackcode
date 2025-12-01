@@ -1,16 +1,15 @@
 class MedianFinder {
 
-    //2 heaps
-    //1st half -> maxHeap
-    //2nd half -> minHeap
+    //1st half: maxHeap
+    //2nd half: minHeap
 
     PriorityQueue<Integer> maxHeap;
     PriorityQueue<Integer> minHeap;
 
     public MedianFinder() {
 
-        maxHeap = new PriorityQueue<>((a, b) -> Integer.compare(b, a));
-        minHeap = new PriorityQueue<>((a, b) -> Integer.compare(a, b));
+        maxHeap = new PriorityQueue<>((a, b) -> b - a);
+        minHeap = new PriorityQueue<>((a, b) -> a - b);
         
     }
     
@@ -25,16 +24,15 @@ class MedianFinder {
         while(minHeap.size() - maxHeap.size() > 1){
             maxHeap.offer(minHeap.poll());
         }
-        
     }
     
     public double findMedian() {
 
         double ans = 0;
 
-        if(maxHeap.size() == minHeap.size()) ans = (double)(maxHeap.peek() + minHeap.peek()) / 2;
+        if(maxHeap.size() == minHeap.size()) ans = (double)(maxHeap.peek() + minHeap.peek())/2;
         else if(maxHeap.size() > minHeap.size()) ans = (double)maxHeap.peek();
-        else ans = (double)minHeap.peek();
+        else ans = minHeap.peek();
 
         return (double)ans;
         
