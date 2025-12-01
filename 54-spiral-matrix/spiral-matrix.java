@@ -31,8 +31,8 @@ class Solution {
                 for(int i = rowEnd; i >= rowBegin; i--){
                     res.add(matrix[i][colBegin]);
                 }
-                colBegin++;
-            }
+                colBegin++;  
+            }           
         }
 
         return res;
