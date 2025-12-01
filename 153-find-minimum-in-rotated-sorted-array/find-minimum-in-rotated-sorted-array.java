@@ -1,24 +1,22 @@
 class Solution {
     public int findMin(int[] nums) {
-        
-        int l = 0;
-        int r = nums.length - 1;
 
-        while(l < r){
+        int left = 0;
+        int right = nums.length - 1;
 
-            int m = l + (r - l)/2;
+        while(left < right){
 
-            if(nums[m] >= nums[l] && nums[m] > nums[r]){
-                l = m + 1;
-            }
-            else if(nums[m] < nums[l] && nums[m] < nums[r] && nums[m] < nums[m - 1]){
-                return nums[m];
+            int mid = left + (right - left) / 2;
+
+            if(nums[mid] < nums[right]){
+                right = mid;
             }
             else{
-                r = m - 1;
+                left = mid + 1;
             }
         }
 
-        return nums[l];
+        return nums[left];
+        
     }
 }
