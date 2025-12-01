@@ -1,26 +1,28 @@
 class Solution {
     public int numDecodings(String s) {
-        
-        int[] dp = new int[s.length() + 1];
-        Arrays.fill(dp, -1);
 
-        dp[s.length()] = 1;
+        int n = s.length();
+        int[] dp = new int[n + 1];
 
-        return getAns(dp, s, 0);
-    }
+        dp[n] = 1;
+        dp[n - 1] = s.charAt(n - 1) == '0' ? 0 : 1;
 
-    private int getAns(int[] dp, String s, int i){
+        for(int i = n - 2; i >= 0; i--){
 
-        if(dp[i] != -1) return dp[i];
+            if(s.charAt(i) == '0'){
+                dp[i] = 0;
+                continue;
+            }
 
-        if(s.charAt(i) == '0') return 0;
+            dp[i] = dp[i + 1];
 
-        int res = getAns(dp, s, i + 1);
-
-        if(i + 1 < s.length() && (s.charAt(i) == '1' || s.charAt(i) == '2' &&s.charAt(i + 1) < '7')){
-            res += getAns(dp, s, i + 2);
+            int check = Integer.parseInt(s.substring(i, i + 2));
+            if(check >= 10 && check <= 26){
+                dp[i] += dp[i + 2];
+            }
         }
 
-        return dp[i] = res;
+        return dp[0];
+        
     }
 }
