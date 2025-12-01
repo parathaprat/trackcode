@@ -1,42 +1,59 @@
 class Solution {
+
+    int[] parent;
+    int[] rank;
+
     public int countComponents(int n, int[][] edges) {
 
-        //dfs
-        Set<Integer> visited = new HashSet<>();
-        int comp = 0;
-
-        Map<Integer, List<Integer>> map = new HashMap<>();
+        parent = new int[n];
+        rank = new int[n];
 
         for(int i = 0; i < n; i++){
-            map.put(i, new ArrayList<>());
+            parent[i] = i;
+            rank[i] = 1;
         }
 
+        int comp = n;
+
+        //decrement comp count for every valid union
         for(int[] edge : edges){
-            map.get(edge[0]).add(edge[1]);
-            map.get(edge[1]).add(edge[0]);
-        }
-
-        for(int i = 0; i < n; i++){
-
-            if(!visited.contains(i)){
-                dfs(i, visited, map);
-                comp++;
+            if(union(edge[0], edge[1])){
+                comp--;
             }
         }
 
         return comp;
     }
 
-    private void dfs(int node, Set<Integer> visited, Map<Integer, List<Integer>> map){
+    private boolean union(int u, int v){
 
-        if(visited.contains(node)) return;
+        int pu = find(u);
+        int pv = find(v);
 
-        visited.add(node);
+        if(pu == pv) return false; //alr connected if parents are equal
 
-        for(int nei : map.get(node)){
-            dfs(nei, visited, map);
+        if(rank[pu] < rank[pv]){ //swap since we will set pv's parent as pu
+            int temp = pu;
+            pu = pv;
+            pv = temp;
         }
 
-        return;
+        parent[pv] = pu;
+        rank[pu] += rank[pv]; //add the rank/size of pv componenet to pu
+
+        return true;
+    }
+
+    //find parent of a node
+    private int find(int node){
+
+        int cur = node;
+
+        while(cur != parent[cur]){
+            parent[cur] = parent[parent[cur]];
+            cur = parent[cur];
+        }
+
+        return cur;
     }
 }
