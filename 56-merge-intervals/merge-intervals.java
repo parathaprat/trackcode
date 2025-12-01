@@ -10,7 +10,6 @@ class Solution {
         for(int i = 1; i < intervals.length; i++){
 
             if(in[1] >= intervals[i][0]){
-                // in[0] = Math.min(in[0], intervals[i][0]);
                 in[1] = Math.max(in[1], intervals[i][1]); 
             }
             else{
