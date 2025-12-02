@@ -13,8 +13,8 @@ class Solution {
                 max = temp;
             }
 
-            max = Math.max(nums[i], max * nums[i]);
-            min = Math.min(nums[i], min * nums[i]);
+            min = Math.min(min * nums[i], nums[i]);
+            max = Math.max(max * nums[i], nums[i]);
 
             ans = Math.max(ans, max);
         }
