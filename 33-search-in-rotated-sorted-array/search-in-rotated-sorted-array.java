@@ -6,13 +6,13 @@ class Solution {
 
         while(left < right){
 
-            int mid = left + (right - left)/2;
+            int mid = left + (right - left) / 2;
 
-            if(nums[mid] > nums[right]){
-                left = mid + 1;
+            if(nums[mid] < nums[right]){
+                right = mid;
             }
             else{
-                right = mid;
+                left = mid + 1;
             }
         }
 
@@ -23,8 +23,8 @@ class Solution {
             right = nums.length - 1;
         }
         else{
-            left = 0;
             right = pivot - 1;
+            left = 0;
         }
 
         while(left <= right){
@@ -43,5 +43,6 @@ class Solution {
         }
 
         return -1;
+        
     }
 }
