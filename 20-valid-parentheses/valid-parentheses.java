@@ -13,7 +13,7 @@ class Solution {
             }
             else if(
                 c == ')' && st.peek() == '(' ||
-                c == ']' && st.peek() == '[' ||
+                c == ']' && st.peek() == '[' || 
                 c == '}' && st.peek() == '{'
             ){
                 st.pop();
@@ -22,5 +22,6 @@ class Solution {
         }
 
         return st.isEmpty();
+        
     }
 }
