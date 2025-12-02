@@ -3,27 +3,25 @@ class Solution {
 
         Set<Integer> set = new HashSet<>();
 
+        int ans = 0;
+
         for(int num : nums){
             set.add(num);
         }
 
-        int longest = 0;
 
         for(int num : set){
 
             if(!set.contains(num - 1)){
 
-                int len = 1;
-
+                int len = 0;
                 while(set.contains(num + len)){
                     len++;
+                    ans = Math.max(ans, len);
                 }
-
-                longest = Math.max(longest, len);
             }
         }
 
-        return longest;
-        
+        return ans;
     }
 }
