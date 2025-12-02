@@ -11,16 +11,16 @@
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
 
-        //add all heads to minHeap, pop, add nest and append to res
-        
         PriorityQueue<ListNode> pq = new PriorityQueue<>((a, b) -> a.val - b.val);
+
+        for(ListNode node : lists){
+            
+            if(node != null) pq.add(node);
+
+        }
 
         ListNode temp = new ListNode(0);
         ListNode cur = temp;
-
-        for(ListNode node : lists){
-            if(node != null) pq.add(node);
-        }
 
         while(!pq.isEmpty()){
 
@@ -32,5 +32,6 @@ class Solution {
         }
 
         return temp.next;
+        
     }
 }
