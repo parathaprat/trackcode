@@ -19,13 +19,14 @@ class Solution {
             if(list1.val < list2.val){
                 cur.next = list1;
                 list1 = list1.next;
+                cur = cur.next;
             }
             else{
                 cur.next = list2;
                 list2 = list2.next;
+                cur = cur.next;
             }
 
-            cur = cur.next;
         }
 
         while(list1 != null){
@@ -41,5 +42,6 @@ class Solution {
         }
 
         return temp.next;
+        
     }
 }
