@@ -1,26 +1,22 @@
 class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
 
-        Set<String> set = new HashSet<>(wordDict);
-        Boolean[] dp = new Boolean[s.length() + 1];
+        Set<String> dict = new HashSet<>(wordDict);
+        boolean[] dp = new boolean[s.length() + 1];
 
-        return getAns(0, set, dp, s);
-        
-    }
+        dp[0] = true;
 
-    private Boolean getAns(int ind, Set<String> set, Boolean[] dp, String s){
+        for(int i = 0; i <= s.length(); i++){
+            for(int j = 0; j < i; j++){
 
-        if(ind >= s.length()) return true;
-
-        if(dp[ind] != null) return dp[ind];
-
-        for(int i = ind; i < s.length(); i++){
-
-            if(set.contains(s.substring(ind, i + 1))){
-                if(getAns(i + 1, set,dp, s)) return dp[ind] = true;
+                if(dp[j] && dict.contains(s.substring(j, i))){
+                    dp[i] = true;
+                    break;
+                }
             }
         }
 
-        return dp[ind] = false;
+        return dp[s.length()];
+        
     }
 }
