@@ -15,36 +15,33 @@
  */
 class Solution {
 
-    //global variable to track preorder
     int preorderIndex = 0;
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
 
-        //store inorder in a map for o(1) lookup
-        Map<Integer, Integer> inorderIndexMap = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
 
         for(int i = 0; i < inorder.length; i++){
-            inorderIndexMap.put(inorder[i], i);
+            map.put(inorder[i], i);
         }
 
-        return build(preorder, 0, inorder.length - 1, inorderIndexMap);
-    }
-
-    private TreeNode build(int[] preorder, int inorderStart, int inorderEnd, Map<Integer, Integer> map){
-
-        if(inorderStart > inorderEnd) return null;
-
-        //pick next root from preorder
-        int rootValue = preorder[preorderIndex++];
-        TreeNode root = new TreeNode(rootValue);
-
-        //find index of root in indorder
-        int rootPosition = map.get(rootValue);
-
-        root.left = build(preorder, inorderStart, rootPosition - 1, map);
-        root.right = build(preorder, rootPosition + 1, inorderEnd, map);
+        TreeNode root = buildGraph(preorder, 0, inorder.length - 1, map);
 
         return root;
+    }
 
+    private TreeNode buildGraph(int[] preorder, int start, int end, Map<Integer, Integer> map){
+
+        if(start > end) return null;
+
+        int rootVal = preorder[preorderIndex++];
+        int inorderIndex = map.get(rootVal);
+
+        TreeNode root = new TreeNode(rootVal);
+
+        root.left = buildGraph(preorder, start, inorderIndex - 1, map);
+        root.right = buildGraph(preorder, inorderIndex + 1, end, map);
+
+        return root;
     }
 }
