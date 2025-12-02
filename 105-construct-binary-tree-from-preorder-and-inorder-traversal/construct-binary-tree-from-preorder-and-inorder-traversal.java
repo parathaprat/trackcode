@@ -27,10 +27,10 @@ class Solution {
             inorderIndexMap.put(inorder[i], i);
         }
 
-        return build(preorder, inorder, 0, inorder.length - 1, inorderIndexMap);
+        return build(preorder, 0, inorder.length - 1, inorderIndexMap);
     }
 
-    private TreeNode build(int[] preorder, int[] inorder, int inorderStart, int inorderEnd, Map<Integer, Integer> map){
+    private TreeNode build(int[] preorder, int inorderStart, int inorderEnd, Map<Integer, Integer> map){
 
         if(inorderStart > inorderEnd) return null;
 
@@ -41,8 +41,8 @@ class Solution {
         //find index of root in indorder
         int rootPosition = map.get(rootValue);
 
-        root.left = build(preorder, inorder, inorderStart, rootPosition - 1, map);
-        root.right = build(preorder, inorder, rootPosition + 1, inorderEnd, map);
+        root.left = build(preorder, inorderStart, rootPosition - 1, map);
+        root.right = build(preorder, rootPosition + 1, inorderEnd, map);
 
         return root;
 
