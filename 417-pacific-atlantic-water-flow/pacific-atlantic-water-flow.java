@@ -4,27 +4,27 @@ class Solution {
 
     public List<List<Integer>> pacificAtlantic(int[][] heights) {
 
-        boolean[][] pac = new boolean[heights.length][heights[0].length];
-        boolean[][] atl = new boolean[heights.length][heights[0].length];
-
         List<List<Integer>> res = new ArrayList<>();
 
         int row = heights.length;
         int col = heights[0].length;
 
+        boolean[][] pac = new boolean[row][col];
+        boolean[][] atl = new boolean[row][col];
+
+        for(int r = 0; r < row; r++){
+            dfs(r, 0, pac, heights);
+            dfs(r, col - 1, atl, heights);
+        }
+
+        for(int c = 0; c < col; c++){
+            dfs(0, c, pac, heights);
+            dfs(row - 1, c, atl, heights);
+        }
+
         for(int i = 0; i < row; i++){
-            dfs(i, 0, pac, heights);
-            dfs(i, col - 1, atl, heights);
-        }
-
-        for(int i = 0; i < col; i++){
-            dfs(0, i, pac, heights);
-            dfs(row - 1, i, atl, heights);
-        }
-
-        for(int i= 0; i < row; i++){
             for(int j = 0; j < col; j++){
-                if(pac[i][j] && atl[i][j]){
+                if(atl[i][j] && pac[i][j]){
                     res.add(Arrays.asList(i, j));
                 }
             }
@@ -38,7 +38,6 @@ class Solution {
         vis[i][j] = true;
 
         for(int[] dir : directions){
-
             int nr = i + dir[0];
             int nc = j + dir[1];
 
