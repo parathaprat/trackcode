@@ -4,19 +4,18 @@ class Solution {
         if(intervals.length == 0) return true;
 
         Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
 
-        int[] in = intervals[0];
+        for(int[] in : intervals){
 
-        for(int i = 1; i < intervals.length; i++){
-
-            if(in[1] > intervals[i][0]){
-                return false;
+            if(!pq.isEmpty() && pq.peek() <= in[0]){
+                pq.poll();
             }
 
-            in = intervals[i];
+            pq.add(in[1]);
         }
 
-        return true;
+        return pq.size() == 1;
         
     }
 }
