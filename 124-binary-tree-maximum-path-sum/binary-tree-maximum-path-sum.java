@@ -18,13 +18,12 @@ class Solution {
     int sum = Integer.MIN_VALUE;
 
     public int maxPathSum(TreeNode root) {
-        
+
         getAns(root);
         return sum;
     }
 
     private int getAns(TreeNode node){
-
         if(node == null) return 0;
 
         int leftSum = Math.max(0, getAns(node.left));
