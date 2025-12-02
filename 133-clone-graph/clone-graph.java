@@ -25,13 +25,12 @@ class Solution {
 
         Map<Node, Node> map = new HashMap<>();
         return getCopy(node, map);
-        
     }
 
     private Node getCopy(Node node, Map<Node, Node> map){
 
         if(map.containsKey(node)) return map.get(node);
-        
+
         Node copy = new Node(node.val);
         map.put(node, copy);
 
