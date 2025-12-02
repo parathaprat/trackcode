@@ -12,9 +12,9 @@ class Solution {
                 return false;
             }
             else if(
-                c == ')' && st.peek() == '(' ||
-                c == ']' && st.peek() == '[' || 
-                c == '}' && st.peek() == '{'
+                c == ')' && st.peek() == '(' || 
+                c == '}' && st.peek() == '{' ||
+                c == ']' && st.peek() == '['
             ){
                 st.pop();
             }
