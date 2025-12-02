@@ -14,32 +14,37 @@
  * }
  */
 class Solution {
-    
-    int index = 0;
+
+    //global variable to track preorder
+    int preorderIndex = 0;
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        
-        HashMap<Integer, Integer> map = new HashMap<>();
-        
+
+        //store inorder in a map for o(1) lookup
+        Map<Integer, Integer> inorderIndexMap = new HashMap<>();
+
         for(int i = 0; i < inorder.length; i++){
-            map.put(inorder[i], i);
+            inorderIndexMap.put(inorder[i], i);
         }
 
-        return helper(preorder, 0, inorder.length - 1, map);
+        return build(preorder, inorder, 0, inorder.length - 1, inorderIndexMap);
     }
 
-    private TreeNode helper(int[] preorder, int start, int end, HashMap<Integer, Integer> map){
+    private TreeNode build(int[] preorder, int[] inorder, int inorderStart, int inorderEnd, Map<Integer, Integer> map){
 
-        if(start > end) return null;
+        if(inorderStart > inorderEnd) return null;
 
-        int nodeVal = preorder[index++];
-        TreeNode node = new TreeNode(nodeVal);
+        //pick next root from preorder
+        int rootValue = preorder[preorderIndex++];
+        TreeNode root = new TreeNode(rootValue);
 
-        int inorderIndex = map.get(nodeVal);
+        //find index of root in indorder
+        int rootPosition = map.get(rootValue);
 
-        node.left = helper(preorder, start, inorderIndex - 1, map);
-        node.right = helper(preorder, inorderIndex + 1, end, map);
+        root.left = build(preorder, inorder, inorderStart, rootPosition - 1, map);
+        root.right = build(preorder, inorder, rootPosition + 1, inorderEnd, map);
 
-        return node;
+        return root;
+
     }
 }
