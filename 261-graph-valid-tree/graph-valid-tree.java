@@ -1,7 +1,6 @@
 class Solution {
     public boolean validTree(int n, int[][] edges) {
 
-        //a valid tree with n nodes has n - 1 edges
         if(edges.length != n - 1) return false;
 
         Map<Integer, List<Integer>> map = new HashMap<>();
@@ -10,14 +9,15 @@ class Solution {
             map.put(i, new ArrayList<>());
         }
 
-        for(int[] edge : edges){
-            map.get(edge[0]).add(edge[1]);
-            map.get(edge[1]).add(edge[0]);
+        for(int[] e : edges){
+            map.get(e[0]).add(e[1]);
+            map.get(e[1]).add(e[0]);
         }
 
         Set<Integer> visit = new HashSet<>();
+
         if(!dfs(0, -1, map, visit)) return false;
-         
+
         return visit.size() == n;
     }
 
@@ -28,6 +28,7 @@ class Solution {
         visit.add(node);
 
         for(int nei : map.get(node)){
+
             if(nei == parent) continue;
             if(!dfs(nei, node, map, visit)) return false;
         }
