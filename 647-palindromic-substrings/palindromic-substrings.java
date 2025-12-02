@@ -1,23 +1,23 @@
 class Solution {
+
+    int ans = 0;
+
     public int countSubstrings(String s) {
 
-        int ans = 0;
-
         for(int i = 0; i < s.length(); i++){
-            int odd = checkPal(i, i, s);
-            int even = checkPal(i, i + 1, s);
-
-            ans += odd + even;
+            checkPal(i, i, s);
+            checkPal(i, i + 1, s);
         }
 
         return ans;
-        
     }
 
-    private int checkPal(int l, int r, String s){
+    private void checkPal(int left, int right, String s){
 
-        if(l < 0 || r >= s.length() || s.charAt(l) != s.charAt(r)) return 0;
+        if(left < 0 || right >= s.length() || s.charAt(left) != s.charAt(right)) return;
 
-        return 1 + checkPal(l - 1, r + 1, s);
+        ans++;
+
+        checkPal(left - 1, right + 1, s);
     }
 }
