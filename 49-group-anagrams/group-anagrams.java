@@ -14,6 +14,7 @@ class Solution {
             }
 
             String key = Arrays.toString(freq);
+
             map.putIfAbsent(key, new ArrayList<>());
             map.get(key).add(str);
         }
