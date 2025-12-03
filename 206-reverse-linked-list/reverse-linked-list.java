@@ -14,6 +14,7 @@ class Solution {
         ListNode prev = null;
 
         while(head != null){
+
             ListNode next = head.next;
 
             head.next = prev;
@@ -22,5 +23,6 @@ class Solution {
         }
 
         return prev;
+        
     }
 }
