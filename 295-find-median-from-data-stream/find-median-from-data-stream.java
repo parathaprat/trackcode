@@ -12,11 +12,11 @@ class MedianFinder {
 
         maxHeap.add(num);
 
-        if(maxHeap.size() - minHeap.size() > 1 || !minHeap.isEmpty() && maxHeap.peek() > minHeap.peek()){
+        if(maxHeap.size() > minHeap.size() || !minHeap.isEmpty() && maxHeap.peek() > minHeap.peek()){
             minHeap.add(maxHeap.poll());
         }
 
-        if(minHeap.size() - maxHeap.size() > 1){
+        if(minHeap.size() > maxHeap.size()){
             maxHeap.add(minHeap.poll());
         }
         
@@ -24,13 +24,14 @@ class MedianFinder {
     
     public double findMedian() {
 
-        double ans = 0;
-
-        if(maxHeap.size() == minHeap.size()) ans = (double)(maxHeap.peek() + minHeap.peek()) / 2;
-        else if(minHeap.size() > maxHeap.size()) ans = minHeap.peek();
-        else ans = maxHeap.peek();
-
-        return ans;
+        if((minHeap.size() + maxHeap.size()) % 2 == 0){
+            return (double)(minHeap.peek() + maxHeap.peek())/2.0;
+        }
+        else{
+            if(minHeap.size() > maxHeap.size()) return minHeap.peek();
+            else return maxHeap.peek();
+        }
+        
     }
 }
 
