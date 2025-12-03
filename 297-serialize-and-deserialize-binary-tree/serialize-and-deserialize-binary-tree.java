@@ -9,7 +9,7 @@
  */
 public class Codec {
 
-    //encode preorder trav with N in place of nulls
+    //encode in preorder with N at leaf spots
 
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
@@ -36,24 +36,24 @@ public class Codec {
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
 
-        String[] str = data.split(" ");
+        String[] arr = data.split(" ");
         int[] i = {0};
 
-        return dfs2(str, i);
+        return dfs2(arr, i);    
     }
 
-    private TreeNode dfs2(String[] str, int[] i){
+    private TreeNode dfs2(String[] arr, int[] i){
 
-        if(str[i[0]].equals("N")){
+        if(arr[i[0]].equals("N")){
             i[0]++;
             return null;
         }
 
-        TreeNode node = new TreeNode(Integer.parseInt(str[i[0]]));
+        TreeNode node = new TreeNode(Integer.parseInt(arr[i[0]]));
         i[0]++;
 
-        node.left = dfs2(str, i);
-        node.right = dfs2(str, i);
+        node.left = dfs2(arr, i);
+        node.right = dfs2(arr, i);
 
         return node;
     }
