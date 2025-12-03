@@ -15,6 +15,7 @@ class Solution {
         }
 
         for(int i = 0; i < numCourses; i++){
+
             if(!dfs(i)) return false;
         }
 
