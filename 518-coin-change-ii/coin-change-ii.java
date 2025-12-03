@@ -1,7 +1,9 @@
 class Solution {
     public int change(int amount, int[] coins) {
 
+        Arrays.sort(coins);
         int[] dp = new int[amount + 1];
+
         dp[0] = 1;
 
         for(int coin : coins){
@@ -12,7 +14,5 @@ class Solution {
         }
 
         return dp[amount];
-
-        
     }
 }
