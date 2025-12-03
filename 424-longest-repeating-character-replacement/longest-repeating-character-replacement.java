@@ -1,19 +1,16 @@
 class Solution {
     public int characterReplacement(String s, int k) {
 
-        //windowLen - maxFreq > k, left++
-
         int left = 0;
-
-        int[] freq = new int[26];
-        int maxFreq = 0;
-
+        int right = 0;
         int ans = 0;
 
-        for(int right = 0; right < s.length(); right++){
+        int maxFreq = 0;
+        int[] freq = new int[26];
+
+        while(right < s.length()){
 
             freq[s.charAt(right) - 'A']++;
-
             maxFreq = Math.max(freq[s.charAt(right) - 'A'], maxFreq);
 
             int windowSize = right - left + 1;
@@ -24,8 +21,10 @@ class Solution {
             }
 
             windowSize = right - left + 1;
-
             ans = Math.max(ans, windowSize);
+
+            right++;
+
         }
 
         return ans;
