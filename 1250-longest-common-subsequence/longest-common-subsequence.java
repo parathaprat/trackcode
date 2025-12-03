@@ -1,13 +1,11 @@
 class Solution {
     public int longestCommonSubsequence(String text1, String text2) {
 
-        //grid, 1st row ans 1st col all 0s, since LCS bw a string and nothing is 0
-
+        //grid of len + 1, 1st row and col set to 0 
         int len1 = text1.length();
         int len2 = text2.length();
 
-        //dp shifted by 1 to accomodate nothing states
-        int[][] dp = new int[len1 + 1][len2 + 1];
+        int[][] dp = new int[len1 + 1][len2 + 2];
 
         for(int i = 1; i <= len1; i++){
             for(int j = 1; j <= len2; j++){
