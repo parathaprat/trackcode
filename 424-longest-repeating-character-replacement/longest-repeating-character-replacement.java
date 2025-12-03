@@ -1,11 +1,12 @@
 class Solution {
     public int characterReplacement(String s, int k) {
 
-        //windowSize - maxFreq > k; left++;
+        //windowSize - maxFreq <= k
 
         int left = 0;
-        int ans = 0;
         int maxFreq = 0;
+
+        int ans = 0;
 
         int[] freq = new int[26];
 
@@ -15,6 +16,7 @@ class Solution {
             maxFreq = Math.max(maxFreq, freq[s.charAt(right) - 'A']);
 
             if((right - left + 1) - maxFreq > k){
+
                 freq[s.charAt(left) - 'A']--;
                 left++;
             }
