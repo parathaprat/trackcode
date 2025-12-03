@@ -1,41 +1,60 @@
 class Solution {
+
+    //DSU: union: connect components
+    //find: find parents
+
+    int[] parent;
+    int[] rank;
+
     public int countComponents(int n, int[][] edges) {
 
-        Map<Integer, List<Integer>> map = new HashMap<>();
+        parent = new int[n];
+        rank = new int[n];
 
         for(int i = 0; i < n; i++){
-            map.put(i, new ArrayList<>());
+            parent[i] = i;
+            rank[i] = 1;
         }
+
+        int count = n;
 
         for(int[] e : edges){
-            map.get(e[0]).add(e[1]);
-            map.get(e[1]).add(e[0]);
-        }
 
-        Set<Integer> vis = new HashSet<>();
-        int count = 0;
-
-        for(int i = 0; i < n; i++){
-
-            if(!vis.contains(i)){
-                dfs(i, map, vis);
-                count++;
+            if(union(e[0], e[1])){
+                count--;
             }
         }
 
         return count;
     }
 
-    private void dfs(int node, Map<Integer, List<Integer>> map, Set<Integer> vis){
+    private boolean union(int u, int v){
 
-        if(vis.contains(node)) return;
+        int pv = find(v);
+        int pu = find(u);
 
-        vis.add(node);
+        if(pv == pu) return false;
 
-        for(int nei : map.get(node)){
-            dfs(nei, map, vis);
+        if(rank[pu] > rank[pv]){
+            int temp = pv;
+            pv = pu;
+            pu = temp;
         }
 
-        return;
+        parent[pu] = pv;
+
+        rank[pv] += rank[pu];
+        return true;
+    }
+
+    private int find(int node){
+        int cur = node;
+
+        while(parent[cur] != cur){
+            parent[cur] = parent[parent[cur]];
+            cur = parent[cur];
+        }
+
+        return cur;
     }
 }
