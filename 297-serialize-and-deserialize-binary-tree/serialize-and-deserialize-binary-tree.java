@@ -14,8 +14,8 @@ public class Codec {
 
         StringBuilder sb = new StringBuilder();
         dfs1(root, sb);
+
         return sb.toString();
-        
     }
 
     private void dfs1(TreeNode root, StringBuilder sb){
@@ -34,15 +34,15 @@ public class Codec {
     public TreeNode deserialize(String data) {
 
         String[] arr = data.split(" ");
-        int[] i = {0};
 
-        return dfs2(arr, i);
+        int[] i = {0};
+       return dfs2(arr, i);
     }
 
     private TreeNode dfs2(String[] arr, int[] i){
 
         if(arr[i[0]].equals("N")){
-            i[0]++; 
+            i[0]++;
             return null;
         }
 
