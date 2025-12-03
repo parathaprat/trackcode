@@ -1,33 +1,40 @@
 class Solution {
 
-    int[][] directions = {{0,1}, {1,0}, {-1,0}, {0,-1}};
+    int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
     public boolean exist(char[][] board, String word) {
 
-        boolean[][] visit = new boolean[board.length][board[0].length];
+        boolean[][] visited = new boolean[board.length][board[0].length];
 
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[0].length; j++){
 
-                if(dfs(i, j, 0, board, word, visit)) return true;
+                if(dfs(i, j, 0, word, board, visited)) return true;
             }
         }
-
-        return false;   
+        
+        return false;
     }
 
-    private boolean dfs(int i, int j, int ind, char[][] board, String word, boolean[][] visit){
+    private boolean dfs(int i, int j, int in, String word, char[][] board, boolean[][] visited){
 
-        if(ind >= word.length()) return true;
-
-        if(i < 0 || i >= board.length || j < 0 || j >= board[0].length || visit[i][j] || word.charAt(ind) != board[i][j]) return false;
-
-        visit[i][j] = true;
-
-        for(int[] dir : directions){
-            if(dfs(i + dir[0], j + dir[1], ind + 1, board, word, visit)) return true;
+        if(in >= word.length()){
+            return true;
         }
 
-        visit[i][j] = false;
+        if(i < 0 || i >= board.length || j < 0 || j >= board[0].length || word.charAt(in) != board[i][j] || visited[i][j]) return false;
+
+        visited[i][j] = true;
+
+        for(int[] dir : directions){
+
+            int nr = i + dir[0];
+            int nc = j + dir[1];
+
+            if(dfs(nr, nc, in + 1, word, board, visited)) return true;
+        }
+
+        visited[i][j] = false;
         return false;
     }
 }
