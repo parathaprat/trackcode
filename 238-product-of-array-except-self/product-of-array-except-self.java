@@ -8,10 +8,10 @@ class Solution {
             ans[i] = ans[i - 1] * nums[i - 1];
         }
 
-        int suffix = 1;
+        int post = 1;
         for(int i = nums.length - 1; i >= 0; i--){
-            ans[i] = ans[i] * suffix;
-            suffix = suffix * nums[i];
+            ans[i] = ans[i] * post;
+            post = nums[i] * post;
         }
 
         return ans;
