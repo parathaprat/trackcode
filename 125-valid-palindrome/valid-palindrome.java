@@ -1,26 +1,29 @@
 class Solution {
     public boolean isPalindrome(String s) {
 
-        String ans = "";
+        String check = "";
 
         for(char c : s.toCharArray()){
+
             if(Character.isDigit(c) || Character.isLetter(c)){
-                ans += c;
+                check += c;
             }
         }
 
-        ans = ans.toLowerCase();
+        check = check.toLowerCase();
 
-        int r = ans.length() - 1;
-        int l = 0;
+        int left = 0;
+        int right = check.length() - 1;
 
-        while(l <= r){
-            if(ans.charAt(l) != ans.charAt(r)) return false;
-            l++;
-            r--;
+        while(left <= right){
+
+            if(check.charAt(left) != check.charAt(right)) return false;
+            left++;
+            right--;
         }
 
         return true;
+
         
     }
 }
