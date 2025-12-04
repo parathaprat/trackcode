@@ -8,13 +8,13 @@ class Solution {
         for(int i = 1; i < nums.length; i++){
 
             if(nums[i] < 0){
-                int temp = min;
-                min = max;
-                max = temp;
+                int temp = max;
+                max = min;
+                min = temp;
             }
 
-            min = Math.min(min * nums[i], nums[i]);
-            max = Math.max(max * nums[i], nums[i]);
+            min = Math.min(nums[i], min * nums[i]);
+            max = Math.max(nums[i], max * nums[i]);
 
             ans = Math.max(ans, max);
         }
