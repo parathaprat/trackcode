@@ -11,8 +11,8 @@ class Solution {
             freq[c - 'a']--;
         }
 
-        for(int ind : freq){
-            if(ind != 0) return false;
+        for(int num : freq){
+            if(num != 0) return false;
         }
 
         return true;
