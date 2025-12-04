@@ -4,22 +4,22 @@ class Solution {
         List<List<Integer>> res = new ArrayList<>();
         List<Integer> path = new ArrayList<>();
 
-        backtrack(0, nums, res, path);
+        backtrack(0, nums, path, res);
 
         return res;
     }
 
-    private void backtrack(int ind, int[] nums, List<List<Integer>> res, List<Integer> path){
+    private void backtrack(int in, int[] nums, List<Integer> path, List<List<Integer>> res){
 
-        if(ind >= nums.length){
+        if(in >= nums.length){
             res.add(new ArrayList<>(path));
             return;
         }
 
-        path.add(nums[ind]);
-        backtrack(ind + 1, nums, res, path);
+        path.add(nums[in]);
+        backtrack(in + 1, nums, path, res);
         path.remove(path.size() - 1);
 
-        backtrack(ind + 1, nums, res, path);
+        backtrack(in + 1, nums, path, res);
     }
 }
