@@ -2,7 +2,7 @@ class Solution {
     public int maxProfit(int[] prices) {
 
         int low = Integer.MAX_VALUE;
-        int prof = 0;
+        int prof = Integer.MIN_VALUE;
 
         for(int i = 0; i < prices.length; i++){
 
