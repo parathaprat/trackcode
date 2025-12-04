@@ -5,7 +5,7 @@ class Allocator {
     public Allocator(int n) {
 
         array = new int[n];
-        
+
         for(int i = 0; i < array.length; i++){
             array[i] = -1;
         }
@@ -31,10 +31,12 @@ class Allocator {
             if(count == size){
                 endIndex = i;
                 break;
+    
             }
         }
 
         if(startIndex > endIndex) return -1;
+
         Arrays.fill(array, startIndex, Math.min(endIndex + 1, array.length), mID);
         return startIndex;
         
@@ -52,6 +54,7 @@ class Allocator {
         }
 
         return count;
+        
     }
 }
 
