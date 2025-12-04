@@ -3,43 +3,39 @@ class Allocator {
     int[] array;
 
     public Allocator(int n) {
-
         array = new int[n];
-
-        for(int i = 0; i < array.length; i++){
-            array[i] = -1;
-        }
-        
+        Arrays.fill(array, -1);
     }
     
     public int allocate(int size, int mID) {
 
         if(size > array.length) return -1;
-
-        int count = 0;
+        
         int startIndex = 0;
         int endIndex = 0;
+
+        int count = 0;
 
         for(int i = 0; i < array.length; i++){
 
             if(array[i] == -1) count++;
             else{
-                count = 0;
                 startIndex = i + 1;
+                count = 0;
             }
 
             if(count == size){
                 endIndex = i;
                 break;
-    
             }
         }
 
-        if(startIndex > endIndex) return -1;
+        if(startIndex > endIndex) return - 1;
 
-        Arrays.fill(array, startIndex, Math.min(endIndex + 1, array.length), mID);
+        Arrays.fill(array, startIndex, endIndex + 1, mID);
         return startIndex;
-        
+
+
     }
     
     public int freeMemory(int mID) {
@@ -54,7 +50,6 @@ class Allocator {
         }
 
         return count;
-        
     }
 }
 
