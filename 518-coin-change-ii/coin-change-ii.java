@@ -8,11 +8,11 @@ class Solution {
 
         for(int coin : coins){
             for(int i = coin; i <= amount; i++){
-
                 if(coin <= i) dp[i] += dp[i - coin];
             }
         }
 
         return dp[amount];
+        
     }
 }
