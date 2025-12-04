@@ -16,12 +16,12 @@ class Solution {
 
         Set<Integer> visit = new HashSet<>();
 
-        if(!dfs(0, -1, map, visit)) return false;
+        if(!dfs(0, -1, visit, map)) return false;
 
         return visit.size() == n;
     }
 
-    private boolean dfs(int node, int parent, Map<Integer, List<Integer>> map, Set<Integer> visit){
+    private boolean dfs(int node, int parent, Set<Integer> visit, Map<Integer, List<Integer>> map){
 
         if(visit.contains(node)) return false;
 
@@ -30,7 +30,7 @@ class Solution {
         for(int nei : map.get(node)){
 
             if(nei == parent) continue;
-            if(!dfs(nei, node, map, visit)) return false;
+            if(!dfs(nei, node, visit, map)) return false;
         }
 
         return true;
