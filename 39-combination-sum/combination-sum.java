@@ -7,22 +7,21 @@ class Solution {
         backtrack(0, candidates, target, res, path);
 
         return res;
-        
     }
 
-    private void backtrack(int i, int[] candidates, int target, List<List<Integer>> res, List<Integer> path){
+    private void backtrack(int in, int[] candidates, int target, List<List<Integer>> res, List<Integer> path){
 
         if(target == 0){
             res.add(new ArrayList<>(path));
             return;
         }
 
-        if(target < 0 || i >= candidates.length) return;
+        if(in >= candidates.length || target < 0) return;
 
-        path.add(candidates[i]);
-        backtrack(i, candidates, target - candidates[i], res, path);
+        path.add(candidates[in]);
+        backtrack(in, candidates, target - candidates[in], res, path);
         path.remove(path.size() - 1);
 
-        backtrack(i + 1, candidates, target, res, path);
+        backtrack(in + 1, candidates, target, res, path);
     }
 }
