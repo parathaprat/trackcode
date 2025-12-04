@@ -15,33 +15,32 @@
  */
 class Solution {
 
-    int preorderIndex = 0;
+    int preOrderIndex = 0;
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
 
+        //map to get inorder index in o(1)
         Map<Integer, Integer> map = new HashMap<>();
 
         for(int i = 0; i < inorder.length; i++){
             map.put(inorder[i], i);
         }
 
-        TreeNode root = buildGraph(preorder, 0, inorder.length - 1, map);
-
-        return root;
+        return buildGraph(preorder, inorder, 0, inorder.length - 1, map);
     }
 
-    private TreeNode buildGraph(int[] preorder, int start, int end, Map<Integer, Integer> map){
+    private TreeNode buildGraph(int[] preorder, int[] inorder, int start, int end, Map<Integer, Integer> map){
 
         if(start > end) return null;
 
-        int rootVal = preorder[preorderIndex++];
-        int inorderIndex = map.get(rootVal);
+        int nodeIndex = map.get(preorder[preOrderIndex]);
 
-        TreeNode root = new TreeNode(rootVal);
+        TreeNode node = new TreeNode(preorder[preOrderIndex]);
+        preOrderIndex++;
 
-        root.left = buildGraph(preorder, start, inorderIndex - 1, map);
-        root.right = buildGraph(preorder, inorderIndex + 1, end, map);
+        node.left = buildGraph(preorder, inorder, start, nodeIndex - 1, map);
+        node.right = buildGraph(preorder, inorder, nodeIndex + 1, end, map);
 
-        return root;
+        return node;
     }
 }
