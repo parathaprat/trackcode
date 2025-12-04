@@ -13,24 +13,22 @@ class Solution {
 
         if(head == null || head.next == null) return;
 
-        //reverse 2nd half and then merge
-
         ListNode l1 = head;
         ListNode slow = head;
-        ListNode fast = head;
         ListNode prev = head;
+        ListNode fast = head;
 
         while(fast != null && fast.next != null){
-            prev = slow;
 
+            prev = slow;
             slow = slow.next;
             fast = fast.next.next;
+            
         }
 
         prev.next = null;
 
         ListNode l2 = reverse(slow);
-
         merge(l1, l2);
     }
 
