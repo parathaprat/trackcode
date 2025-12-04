@@ -10,14 +10,14 @@ class Solution {
             if(s.charAt(i) == s.charAt(i - 1)) curGroupLen++;
             else{
 
-                count += Math.min(prevGroupLen, curGroupLen);
+                count += Math.min(curGroupLen, prevGroupLen);
 
-                prevGroupLen = curGroupLen; //shift
-                curGroupLen = 1; //reset
+                prevGroupLen = curGroupLen;
+                curGroupLen = 1;
             }
         }
 
-        count += Math.min(prevGroupLen, curGroupLen); //add last pair
+        count += Math.min(prevGroupLen, curGroupLen);
         return count;
     }
 }
