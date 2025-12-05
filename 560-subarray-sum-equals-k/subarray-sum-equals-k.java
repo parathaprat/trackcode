@@ -1,24 +1,20 @@
 class Solution {
     public int subarraySum(int[] nums, int k) {
 
-        //create prefixSum map, prefixSum -> count
-        //traverse through, check for sum so far
-        //add count of surSum - k prefixsum to ans
+        //count(curSum - k) prefix's get added to ans
 
-        int curSum = 0;
-        int ans = 0;
-
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>(); //prefixSum -> count
         map.put(0, 1);
 
-        for(int num : nums){
+        int curSum = 0;
+        int count = 0;
 
+        for(int num : nums){
             curSum += num;
-            ans += map.getOrDefault(curSum - k, 0);
+            count += map.getOrDefault(curSum - k, 0);
             map.put(curSum, map.getOrDefault(curSum, 0) + 1);
         }
 
-        return ans;
-        
+        return count;
     }
 }
