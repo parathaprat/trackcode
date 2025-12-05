@@ -1,9 +1,6 @@
 class Solution {
     public int subarraySum(int[] nums, int k) {
 
-        //map -> prefixSums, counts
-        //ans += current prefixSum's - k
-
         Map<Integer, Integer> map = new HashMap<>();
         map.put(0, 1);
 
@@ -17,5 +14,6 @@ class Solution {
         }
 
         return count;
+        
     }
 }
