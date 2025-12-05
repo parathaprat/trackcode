@@ -3,13 +3,12 @@ class Solution {
 
         int left = 0;
         int right = x;
-
         int ans = 0;
 
         while(left <= right){
 
-            int mid = left + (right - left)/2;
-            long sq = (long) mid * mid;
+            int mid = left + (right - left) / 2;
+            long sq = (long)mid*mid;
 
             if(sq <= x){
                 left = mid + 1;
@@ -21,6 +20,5 @@ class Solution {
         }
 
         return ans;
-        
     }
 }
