@@ -11,65 +11,67 @@ class Solution {
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
 
         List<Integer> ans = new ArrayList<>();
-        Map<Integer, TreeNode> parentMap = new HashMap<>();
+        Map<TreeNode, TreeNode> parentMap = new HashMap<>();
         Queue<TreeNode> q = new LinkedList<>();
 
         q.offer(root);
 
-        //BFS1: populate parent map
+        //populate parentMap with first BFS
+
         while(!q.isEmpty()){
 
-            int size = q.size();
+            int level = q.size();
 
-            for(int i = 0; i < size; i++){
+            for(int i = 0; i < level; i++){
 
-                TreeNode top = q.poll();
+                TreeNode cur = q.poll();
 
-                if(top.left != null){
-                    parentMap.put(top.left.val, top);
-                    q.add(top.left);
+                if(cur.left != null){
+                    parentMap.put(cur.left, cur);
+                    q.add(cur.left);
                 }
-
-                if(top.right != null){
-                    parentMap.put(top.right.val, top);
-                    q.add(top.right);
+                if(cur.right != null){
+                    parentMap.put(cur.right, cur);
+                    q.add(cur.right);
                 }
             }
         }
 
         Set<Integer> visited = new HashSet<>();
 
-        q.add(target); //BFS2: from target to dist k
+        //BFS 2 k times from node target
+        q.add(target);
 
         while(k > 0 && !q.isEmpty()){
 
-            int size = q.size();
-            
-            for(int i = 0; i < size; i++){
+            int level = q.size();
 
-                TreeNode top = q.poll();
-                visited.add(top.val);
+            for(int i = 0; i < level; i++){
 
-                if(top.left != null && !visited.contains(top.left.val)){
-                    q.add(top.left);
+                TreeNode cur = q.poll();
+                visited.add(cur.val);
+
+                if(cur.left != null && !visited.contains(cur.left.val)){
+                    q.add(cur.left);
                 }
 
-                if(top.right != null && !visited.contains(top.right.val)){
-                    q.add(top.right);
+                if(cur.right != null && !visited.contains(cur.right.val)){
+                    q.add(cur.right);
                 }
 
-                if(parentMap.containsKey(top.val) && !visited.contains(parentMap.get(top.val).val)){
-                    q.add(parentMap.get(top.val));
+                if(parentMap.containsKey(cur) && !visited.contains(parentMap.get(cur).val)){
+                    q.add(parentMap.get(cur));
                 }
             }
 
             k--;
         }
 
+        List<Integer> res = new ArrayList<>();
         while(!q.isEmpty()){
-            ans.add(q.poll().val);
+            res.add(q.poll().val);
         }
 
-        return ans;
+        return res;
     }
 }
