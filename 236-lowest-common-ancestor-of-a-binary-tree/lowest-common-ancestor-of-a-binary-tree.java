@@ -9,8 +9,6 @@
  */
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        
-        //recursively search the entire tree
 
         if(root == null) return null;
 
@@ -23,12 +21,11 @@ class Solution {
 
         if(node == p || node == q) return node;
 
-        TreeNode left = getAns( node.left,  p,  q);
-        TreeNode right = getAns( node.right,  p,  q);
+        TreeNode left = getAns(node.left, p, q);
+        TreeNode right = getAns(node.right, p, q);
 
         if(left != null && right != null) return node;
 
         return left == null ? right : left;
-
     }
 }
