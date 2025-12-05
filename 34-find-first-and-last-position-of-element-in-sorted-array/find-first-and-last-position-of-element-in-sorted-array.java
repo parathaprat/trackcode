@@ -4,7 +4,7 @@ class Solution {
         int left = 0;
         int right = nums.length - 1;
 
-        int leftMostIndex = -1;
+        int l = -1;
 
         while(left <= right){
 
@@ -18,14 +18,13 @@ class Solution {
             }
 
             if(nums[mid] == target){
-                leftMostIndex = mid;
+                l = mid;
             }
         }
 
-        int rightMostIndex = -1;
-
         left = 0;
         right = nums.length - 1;
+        int r = -1;
 
         while(left <= right){
 
@@ -39,10 +38,10 @@ class Solution {
             }
 
             if(nums[mid] == target){
-                rightMostIndex = mid;
+                r = mid;
             }
         }
 
-        return new int[]{leftMostIndex, rightMostIndex};
+        return new int[]{l, r};
     }
 }
