@@ -8,14 +8,14 @@ class Solution {
 
             if(i != 0 && nums[i] == nums[i - 1]) continue;
 
+            int target = -nums[i];
             int left = i + 1;
             int right = nums.length - 1;
-
-            int target = -nums[i];
 
             while(left < right){
 
                 if(nums[left] + nums[right] == target){
+
                     res.add(Arrays.asList(nums[i], nums[left], nums[right]));
 
                     while(left < right && nums[left] == nums[left + 1]) left++;
