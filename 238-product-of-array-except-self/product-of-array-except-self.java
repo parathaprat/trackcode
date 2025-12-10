@@ -11,10 +11,9 @@ class Solution {
         int post = 1;
         for(int i = nums.length - 1; i >= 0; i--){
             ans[i] = ans[i] * post;
-            post = nums[i] * post;
+            post = post * nums[i];
         }
 
         return ans;
-        
     }
 }
