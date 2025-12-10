@@ -6,7 +6,8 @@ public class Codec {
         StringBuilder sb = new StringBuilder();
 
         for(String str : strs){
-            sb.append(str.length() + "#" + str);
+
+            sb.append(str.length()).append("#").append(str);
         }
 
         return sb.toString();
@@ -15,27 +16,29 @@ public class Codec {
     // Decodes a single string to a list of strings.
     public List<String> decode(String s) {
 
+        List<String> ans = new ArrayList<>();
+
         int i = 0;
-
-        List<String> res = new ArrayList<>();
-
         while(i < s.length()){
 
-            int j = i;
-            while((s.charAt(j) != '#')){
+            if(Character.isDigit(s.charAt(i))){
+                int j = i + 1;
+
+                while(Character.isDigit(s.charAt(j))) j++;
+
+                int num = Integer.parseInt(s.substring(i, j));
+
                 j++;
+
+                String string = s.substring(j, j + num);
+
+                ans.add(string);
+
+                i = j + num;
             }
-
-            int len = Integer.parseInt(s.substring(i, j));
-            j++;
-
-            String str = s.substring(j, j + len);
-            res.add(str);
-
-            i = j + len;
         }
 
-        return res;
+        return ans; 
     }
 }
 
