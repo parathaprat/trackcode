@@ -2,8 +2,9 @@ class Solution {
     public int lengthOfLongestSubstring(String s) {
 
         int left = 0;
-        int ans = 0;
         int right = 0;
+
+        int maxLen = 0;
 
         Set<Character> set = new HashSet<>();
 
@@ -18,9 +19,9 @@ class Solution {
                 left++;
             }
 
-            ans = Math.max(ans, right - left);
+            maxLen = Math.max(right - left, maxLen);
         }
 
-        return ans;
+        return maxLen;
     }
 }
