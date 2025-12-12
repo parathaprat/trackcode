@@ -1,10 +1,8 @@
 class Solution {
     public int[] dailyTemperatures(int[] temperatures) {
 
-        //store index of temps in the stack 
-
         int[] res = new int[temperatures.length];
-        Stack<Integer> st = new Stack<>();
+        Stack<Integer> st = new Stack<>(); //stack to store indexes of non increasing temperatures
 
         for(int i = 0; i < temperatures.length; i++){
 
@@ -16,6 +14,5 @@ class Solution {
         }
 
         return res;
-        
     }
 }
