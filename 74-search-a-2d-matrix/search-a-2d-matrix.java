@@ -4,21 +4,21 @@ class Solution {
         int r = matrix.length;
         int c = matrix[0].length;
 
-        int l = 0;
-        int ri = r * c - 1;
+        int left = 0;
+        int right = r * c - 1;
 
-        while(l <= ri){
+        while(left <= right){
 
-            int m = l + (ri - l)/2;
+            int mid = left + (right - left) / 2;
 
-            if(matrix[m/c][m%c] == target){
+            if(matrix[mid/c][mid%c] == target){
                 return true;
             }
-            else if(matrix[m/c][m%c] < target){
-                l = m + 1;
+            else if(matrix[mid/c][mid%c] < target){
+                left = mid + 1;
             }
             else{
-                ri = m - 1;
+                right = mid - 1;
             }
         }
 
