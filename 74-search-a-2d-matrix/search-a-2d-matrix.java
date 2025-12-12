@@ -1,7 +1,6 @@
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
-        
-        //flatten it out and do binary search
+
         int r = matrix.length;
         int c = matrix[0].length;
 
