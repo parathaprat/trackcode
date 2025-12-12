@@ -1,6 +1,8 @@
 class Solution {
     public int[] dailyTemperatures(int[] temperatures) {
 
+        //store index of temps in the stack 
+
         int[] res = new int[temperatures.length];
         Stack<Integer> st = new Stack<>();
 
