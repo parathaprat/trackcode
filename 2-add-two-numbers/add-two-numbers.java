@@ -11,8 +11,8 @@
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
-        int carry = 0;
         int sum = 0;
+        int carry = 0;
 
         ListNode temp = new ListNode(0);
         ListNode cur = temp;
@@ -31,15 +31,13 @@ class Solution {
                 l2 = l2.next;
             }
 
+            ListNode node = new ListNode(sum%10);
             carry = sum/10;
-            sum = sum%10;
 
-            ListNode node = new ListNode(sum);
             cur.next = node;
             cur = cur.next;
         }
 
         return temp.next;
-        
     }
 }
