@@ -1,6 +1,8 @@
 class Solution {
     public int search(int[] nums, int target) {
 
+        //BS to find pivot. BS to search for element
+
         int left = 0;
         int right = nums.length - 1;
 
@@ -8,11 +10,11 @@ class Solution {
 
             int mid = left + (right - left) / 2;
 
-            if(nums[mid] < nums[right]){
-                right = mid;
+            if(nums[mid] > nums[right]){
+                left = mid + 1;
             }
             else{
-                left = mid + 1;
+                right = mid;
             }
         }
 
@@ -23,8 +25,8 @@ class Solution {
             right = nums.length - 1;
         }
         else{
-            right = pivot - 1;
             left = 0;
+            right = pivot - 1;
         }
 
         while(left <= right){
@@ -43,6 +45,5 @@ class Solution {
         }
 
         return -1;
-        
     }
 }
