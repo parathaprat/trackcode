@@ -26,7 +26,6 @@ class Solution {
                 list2 = list2.next;
                 cur = cur.next;
             }
-
         }
 
         while(list1 != null){
@@ -42,6 +41,5 @@ class Solution {
         }
 
         return temp.next;
-        
     }
 }
