@@ -28,7 +28,7 @@ class LRUCache {
     }
     
     public int get(int key) {
-
+        
         if(!map.containsKey(key)) return -1;
 
         Node node = map.get(key);
@@ -37,7 +37,6 @@ class LRUCache {
         insert(node);
         
         return node.val;
-        
     }
     
     public void put(int key, int value) {
