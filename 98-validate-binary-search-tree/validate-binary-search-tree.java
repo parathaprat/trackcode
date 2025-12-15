@@ -26,6 +26,6 @@ class Solution {
 
         if(root.val >= max || root.val <= min) return false;
 
-        return isValid(root.left, root.val, min) && isValid(root.right, max, root.val);
+        return isValid(root.right, max, root.val) && isValid(root.left, root.val, min);
     }
 }
