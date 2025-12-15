@@ -19,7 +19,6 @@ class Solution {
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
 
-        //map to get inorder index in o(1)
         Map<Integer, Integer> map = new HashMap<>();
 
         for(int i = 0; i < inorder.length; i++){
@@ -42,5 +41,6 @@ class Solution {
         node.right = buildGraph(preorder, inorder, nodeIndex + 1, end, map);
 
         return node;
+
     }
 }
