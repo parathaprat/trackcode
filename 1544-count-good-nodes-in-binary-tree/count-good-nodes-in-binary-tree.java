@@ -17,6 +17,13 @@ class Solution {
 
     int count = 0;
 
+    public int goodNodes(TreeNode root) {
+
+        helper(root, Integer.MIN_VALUE);
+        return count;
+        
+    }
+
     private void helper(TreeNode node, int max){
 
         if(node == null) return;
@@ -25,12 +32,5 @@ class Solution {
 
         helper(node.left, Math.max(node.val, max));
         helper(node.right, Math.max(node.val, max));
-    }
-
-    public int goodNodes(TreeNode root) {
-
-        helper(root, Integer.MIN_VALUE);
-        return count;
-        
     }
 }
