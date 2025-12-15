@@ -20,20 +20,19 @@ class Solution {
 
     public int kthSmallest(TreeNode root, int k) {
 
-        inorder(root, k);
-
+        dfs(root, k);
         return ans;
     }
 
-    private void inorder(TreeNode root, int k){
+    private void dfs(TreeNode root, int k){
 
         if(root == null) return;
 
-        inorder(root.left, k);
+        dfs(root.left, k);
 
         count++;
         if(count == k) ans = root.val;
 
-        inorder(root.right, k);
+        dfs(root.right, k);
     }
 }
