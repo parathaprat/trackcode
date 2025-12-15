@@ -14,9 +14,7 @@ class Solution {
         PriorityQueue<ListNode> pq = new PriorityQueue<>((a, b) -> a.val - b.val);
 
         for(ListNode node : lists){
-            
             if(node != null) pq.add(node);
-
         }
 
         ListNode temp = new ListNode(0);
@@ -24,14 +22,14 @@ class Solution {
 
         while(!pq.isEmpty()){
 
-            ListNode node = pq.poll();
-            if(node.next != null) pq.add(node.next);
+            ListNode next = pq.poll();
 
-            cur.next = node;
+            if(next.next != null) pq.add(next.next);
+
+            cur.next = next;
             cur = cur.next;
         }
 
         return temp.next;
-        
     }
 }
