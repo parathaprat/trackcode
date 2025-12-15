@@ -19,18 +19,17 @@ class Solution {
 
     public int goodNodes(TreeNode root) {
 
-        helper(root, Integer.MIN_VALUE);
+        dfs(root, Integer.MIN_VALUE);
         return count;
-        
     }
 
-    private void helper(TreeNode node, int max){
+    private void dfs(TreeNode node, int max){
 
         if(node == null) return;
 
         if(node.val >= max) count++;
 
-        helper(node.left, Math.max(node.val, max));
-        helper(node.right, Math.max(node.val, max));
+        dfs(node.left, Math.max(node.val, max));
+        dfs(node.right, Math.max(node.val, max));
     }
 }
