@@ -19,10 +19,9 @@ class Solution {
 
     public int maxPathSum(TreeNode root) {
 
-        //maxPathSum of left subtree, maxPathSum right subtree
-
         getAns(root);
         return maxSum;
+        
     }
 
     private int getAns(TreeNode root){
@@ -35,5 +34,6 @@ class Solution {
         maxSum = Math.max(maxSum, root.val + leftSum + rightSum);
 
         return root.val + Math.max(leftSum, rightSum);
+
     }
 }
