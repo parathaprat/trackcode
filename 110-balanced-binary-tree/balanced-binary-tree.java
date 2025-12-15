@@ -14,22 +14,25 @@
  * }
  */
 class Solution {
+
+    //return height of subtree if balanced, -1 if not balanced 
+
     public boolean isBalanced(TreeNode root) {
 
         return height(root) != -1;
+        
     }
 
     private int height(TreeNode root){
 
         if(root == null) return 0;
 
-        int leftHeight = height(root.left);
-        int rightHeight = height(root.right);
+        int leftSubtree = height(root.left);
+        int rightSubtree = height(root.right);
 
-        if(Math.abs(leftHeight - rightHeight) > 1) return -1;
+        if(Math.abs(leftSubtree - rightSubtree) > 1) return -1;
+        if(leftSubtree == -1 || rightSubtree == -1) return -1;
 
-        if(leftHeight == -1 || rightHeight == -1) return -1;
-
-        return 1 + (Math.max(leftHeight, rightHeight));
+        return 1 + Math.max(leftSubtree, rightSubtree);
     }
 }
