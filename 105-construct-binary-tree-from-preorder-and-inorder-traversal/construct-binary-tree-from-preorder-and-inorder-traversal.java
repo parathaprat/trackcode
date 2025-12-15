@@ -15,7 +15,7 @@
  */
 class Solution {
 
-    int preOrderIndex = 0;
+    int preorderIndex = 0;
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
 
@@ -32,15 +32,14 @@ class Solution {
 
         if(start > end) return null;
 
-        int nodeIndex = map.get(preorder[preOrderIndex]);
+        TreeNode node = new TreeNode(preorder[preorderIndex]);
+        preorderIndex++;
 
-        TreeNode node = new TreeNode(preorder[preOrderIndex]);
-        preOrderIndex++;
+        int inorderIndex = map.get(node.val);
 
-        node.left = buildGraph(preorder, inorder, start, nodeIndex - 1, map);
-        node.right = buildGraph(preorder, inorder, nodeIndex + 1, end, map);
+        node.left = buildGraph(preorder, inorder, start, inorderIndex - 1, map);
+        node.right = buildGraph(preorder, inorder, inorderIndex + 1, end, map);
 
         return node;
-
     }
 }
