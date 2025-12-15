@@ -1,19 +1,19 @@
 class Solution {
     public int leastInterval(char[] tasks, int n) {
 
-        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a); //CPU sim, highest freq first
-
-        Queue<int[]> q = new LinkedList<>(); //cooldown q (task, time executable)
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
 
         int[] freq = new int[26];
 
         for(char c : tasks){
             freq[c - 'A']++;
         }
-        
+
         for(int fre : freq){
             if(fre != 0) pq.add(fre);
         }
+
+        Queue<int[]> q = new LinkedList<>();
 
         int time = 0;
 
@@ -22,15 +22,12 @@ class Solution {
             if(pq.isEmpty()){
                 time = q.peek()[1];
             }
-
             if(!pq.isEmpty()){
-
                 int task = pq.poll();
                 task -= 1;
                 if(task > 0) q.add(new int[]{task, time + n});
             }
-
-            if(!q.isEmpty() && time == q.peek()[1]){
+            if(!q.isEmpty() && q.peek()[1] == time){
                 pq.add(q.poll()[0]);
             }
 
