@@ -8,7 +8,7 @@ class Solution {
 
             sum += num;
 
-            maxSum = Math.max(maxSum, sum);
+            maxSum = Math.max(sum, maxSum);
 
             if(sum < 0) sum = 0;
         }
