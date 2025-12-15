@@ -15,21 +15,24 @@
  */
 class Solution {
 
-    List<Integer> inorder= new ArrayList<>();
+    int count = 0;
+    int ans = 0;
 
     public int kthSmallest(TreeNode root, int k) {
 
-        dfs(root);
-        
-        return inorder.get(k - 1);
+        dfs(root, k);
+        return ans;
     }
 
-    private void dfs(TreeNode root){
+    private void dfs(TreeNode root, int k){
 
         if(root == null) return;
 
-        dfs(root.left);
-        inorder.add(root.val);
-        dfs(root.right);
+        dfs(root.left, k);
+
+        count++;
+        if(count == k) ans = root.val;
+
+        dfs(root.right, k);
     }
 }
