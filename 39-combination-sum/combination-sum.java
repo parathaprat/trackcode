@@ -2,26 +2,26 @@ class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
 
         List<List<Integer>> res = new ArrayList<>();
-        List<Integer> path = new ArrayList<>();
+        List<Integer> set = new ArrayList<>();
 
-        backtrack(0, candidates, target, res, path);
+        backtrack(res, set, 0, candidates, target);
 
         return res;
     }
 
-    private void backtrack(int in, int[] candidates, int target, List<List<Integer>> res, List<Integer> path){
+    private void backtrack(List<List<Integer>> res, List<Integer> set, int ind, int[] candidates, int target){
 
         if(target == 0){
-            res.add(new ArrayList<>(path));
+            res.add(new ArrayList<>(set));
             return;
         }
 
-        if(in >= candidates.length || target < 0) return;
+        if(ind >= candidates.length || target < 0) return;
 
-        path.add(candidates[in]);
-        backtrack(in, candidates, target - candidates[in], res, path);
-        path.remove(path.size() - 1);
+        set.add(candidates[ind]);
+        backtrack(res, set, ind, candidates, target - candidates[ind]);
+        set.remove(set.size() - 1);
 
-        backtrack(in + 1, candidates, target, res, path);
+        backtrack(res, set, ind + 1, candidates, target);
     }
 }
