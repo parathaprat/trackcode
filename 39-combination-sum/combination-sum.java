@@ -7,6 +7,7 @@ class Solution {
         backtrack(res, path, 0, candidates, target);
 
         return res;
+        
     }
 
     private void backtrack(List<List<Integer>> res, List<Integer> path, int ind, int[] candidates, int target){
@@ -16,12 +17,13 @@ class Solution {
             return;
         }
 
-        if(ind >= candidates.length || target < 0) return;
+        if(target < 0) return;
 
-        path.add(candidates[ind]);
-        backtrack(res, path, ind, candidates, target - candidates[ind]);
-        path.remove(path.size() - 1);
+        for(int i = ind; i < candidates.length; i++){
 
-        backtrack(res, path, ind + 1, candidates, target);
+            path.add(candidates[i]);
+            backtrack(res, path, i, candidates, target - candidates[i]);
+            path.remove(path.size() - 1);
+        }
     }
 }
