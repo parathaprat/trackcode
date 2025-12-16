@@ -28,6 +28,5 @@ class Solution {
             backtrack(res, path, i + 1, candidates, target - candidates[i]);
             path.remove(path.size() - 1);
         }
-
     }
 }
