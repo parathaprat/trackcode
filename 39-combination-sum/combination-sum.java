@@ -17,13 +17,12 @@ class Solution {
             return;
         }
 
-        if(target < 0) return;
+        if(ind >= candidates.length || target < 0) return;
 
-        for(int i = ind; i < candidates.length; i++){
+        path.add(candidates[ind]);
+        backtrack(res, path, ind, candidates, target - candidates[ind]);
+        path.remove(path.size() - 1);
 
-            path.add(candidates[i]);
-            backtrack(res, path, i, candidates, target - candidates[i]);
-            path.remove(path.size() - 1);
-        }
+        backtrack(res, path, ind + 1, candidates, target);
     }
 }
