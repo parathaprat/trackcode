@@ -4,27 +4,27 @@ class Solution {
         StringBuilder sb = new StringBuilder();
         List<String> res = new ArrayList<>();
 
-        backtrack(0, 0, sb, res, n);
+        backtrack(sb, res, n, 0, 0);
 
         return res;
     }
 
-    private void backtrack(int open, int close, StringBuilder sb, List<String> res, int n){
+    private void backtrack(StringBuilder sb, List<String> res, int n, int open, int close){
 
-        if(open == close && close == n){
+        if(open == n && close == n){
             res.add(sb.toString());
             return;
         }
 
         if(open < n){
-            sb.append('(');
-            backtrack(open + 1, close, sb, res, n);
+            sb.append("(");
+            backtrack(sb, res, n, open + 1, close);
             sb.deleteCharAt(sb.length() - 1);
         }
 
-        if(open > close){
-            sb.append(')');
-            backtrack(open, close + 1, sb, res, n);
+        if(close < open){
+            sb.append(")");
+            backtrack(sb, res, n, open, close + 1);
             sb.deleteCharAt(sb.length() - 1);
         }
     }
