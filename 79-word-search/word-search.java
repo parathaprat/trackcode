@@ -22,12 +22,11 @@ class Solution {
             return true;
         }
 
-        if(i < 0 || i >= board.length || j < 0 || j >= board[0].length || word.charAt(in) != board[i][j] || visited[i][j]) return false;
+        if(i < 0 || i >= board.length || j < 0 || j >= board[0].length || visited[i][j] || word.charAt(in) != board[i][j]) return false;
 
         visited[i][j] = true;
 
         for(int[] dir : directions){
-
             int nr = i + dir[0];
             int nc = j + dir[1];
 
