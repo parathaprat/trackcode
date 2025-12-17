@@ -1,9 +1,11 @@
 class Solution {
     public List<String> generateParenthesis(int n) {
-        
+
         StringBuilder sb = new StringBuilder();
         List<String> res = new ArrayList<>();
+
         backtrack(0, 0, sb, res, n);
+
         return res;
     }
 
@@ -16,7 +18,7 @@ class Solution {
 
         if(open < n){
             sb.append('(');
-            backtrack(open + 1, close, sb, res,n);
+            backtrack(open + 1, close, sb, res, n);
             sb.deleteCharAt(sb.length() - 1);
         }
 
