@@ -21,13 +21,14 @@ class Node {
 class Solution {
     public Node cloneGraph(Node node) {
 
-        if(node == null) return null;
-
         Map<Node, Node> map = new HashMap<>();
+
         return getCopy(node, map);
     }
 
     private Node getCopy(Node node, Map<Node, Node> map){
+
+        if(node == null) return null;
 
         if(map.containsKey(node)) return map.get(node);
 
