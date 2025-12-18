@@ -4,6 +4,7 @@ class Solution {
         if(edges.length != n - 1) return false;
 
         Map<Integer, List<Integer>> map = new HashMap<>();
+        Set<Integer> visit = new HashSet<>();
 
         for(int i = 0; i < n; i++){
             map.put(i, new ArrayList<>());
@@ -14,23 +15,21 @@ class Solution {
             map.get(e[1]).add(e[0]);
         }
 
-        Set<Integer> visit = new HashSet<>();
-
-        if(!dfs(0, -1, visit, map)) return false;
+        if(!dfs(0, -1, map, visit)) return false;
 
         return visit.size() == n;
     }
 
-    private boolean dfs(int node, int parent, Set<Integer> visit, Map<Integer, List<Integer>> map){
+    private boolean dfs(int node, int parent, Map<Integer, List<Integer>> map, Set<Integer> set){
 
-        if(visit.contains(node)) return false;
+        if(set.contains(node)) return false;
 
-        visit.add(node);
+        set.add(node);
 
         for(int nei : map.get(node)){
 
             if(nei == parent) continue;
-            if(!dfs(nei, node, visit, map)) return false;
+            if(!dfs(nei, node, map, set)) return false;
         }
 
         return true;
