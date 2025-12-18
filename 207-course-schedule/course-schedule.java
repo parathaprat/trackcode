@@ -15,7 +15,6 @@ class Solution {
         }
 
         for(int i = 0; i < numCourses; i++){
-
             if(!dfs(i)) return false;
         }
 
@@ -33,8 +32,8 @@ class Solution {
             if(!dfs(nei)) return false;
         }
 
-        visit.remove(course);
         pros.add(course);
+        visit.remove(course);
         return true;
     }
 }
