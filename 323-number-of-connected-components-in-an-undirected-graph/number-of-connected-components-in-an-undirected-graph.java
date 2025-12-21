@@ -1,8 +1,5 @@
 class Solution {
 
-    //DSU: union: connect components
-    //find: find parents
-
     int[] parent;
     int[] rank;
 
@@ -19,10 +16,7 @@ class Solution {
         int count = n;
 
         for(int[] e : edges){
-
-            if(union(e[0], e[1])){
-                count--;
-            }
+            if(union(e[0], e[1])) count--;
         }
 
         return count;
@@ -30,27 +24,27 @@ class Solution {
 
     private boolean union(int u, int v){
 
-        int pv = find(v);
         int pu = find(u);
+        int pv = find(v);
 
-        if(pv == pu) return false;
+        if(pu == pv) return false;
 
-        if(rank[pu] > rank[pv]){
+        if(pv > pu){
             int temp = pv;
             pv = pu;
             pu = temp;
         }
 
-        parent[pu] = pv;
-
-        rank[pv] += rank[pu];
+        parent[pv] = pu;
+        rank[pu] += rank[pv]; 
         return true;
     }
 
     private int find(int node){
+
         int cur = node;
 
-        while(parent[cur] != cur){
+        while(cur != parent[cur]){
             parent[cur] = parent[parent[cur]];
             cur = parent[cur];
         }
