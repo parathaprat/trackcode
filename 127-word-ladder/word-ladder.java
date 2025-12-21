@@ -9,6 +9,7 @@ class Solution {
         q.add(beginWord);
 
         int steps = 1;
+        
         while(!q.isEmpty()){
 
             int level = q.size();
@@ -23,6 +24,7 @@ class Solution {
                     for(char c = 'a'; c <= 'z'; c++){
 
                         if(c == word.charAt(j)) continue;
+
                         String nei = word.substring(0, j) + c + word.substring(j + 1);
 
                         if(set.contains(nei)){
