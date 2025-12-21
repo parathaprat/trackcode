@@ -9,18 +9,17 @@ class Solution {
         parent = new int[n + 1];
         rank = new int[n + 1];
 
-        for(int i = 1; i<= n; i++){
+        for(int i = 1; i <= n; i++){
             parent[i] = i;
             rank[i] = i;
         }
 
-        for(int[] edge : edges){
-
-            int u = edge[0];
-            int v = edge[1];
+        for(int[] e : edges){
+            int u = e[0];
+            int v = e[1];
 
             if(!union(u, v)){
-                return edge;
+                return e;
             }
         }
 
