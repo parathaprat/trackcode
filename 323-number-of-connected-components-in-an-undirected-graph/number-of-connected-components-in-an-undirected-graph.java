@@ -29,7 +29,7 @@ class Solution {
 
         if(pu == pv) return false;
 
-        if(pv > pu){
+        if(rank[pv] > rank[pu]){
             int temp = pv;
             pv = pu;
             pu = temp;
