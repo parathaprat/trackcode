@@ -4,7 +4,7 @@ class Solution {
     int[] rank;
 
     public int countComponents(int n, int[][] edges) {
-
+        
         parent = new int[n];
         rank = new int[n];
 
@@ -30,18 +30,19 @@ class Solution {
         if(pu == pv) return false;
 
         if(rank[pv] > rank[pu]){
-            int temp = pv;
-            pv = pu;
-            pu = temp;
+            int temp = pu;
+            pu = pv;
+            pv = temp;
         }
 
         parent[pv] = pu;
-        rank[pu] += rank[pv]; 
+        rank[pu] += rank[pv];
+
         return true;
     }
 
     private int find(int node){
-
+        
         int cur = node;
 
         while(cur != parent[cur]){
