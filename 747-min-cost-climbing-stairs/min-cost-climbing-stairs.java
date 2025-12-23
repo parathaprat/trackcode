@@ -10,8 +10,7 @@ class Solution {
             dp[i] = Math.min(dp[i - 1], dp[i - 2]) + cost[i];
         }
 
-        return Math.min(dp[cost.length - 1], dp[cost.length - 2]);
-
+        return Math.min(dp[cost.length - 2], dp[cost.length - 1]);
         
     }
 }
