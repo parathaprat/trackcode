@@ -8,18 +8,18 @@ class Solution {
         for(int i = 1; i < nums.length; i++){
 
             if(nums[i] < 0){
+
                 int temp = max;
                 max = min;
                 min = temp;
             }
 
-            min = Math.min(nums[i], min * nums[i]);
-            max = Math.max(nums[i], max * nums[i]);
+            min = Math.min(nums[i], nums[i] * min);
+            max = Math.max(nums[i], nums[i] * max);
 
             ans = Math.max(ans, max);
         }
 
         return ans;
-        
     }
 }
