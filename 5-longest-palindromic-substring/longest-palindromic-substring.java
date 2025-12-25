@@ -1,29 +1,29 @@
 class Solution {
 
-    int left = 0;
-    int right = 0;
-    int max = 0;
+    int l = 0;
+    int r = 0;
+    int len = 0;
 
     public String longestPalindrome(String s) {
 
-        for(int i = 1; i < s.length(); i++){
+        for(int i = 0; i < s.length() - 1; i++){
             checkPal(i, i, s);
-            checkPal(i, i - 1, s);
+            checkPal(i, i + 1, s);
         }
 
-        return s.substring(left, right + 1);
+        return s.substring(l, r + 1);
     }
 
-    private void checkPal(int l, int r, String s){
+    private void checkPal(int left, int right, String s){
 
-        if(l < 0 || r >= s.length() || s.charAt(l) != s.charAt(r)) return;
+        if(left < 0 || right >= s.length() || s.charAt(left) != s.charAt(right)) return;
 
-        if(r - l + 1 > max){
-            max = r - l + 1;
-            left = l;
-            right = r;
+        if(len < right - left + 1){
+            len = right - left + 1;
+            l = left;
+            r = right;
         }
 
-        checkPal(l - 1, r + 1, s);
+        checkPal(left - 1, right + 1, s);
     }
 }
