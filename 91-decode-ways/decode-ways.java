@@ -19,7 +19,7 @@ class Solution {
             int num = Integer.parseInt(s.substring(i, i + 2));
             if(num >= 10 && num <= 26) dp[i] += dp[i + 2];
         }
-
+        
         return dp[0];
     }
 }
