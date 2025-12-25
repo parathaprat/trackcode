@@ -6,7 +6,7 @@ class Solution {
 
     public String longestPalindrome(String s) {
 
-        for(int i = 0; i < s.length() - 1; i++){
+        for(int i = 0; i < s.length(); i++){
             checkPal(i, i, s);
             checkPal(i, i + 1, s);
         }
