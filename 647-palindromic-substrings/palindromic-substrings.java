@@ -12,12 +12,12 @@ class Solution {
         return ans;
     }
 
-    private void checkPal(int left, int right, String s){
+    private void checkPal(int l, int r, String s){
 
-        if(left < 0 || right >= s.length() || s.charAt(left) != s.charAt(right)) return;
+        if(l < 0 || r >= s.length() || s.charAt(l) != s.charAt(r)) return;
 
         ans++;
 
-        checkPal(left - 1, right + 1, s);
+        checkPal(l - 1, r + 1, s);
     }
 }
