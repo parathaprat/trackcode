@@ -5,7 +5,7 @@ class Solution {
 
         for(int num : nums) totalSum += num;
 
-        if(totalSum%2 != 0) return false;
+        if(totalSum % 2 != 0) return false;
 
         int targetSum = totalSum/2;
 
@@ -21,5 +21,6 @@ class Solution {
         }
 
         return dp[targetSum];
+        
     }
 }
