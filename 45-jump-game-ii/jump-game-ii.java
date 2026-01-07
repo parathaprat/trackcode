@@ -10,7 +10,7 @@ class Solution {
             int farthest = 0;
 
             for(int i = near; i <= far; i++){
-                farthest = Math.max(farthest, i + nums[i]);
+                farthest = Math.max(nums[i] + i, farthest);
             }
 
             near = far + 1;
@@ -19,5 +19,6 @@ class Solution {
         }
 
         return jumps;
+        
     }
 }
