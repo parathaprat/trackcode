@@ -25,6 +25,5 @@ class Solution {
         }
 
         return res.toArray(new int[res.size()][]);
-        
     }
 }
