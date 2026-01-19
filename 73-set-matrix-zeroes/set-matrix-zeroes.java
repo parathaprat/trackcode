@@ -1,16 +1,16 @@
 class Solution {
     public void setZeroes(int[][] matrix) {
 
-        //use 1st col and 1st row to store 0 index's for its corresponding r/c
-        //store the one overlapping index seperately
+        int row = matrix.length;
+        int col = matrix[0].length;
 
-        boolean firstColZero = false;
+        boolean colInd = false;
 
-        for(int i = 0; i < matrix.length; i++){
+        for(int i = 0; i < row; i++){
 
-            if(matrix[i][0] == 0) firstColZero = true;
+            if(matrix[i][0] == 0) colInd = true;
 
-            for(int j = 1; j < matrix[0].length; j++){
+            for(int j = 1; j < col; j++){
 
                 if(matrix[i][j] == 0){
                     matrix[i][0] = 0;
@@ -19,17 +19,13 @@ class Solution {
             }
         }
 
-        //use those zeros to convert rows and cols into 0s
+        for(int i = row - 1; i >= 0; i--){
+            for(int j = col - 1; j > 0; j--){
 
-        for(int i = matrix.length - 1; i >= 0; i--){
-            for(int j = matrix[0].length - 1; j > 0; j--){
-
-                if(matrix[i][0] == 0 || matrix[0][j] == 0){
-                    matrix[i][j] = 0;
-                }
+                if(matrix[i][0] == 0 || matrix[0][j] == 0) matrix[i][j] = 0;
             }
 
-            if(firstColZero) matrix[i][0] = 0;
+            if(colInd) matrix[i][0] = 0;
         }
     }
 }
