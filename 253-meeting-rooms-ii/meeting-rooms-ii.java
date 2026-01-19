@@ -4,7 +4,7 @@ class Solution {
         Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
 
         PriorityQueue<Integer> pq = new PriorityQueue<>();
-        
+
         for(int[] in : intervals){
 
             if(!pq.isEmpty() && pq.peek() <= in[0]){
@@ -15,6 +15,5 @@ class Solution {
         }
 
         return pq.size();
-        
     }
 }
