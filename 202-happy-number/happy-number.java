@@ -1,6 +1,5 @@
 class Solution {
     public boolean isHappy(int n) {
-        
 
         HashSet<Integer> seen = new HashSet<>();
 
@@ -15,9 +14,7 @@ class Solution {
                 current = current/10;
             }
 
-            if(seen.contains(sum)){
-                return false;
-            }
+            if(seen.contains(sum)) return false;
 
             seen.add(sum);
             n = sum;
