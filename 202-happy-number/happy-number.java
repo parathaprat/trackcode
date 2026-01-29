@@ -9,10 +9,9 @@ class Solution {
             int sum = 0;
 
             while(current != 0){
-                
+
                 sum += (current % 10) * (current % 10);
                 current = current/10;
-
             }
 
             if(seen.contains(sum)){
