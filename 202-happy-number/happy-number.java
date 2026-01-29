@@ -1,5 +1,6 @@
 class Solution {
     public boolean isHappy(int n) {
+        
 
         HashSet<Integer> seen = new HashSet<>();
 
