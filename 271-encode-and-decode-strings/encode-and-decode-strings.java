@@ -2,7 +2,7 @@ public class Codec {
 
     // Encodes a list of strings to a single string.
     public String encode(List<String> strs) {
-        
+
         StringBuilder sb = new StringBuilder();
 
         for(String str : strs){
@@ -11,6 +11,7 @@ public class Codec {
         }
 
         return sb.toString();
+        
     }
 
     // Decodes a single string to a list of strings.
