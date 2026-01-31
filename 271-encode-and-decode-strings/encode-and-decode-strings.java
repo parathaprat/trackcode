@@ -2,7 +2,7 @@ public class Codec {
 
     // Encodes a list of strings to a single string.
     public String encode(List<String> strs) {
-
+        
         StringBuilder sb = new StringBuilder();
 
         for(String str : strs){
@@ -19,9 +19,11 @@ public class Codec {
         List<String> ans = new ArrayList<>();
 
         int i = 0;
+
         while(i < s.length()){
 
             if(Character.isDigit(s.charAt(i))){
+
                 int j = i + 1;
 
                 while(Character.isDigit(s.charAt(j))) j++;
@@ -38,7 +40,7 @@ public class Codec {
             }
         }
 
-        return ans; 
+        return ans;
     }
 }
 
