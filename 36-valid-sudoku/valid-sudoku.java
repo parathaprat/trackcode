@@ -8,9 +8,11 @@ class Solution {
 
                 if(board[i][j] != '.'){
 
-                    if(!set.add("row" + i + board[i][j]) ||
-                    !set.add("col" + j + board[i][j]) || 
-                    !set.add("block" + i/3 + j/3 + board[i][j])){
+                    if(
+                        !set.add("row" + i + board[i][j]) ||
+                        !set.add("col" + j + board[i][j]) ||
+                        !set.add("block" + i/3 + j/3 + board[i][j])
+                    ){
                         return false;
                     }
                 }
