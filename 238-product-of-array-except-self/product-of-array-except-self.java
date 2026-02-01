@@ -5,7 +5,6 @@ class Solution {
 
         ans[0] = 1;
 
-        //prefix 
         for(int i = 1; i < nums.length; i++){
             ans[i] = ans[i - 1] * nums[i - 1];
         }
@@ -19,6 +18,5 @@ class Solution {
         }
 
         return ans;
-        
     }
 }
