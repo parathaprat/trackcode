@@ -8,7 +8,7 @@ class Solution {
         int ans = 0;
 
         for(int right = 0; right < s.length(); right++){
-            
+
             char rightc = s.charAt(right);
             freq[rightc - 'A']++;
 
