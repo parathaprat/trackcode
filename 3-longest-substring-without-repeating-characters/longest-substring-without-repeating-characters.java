@@ -22,6 +22,6 @@ class Solution {
             maxLen = Math.max(right - left, maxLen);
         }
 
-        return maxLen;
+        return maxLen;        
     }
 }
