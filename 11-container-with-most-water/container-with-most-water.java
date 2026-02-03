@@ -11,12 +11,12 @@ class Solution {
 
             if(height[left] < height[right]){
                 water = height[left] * (right - left);
-                maxWater = Math.max(water, maxWater);
+                maxWater = Math.max(maxWater, water);
                 left++;
             }
             else{
                 water = height[right] * (right - left);
-                maxWater = Math.max(water, maxWater);
+                maxWater = Math.max(maxWater, water);
                 right--;
             }
         }
