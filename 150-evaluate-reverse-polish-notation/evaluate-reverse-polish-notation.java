@@ -2,7 +2,7 @@ class Solution {
     public int evalRPN(String[] tokens) {
 
         //if num, add to stack
-        //if opp, pop last 2 nums, op and put back int stack
+        //if opp, pop last 2 nums, op and add back to stack
 
         Stack<Integer> st = new Stack<>();
 
