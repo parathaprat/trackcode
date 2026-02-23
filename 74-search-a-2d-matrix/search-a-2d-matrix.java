@@ -14,9 +14,11 @@ class Solution {
             if(matrix[mid/c][mid%c] == target){
                 return true;
             }
+
             else if(matrix[mid/c][mid%c] < target){
                 left = mid + 1;
             }
+
             else{
                 right = mid - 1;
             }
