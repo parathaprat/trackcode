@@ -11,7 +11,6 @@ class Solution {
         int r = k;
 
         while(l <= r){
-
             int m = l + (r - l)/2;
 
             int hours = 0;
