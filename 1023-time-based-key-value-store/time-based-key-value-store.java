@@ -11,14 +11,14 @@ class TimeMap {
         }
     }
 
-    HashMap<String, ArrayList<pair>> hashMap;
+    HashMap<String, ArrayList<pair>> hashMap; //key -> timestamp, val
 
     public TimeMap() {
         hashMap = new HashMap<>();
     }
     
     public void set(String key, String value, int timestamp) {
-        
+
         if(hashMap.containsKey(key)){
             hashMap.get(key).add(new pair(timestamp, value));
         }
@@ -27,12 +27,13 @@ class TimeMap {
             arr.add(new pair(timestamp, value));
             hashMap.put(key, arr);
         }
+        
     }
     
     public String get(String key, int timestamp) {
 
         String ans = "";
-        
+
         if(hashMap.containsKey(key)){
 
             ArrayList<pair> arr = hashMap.get(key);
@@ -60,6 +61,7 @@ class TimeMap {
         }
 
         return ans;
+        
     }
 }
 
