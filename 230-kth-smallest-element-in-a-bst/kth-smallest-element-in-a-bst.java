@@ -22,6 +22,7 @@ class Solution {
 
         dfs(root, k);
         return ans;
+        
     }
 
     private void dfs(TreeNode root, int k){
@@ -29,9 +30,9 @@ class Solution {
         if(root == null) return;
 
         dfs(root.left, k);
-
+        
         count++;
-        if(count == k) ans = root.val;
+        if(k == count) ans = root.val;
 
         dfs(root.right, k);
     }
