@@ -12,7 +12,9 @@ public class Codec {
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
 
+        //preorder, N if null, with " " in between
         StringBuilder sb = new StringBuilder();
+
         dfs1(root, sb);
 
         return sb.toString();
@@ -34,9 +36,9 @@ public class Codec {
     public TreeNode deserialize(String data) {
 
         String[] arr = data.split(" ");
-
         int[] i = {0};
-       return dfs2(arr, i);
+
+        return dfs2(arr, i);
     }
 
     private TreeNode dfs2(String[] arr, int[] i){
