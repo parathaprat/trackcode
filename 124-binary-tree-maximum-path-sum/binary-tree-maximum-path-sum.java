@@ -15,25 +15,28 @@
  */
 class Solution {
 
-    int maxSum = Integer.MIN_VALUE;
+    int sum = Integer.MIN_VALUE;
 
     public int maxPathSum(TreeNode root) {
 
-        getAns(root);
-        return maxSum;
-        
-    }
-
-    private int getAns(TreeNode root){
-
         if(root == null) return 0;
 
-        int leftSum = Math.max(0, getAns(root.left));
-        int rightSum = Math.max(0, getAns(root.right));
+        getSum(root);
+        return sum;
+    }
 
-        maxSum = Math.max(maxSum, root.val + leftSum + rightSum);
+    private int getSum(TreeNode node){
 
-        return root.val + Math.max(leftSum, rightSum);
+        if(node == null) return 0;
 
+        //get left and right pathsums// can be -ve
+        int leftSum = Math.max(0, getSum(node.left));
+        int rightSum = Math.max(0, getSum(node.right));
+
+        //include
+        sum = Math.max(sum, node.val + leftSum + rightSum);
+
+        //not include
+        return node.val + Math.max(leftSum, rightSum);
     }
 }
