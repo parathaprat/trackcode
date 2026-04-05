@@ -15,6 +15,6 @@ class Solution {
             pq.add(stone1 - stone2);
         }
 
-        return pq.poll();
+        return pq.poll();        
     }
 }
