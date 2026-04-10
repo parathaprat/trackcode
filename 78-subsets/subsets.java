@@ -2,24 +2,22 @@ class Solution {
     public List<List<Integer>> subsets(int[] nums) {
 
         List<List<Integer>> res = new ArrayList<>();
-        List<Integer> set = new ArrayList<>();
+        List<Integer> path = new ArrayList<>();
 
-        getAns(res, set, 0, nums);
+        backtrack(res, path, 0, nums);
 
         return res;
     }
 
-    private void getAns(List<List<Integer>> res, List<Integer> set, int ind, int[] nums){
+    private void backtrack(List<List<Integer>> res, List<Integer> path, int ind, int[] nums){
 
-        if(ind >= nums.length){
-            res.add(new ArrayList<>(set));
-            return;
+        res.add(new ArrayList<>(path));
+
+        for(int i = ind; i < nums.length; i++){
+
+            path.add(nums[i]);
+            backtrack(res, path, i + 1, nums);
+            path.remove(path.size() - 1);
         }
-
-        set.add(nums[ind]);
-        getAns(res, set, ind + 1, nums);
-        set.remove(set.size() - 1);
-
-        getAns(res, set, ind + 1, nums);
     }
 }
