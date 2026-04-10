@@ -22,7 +22,6 @@ class Solution {
     public Node cloneGraph(Node node) {
 
         Map<Node, Node> map = new HashMap<>();
-
         return getCopy(node, map);
     }
 
