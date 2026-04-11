@@ -37,7 +37,7 @@ class Solution {
             time++;
         }
 
-        return fresh == 0 ? time : -1;        
+        return fresh == 0 ? time : -1;
     }
 
     private void addOrange(int i, int j, int[][] grid, Queue<int[]> q){
