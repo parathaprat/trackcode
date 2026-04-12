@@ -1,6 +1,6 @@
 class Solution {
 
-    int[][] directions = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
+    int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
     public void solve(char[][] board) {
 
@@ -19,12 +19,11 @@ class Solution {
 
         for(int i = 0; i < r; i++){
             for(int j = 0; j < c; j++){
+
                 if(board[i][j] == 'O') board[i][j] = 'X';
                 if(board[i][j] == 'T') board[i][j] = 'O';
             }
         }
-
-        return;
     }
 
     private void dfs(int i, int j, char[][] board){
@@ -35,9 +34,10 @@ class Solution {
 
         for(int[] dir : directions){
 
-            dfs(i + dir[0], j + dir[1], board);
-        }
+            int nr = i + dir[0];
+            int nc = j + dir[1];
 
-        return;
+            dfs(nr, nc, board);
+        }
     }
 }
