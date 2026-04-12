@@ -16,12 +16,11 @@ class Solution {
         }
 
         for(int i = 0; i < numCourses; i++){
-
             if(!dfs(i)) return new int[0];
         }
 
         int[] ans = new int[res.size()];
-        
+
         for(int i = 0; i < res.size(); i++){
             ans[i] = res.get(i);
         }
@@ -33,7 +32,7 @@ class Solution {
 
         if(pros.contains(course)) return true;
         if(visit.contains(course)) return false;
-        
+
         visit.add(course);
 
         for(int nei : map.get(course)){
