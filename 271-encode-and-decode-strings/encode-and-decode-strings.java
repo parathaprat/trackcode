@@ -6,7 +6,6 @@ public class Codec {
         StringBuilder sb = new StringBuilder();
 
         for(String str : strs){
-
             sb.append(str.length()).append("#").append(str);
         }
 
@@ -30,13 +29,11 @@ public class Codec {
                 while(Character.isDigit(s.charAt(j))) j++;
 
                 int num = Integer.parseInt(s.substring(i, j));
-
                 j++;
 
                 String string = s.substring(j, j + num);
 
                 ans.add(string);
-
                 i = j + num;
             }
         }
