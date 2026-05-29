@@ -1,9 +1,8 @@
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
 
-        List<List<String>> res = new ArrayList<>();
-
         Map<String, List<String>> map = new HashMap<>();
+        List<List<String>> res = new ArrayList<>();
 
         for(String str : strs){
 
@@ -24,5 +23,8 @@ class Solution {
         }
 
         return res;
+
+
+        
     }
 }
