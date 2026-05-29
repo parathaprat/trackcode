@@ -1,17 +1,16 @@
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
 
-        //freq map 
-        //buckets representing freqs
-        //return top k from the back 
+        //bucket sort
+        //maxHeap, custom comp
 
+        //create a freq map
         Map<Integer, Integer> map = new HashMap<>();
+        List<Integer>[] buckets = new ArrayList[nums.length + 1];
 
         for(int num : nums){
             map.put(num, map.getOrDefault(num, 0) + 1);
         }
-
-        List<Integer>[] buckets = new ArrayList[nums.length + 1];
 
         for(int num : map.keySet()){
 
@@ -22,12 +21,13 @@ class Solution {
         }
 
         int[] ans = new int[k];
+
         int index = 0;
 
         for(int i = buckets.length - 1; i >= 0; i--){
 
             if(buckets[i] != null){
-
+                
                 for(int num : buckets[i]){
                     ans[index] = num;
                     index++;
