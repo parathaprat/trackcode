@@ -25,7 +25,7 @@ class Solution {
 
     private void dfs(TreeNode root, int depth){
 
-        if(root == null) return;
+        if(root == null) return; 
 
         depth++;
 
