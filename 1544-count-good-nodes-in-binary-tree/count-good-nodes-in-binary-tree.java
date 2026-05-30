@@ -18,9 +18,10 @@ class Solution {
     int count = 0;
 
     public int goodNodes(TreeNode root) {
-
+        
         dfs(root, Integer.MIN_VALUE);
         return count;
+
     }
 
     private void dfs(TreeNode node, int max){
