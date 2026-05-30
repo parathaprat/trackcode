@@ -19,7 +19,6 @@ class Solution {
         if(root == null) return false;
 
         return isSameTree(root, subRoot) || isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
-        
     }
 
     private boolean isSameTree(TreeNode p, TreeNode q){
