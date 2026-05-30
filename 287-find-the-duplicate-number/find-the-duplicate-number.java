@@ -12,12 +12,15 @@ class Solution {
         }
 
         int slow2 = 0;
-
+        
         while(true){
-            slow = nums[slow];
             slow2 = nums[slow2];
+            fast = nums[fast];
 
-            if(slow == slow2) return slow;
+            if(slow2 == fast) break;
         }
+
+        return slow2;
+        
     }
 }
