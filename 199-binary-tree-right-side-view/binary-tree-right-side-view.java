@@ -16,9 +16,6 @@
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
 
-        //level order trav, add right node before left
-        //first from each level into res
-
         List<Integer> res = new ArrayList<>();
         if(root == null) return res;
 
@@ -31,12 +28,12 @@ class Solution {
 
             for(int i = 0; i < size; i++){
 
-                TreeNode cur = q.poll();
+                TreeNode node = q.poll();
 
-                if(i == 0) res.add(cur.val);
+                if(i == 0) res.add(node.val);
 
-                if(cur.right != null) q.add(cur.right);
-                if(cur.left != null) q.add(cur.left);
+                if(node.right != null) q.add(node.right);
+                if(node.left != null) q.add(node.left);
             }
         }
 
