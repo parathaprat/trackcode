@@ -7,23 +7,24 @@ class Solution {
             if(k < pile) k = pile;
         }
 
-        int l = 1;
-        int r = k;
+        int left = 1;
+        int right = k;
 
-        while(l <= r){
-            int m = l + (r - l)/2;
+        while(left <= right){
+
+            int mid = right - (right - left)/2;
 
             int hours = 0;
             for(int pile : piles){
-                hours += Math.ceil((double)pile/m);
+                hours += Math.ceil((double)pile/mid);
             }
 
             if(hours <= h){
-                k = m;
-                r = m - 1;
+                k = mid;
+                right = mid - 1;
             }
             else{
-                l = m + 1;
+                left = mid + 1;
             }
         }
 
