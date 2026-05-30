@@ -11,7 +11,7 @@ class TimeMap {
         }
     }
 
-    HashMap<String, ArrayList<pair>> hashMap; //key -> timestamp, val
+    HashMap<String, ArrayList<pair>> hashMap;
 
     public TimeMap() {
         hashMap = new HashMap<>();
@@ -27,7 +27,6 @@ class TimeMap {
             arr.add(new pair(timestamp, value));
             hashMap.put(key, arr);
         }
-        
     }
     
     public String get(String key, int timestamp) {
@@ -54,14 +53,10 @@ class TimeMap {
                     ans = arr.get(m).val;
                     l = m + 1;
                 }
-                else{
-                    r = m - 1;
-                }
+                else r = m - 1;
             }
         }
-
-        return ans;
-        
+        return ans; 
     }
 }
 
