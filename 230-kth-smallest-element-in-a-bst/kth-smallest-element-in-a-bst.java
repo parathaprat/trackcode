@@ -21,7 +21,7 @@ class Solution {
     public int kthSmallest(TreeNode root, int k) {
 
         dfs(root, k);
-        return ans;
+        return ans; 
         
     }
 
@@ -30,7 +30,7 @@ class Solution {
         if(root == null) return;
 
         dfs(root.left, k);
-        
+
         count++;
         if(k == count) ans = root.val;
 
