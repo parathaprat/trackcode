@@ -21,6 +21,7 @@ class Solution {
 
         dfs(root);
         return diameter;
+        
     }
 
     private int dfs(TreeNode root){
