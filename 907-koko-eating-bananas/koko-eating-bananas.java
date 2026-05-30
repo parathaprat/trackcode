@@ -15,6 +15,7 @@ class Solution {
             int mid = right - (right - left)/2;
 
             int hours = 0;
+
             for(int pile : piles){
                 hours += Math.ceil((double)pile/mid);
             }
