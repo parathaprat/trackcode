@@ -1,8 +1,8 @@
 class Solution {
     public int evalRPN(String[] tokens) {
 
-        //if num, add to stack
-        //if opp, pop last 2 nums, op and add back to stack
+        //num -> add to st
+        //op -> pop last 2, op, and add back
 
         Stack<Integer> st = new Stack<>();
 
