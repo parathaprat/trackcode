@@ -20,13 +20,12 @@ class Solution {
         
     }
 
-    private boolean isValid(TreeNode root, long max, long min){
+    private boolean isValid(TreeNode node, long max, long min){
 
-        if(root == null) return true;
+        if(node == null) return true;
 
-        if(root.val >= max || root.val <= min) return false;
+        if(node.val >= max || node.val <= min) return false;
 
-        return isValid(root.right, max, root.val) && isValid(root.left, root.val, min);
-
+        return isValid(node.left, node.val, min) && isValid(node.right, max, node.val);
     }
 }
