@@ -1,5 +1,8 @@
 class Logger {
 
+    //Queue -> timestamp, message
+    //set -> Active 10s message set
+
     class Log{
 
         int timestamp;
@@ -20,18 +23,16 @@ class Logger {
     }
     
     public boolean shouldPrintMessage(int timestamp, String message) {
-
-        while(!q.isEmpty() && timestamp - q.peek().timestamp >= 10){
+        
+        if(!q.isEmpty() && timestamp - q.peek().timestamp >= 10){
             set.remove(q.peek().message);
             q.poll();
         }
 
-        if(set.contains(message)){
-            return false;
-        }
+        if(set.contains(message)) return false;
 
-        q.add(new Log(timestamp, message));
         set.add(message);
+        q.add(new Log(timestamp, message));
         return true;
     }
 }
