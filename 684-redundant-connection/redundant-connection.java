@@ -1,55 +1,44 @@
 class Solution {
-
-    int[] parent;
-    int[] rank;
-
     public int[] findRedundantConnection(int[][] edges) {
+
+        Map<Integer, List<Integer>> map = new HashMap<>();
 
         int n = edges.length;
 
-        parent = new int[n + 1];
-        rank = new int[n + 1];
-
-        for(int i = 0; i < n; i++){
-            parent[i] = i;
-            rank[i] = 1;
+        for(int i = 1; i <= n; i++){
+            map.put(i, new ArrayList<>());
         }
 
         for(int[] e : edges){
 
-            if(!union(e[0], e[1])) return e;
+            int u = e[0];
+            int v = e[1];
+
+            Set<Integer> vis = new HashSet<>();
+
+            if(dfs(u, v, map, vis)){
+                return e;
+            }
+
+            map.get(u).add(v);
+            map.get(v).add(u);
         }
 
         return new int[0];
     }
 
-    private int find(int node){
+    private boolean dfs(int cur, int target, Map<Integer, List<Integer>> map, Set<Integer> vis){
 
-        int cur = node;
+        if(vis.contains(cur)) return false;
 
-        while(cur != parent[cur]){
-            parent[cur] = parent[parent[cur]];
-            cur = parent[cur];
+        if(cur == target) return true;
+
+        vis.add(cur);
+
+        for(int nei : map.get(cur)){
+            if(dfs(nei, target, map, vis)) return true;
         }
 
-        return cur;
-    }
-
-    private boolean union(int u, int v){
-
-        int pu = find(u);
-        int pv = find(v);
-
-        if(pu == pv) return false;
-
-        if(rank[pv] > rank[pu]){
-            int temp = pv;
-            pv = pu;
-            pu = temp;
-        }
-
-        parent[pv] = pu;
-        rank[pu] += rank[pv];
-        return true;
+        return false;
     }
 }
