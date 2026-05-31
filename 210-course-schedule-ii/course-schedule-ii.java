@@ -2,8 +2,8 @@ class Solution {
 
     Set<Integer> visit = new HashSet<>();
     Set<Integer> pros = new HashSet<>();
-    List<Integer> res = new LinkedList<>();
     Map<Integer, List<Integer>> map = new HashMap<>();
+    List<Integer> res = new ArrayList<>();
 
     public int[] findOrder(int numCourses, int[][] prerequisites) {
 
@@ -30,8 +30,8 @@ class Solution {
 
     private boolean dfs(int course){
 
-        if(pros.contains(course)) return true;
         if(visit.contains(course)) return false;
+        if(pros.contains(course)) return true;
 
         visit.add(course);
 
@@ -40,8 +40,8 @@ class Solution {
         }
 
         res.add(course);
-        pros.add(course);
         visit.remove(course);
+        pros.add(course);
         return true;
     }
 }
