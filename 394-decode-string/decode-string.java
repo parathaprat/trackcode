@@ -1,10 +1,13 @@
 class Solution {
     public String decodeString(String s) {
 
-        Stack<Integer> st = new Stack<>();
-        Stack<StringBuilder> sbStack = new Stack<>();
+        //sb to store chars until num
+        //stack to store num
+        //sb stack to store string
 
-        StringBuilder sb = new StringBuilder();
+        Stack<Integer> st = new Stack<>(); //store nums
+        Stack<StringBuilder> sbStack = new Stack<>(); //store stack of string until nums, nested
+        StringBuilder sb = new StringBuilder(); //store string
 
         int n = 0;
 
@@ -14,7 +17,6 @@ class Solution {
                 n = n * 10 + c - '0';
             }
             else if(c == '['){
-
                 st.push(n);
                 n = 0;
 
@@ -33,11 +35,9 @@ class Solution {
                     k--;
                 }
             }
-            else{
-                sb.append(c);
-            }
+            else sb.append(c);
         }
 
-        return sb.toString();
+        return sb.toString();        
     }
 }
